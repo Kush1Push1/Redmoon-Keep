@@ -216,6 +216,7 @@
 		if(prob(used))
 			attempted_wounds += /datum/wound/dislocation
 			attempted_wounds += /datum/wound/fracture
+			// 
 	if(bclass in GLOB.artery_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(user)
