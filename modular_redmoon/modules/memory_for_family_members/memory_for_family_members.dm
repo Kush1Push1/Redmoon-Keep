@@ -7,6 +7,4 @@
 /datum/preferences/_load_appearence(S)
 	. = ..()
 	S["spouse_ckey"]		>> spouse_ckey
-
-/datum/controller/subsystem/ticker
-	var/families = 0
+	S["allow_alt_genitals_for_spouse"]		>> allow_alt_genitals_for_spouse

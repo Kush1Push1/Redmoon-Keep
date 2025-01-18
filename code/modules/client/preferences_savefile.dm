@@ -607,6 +607,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 	// REDMOON ADD START
 	WRITE_FILE(S["spouse_ckey"] , spouse_ckey) // memory_for_family_members
+	WRITE_FILE(S["allow_alt_genitals_for_spouse"] , allow_alt_genitals_for_spouse) // memory_for_family_members
 	// REDMOON ADD END
 
 	redmoon_character_pref_save(S)

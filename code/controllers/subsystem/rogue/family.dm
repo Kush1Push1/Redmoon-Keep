@@ -243,8 +243,6 @@ SUBSYSTEM_DEF(family)
 	// информация в memories. Модулярнее сделать не получилось.
 	if(holder.mind)
 		holder.mind.store_memory("<b>[target.real_name] ([target.job])</b> is my <b>[R.name]</b>. [target.p_they(TRUE)] is [target.age] [target.dna.species.name].")
-	// статистика для конца раунда
-	SSticker.families++ 
 	// REDMOON ADD END
 	if(announce)
 		spawn(1)
