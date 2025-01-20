@@ -51,20 +51,20 @@
 	if(reason || admin)
 		var/thing = ""
 		if(amt > 0)
-			thing += "+[amt]"
+			thing += "Спасибо за игру (+[amt])"
 		if(amt < 0)
-			thing += "[amt]"
+			thing += "Жалоба на геймлей ([amt])"
 		if(admin)
-			thing += " by [admin]"
+			thing += " от <b>[admin]</b>"
 		if(reason)
-			thing += " for reason: [reason]"
+			thing += " за: <i>[reason]</i>"
 		if(amt == 0)
 			if(!reason && !admin)
 				return
 			if(admin)
-				thing = "NOTE from [admin]: [reason]"
+				thing = "<u>ЗАМЕТКА от [admin]: [reason]</u>"
 			else
-				thing = "NOTE: [reason]"
+				thing = "<u>ЗАМЕТКА: [reason]</u>"
 		thing += " ([GLOB.rogue_round_id])"
 		thing += "\n"
 		text2file(thing,"data/player_saves/[copytext(key,1,2)]/[key]/playerquality.txt")
@@ -215,16 +215,26 @@
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(json))
 
+	// REDMOON ADD START - причина для изменения PQ
 	var/fakekey = src.ckey
 	if(src.ckey in GLOB.anonymize)
 		fakekey = get_fake_key(src.ckey)
 
-	var/raisin = stripped_input(src, "Укажите краткую причину этого изменения", "Симулятор Бога", "", null)
+	var/raisin = stripped_input(src, "Укажите краткую причину этого изменения", "Будь крутым, а не гнилым", "", null)
 	if(!raisin)
 		to_chat(src, span_boldwarning("Причина не указана."))
 		return
+	// REDMOON ADD END
 
-	adjust_playerquality(1, ckey(key), fakekey, raisin)
+	if(curcomm == 1)
+	//add the pq, only on the first commend
+//	if(get_playerquality(key) < 29)
+
+		adjust_playerquality(1, ckey(key), fakekey, raisin) // REDMOON EDIT - was adjust_playerquality(1, ckey(key))
+	// REDMOON ADD START - похвала без PQ
+	else
+		give_comment(1, ckey(key), fakekey, raisin)
+	// REDMOON ADD END
 
 /proc/get_commends(key)
 	if(!key)
