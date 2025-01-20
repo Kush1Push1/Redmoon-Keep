@@ -210,10 +210,10 @@
 	var/list/json = json_decode(file2text(json_file))
 	if(json[giver])
 		curcomm = json[giver]
-	curcomm++
+	// REDMOON REMOVAL - перенесено ниже - WAS: curcomm++
 	json[giver] = curcomm
-	fdel(json_file)
-	WRITE_FILE(json_file, json_encode(json))
+	// REDMOON REMOVAL - перенесено ниже - WAS: fdel(json_file)
+	// REDMOON REMOVAL - перенесено ниже - WAS: WRITE_FILE(json_file, json_encode(json))
 
 	// REDMOON ADD START - причина для изменения PQ
 	var/fakekey = src.ckey
@@ -226,12 +226,16 @@
 		return
 	// REDMOON ADD END
 
-	if(curcomm == 1)
+	if(curcomm <= 0) // REDMOON EDIT - если больше 1, то коммендить нельзя - WAS: if(curcomm == 1)
 	//add the pq, only on the first commend
 //	if(get_playerquality(key) < 29)
 
 		adjust_playerquality(1, ckey(key), fakekey, raisin) // REDMOON EDIT - was adjust_playerquality(1, ckey(key))
 	// REDMOON ADD START - похвала без PQ
+		curcomm++
+		json[giver] = curcomm
+		fdel(json_file)
+		WRITE_FILE(json_file, json_encode(json))
 	else
 		give_comment(1, ckey(key), fakekey, raisin)
 	// REDMOON ADD END

@@ -26,11 +26,6 @@
 	var/list/json = json_decode(file2text(json_file))
 	if(json[giver])
 		curcomm = json[giver]
-	curcomm++
-	json[giver] = curcomm
-	fdel(json_file)
-	WRITE_FILE(json_file, json_encode(json))
-
 	var/fakekey = src.ckey
 	if(src.ckey in GLOB.anonymize)
 		fakekey = get_fake_key(src.ckey)
@@ -45,9 +40,16 @@
 	"Бро, перед тем, как ты это сделаешь, посмотри в чат.", "Он точно заслужил это?", "", null)
 	if(!raisin)
 		to_chat(src, span_boldwarning("Причина не указана."))
+		fdel(json_file)
+		WRITE_FILE(json_file, json_encode(json))
 		return
 
-	if(curcomm == 1)
+	if(curcomm >= 0) // Если комменд -1 или более, то нельзя дальше анкоммендить
 		adjust_playerquality(-1, ckey(key), fakekey, raisin)
+		curcomm--
+		json[giver] = curcomm
+		fdel(json_file)
+		WRITE_FILE(json_file, json_encode(json))
 	else
 		give_comment(-1, ckey(key), fakekey, raisin)
+
