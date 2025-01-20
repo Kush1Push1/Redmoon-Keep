@@ -53,7 +53,7 @@
 		if(amt > 0)
 			thing += "Спасибо за игру (+[amt])"
 		if(amt < 0)
-			thing += "Жалоба на геймлей ([amt])"
+			thing += "Жалоба на игру ([amt])"
 		if(admin)
 			thing += " от <b>[admin]</b>"
 		if(reason)
