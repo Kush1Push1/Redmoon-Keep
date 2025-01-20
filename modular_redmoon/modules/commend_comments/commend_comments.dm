@@ -10,11 +10,11 @@
 	if(good_or_bad >= 1)
 		text += "Похвала от <b>[admin]</b> за: <i>[reason]</i> ([GLOB.rogue_round_id]) \n"
 		text2file(text,"data/player_saves/[copytext(key,1,2)]/[key]/playerquality.txt")
-		message_admins("[admin] похвалил (без PQ) [key] с причиной: [reason]")
+		message_admins("<small>[admin] похвалил (без PQ) [key] с причиной: [reason]</small>")
 	else
 		text = "Недовольство от <b>[admin]</b> за: <i>[reason]</i> ([GLOB.rogue_round_id]) \n"
 		text2file(text,"data/player_saves/[copytext(key,1,2)]/[key]/playerquality.txt")
-		message_admins("[admin] поругал (без PQ) [key] с причиной: [reason]")
+		message_admins("<small>[admin] поругал (без PQ) [key] с причиной: [reason]</small>")
 
 /client/proc/add_uncommend(key, giver)
 	if(!giver || !key)
