@@ -1180,18 +1180,20 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if(!can_commend(forced))
 		return
 	if(theykey)
-		prefs.commendedsomeone = TRUE
+		// REDMOON REMOVAL - перенесено вниз - WAS: prefs.commendedsomeone = TRUE 
 		if(action == "Похвалить" || action == "Commend")
-			add_commend(theykey, ckey)
-			to_chat(src,"[selection] получит похвалу (или даже \"спасибо\", если это первый commend).")
+			if(add_commend(theykey, ckey))
+				to_chat(src,"[selection] получит похвалу (или даже \"спасибо\", если это первый commend).")
+				prefs.commendedsomeone = TRUE // REDMOON ADD
 			/* REDMOON REMOVAL START - логирование добавлено в add_commend
 			log_game("COMMEND: [ckey] commends [theykey].")
 			log_admin("COMMEND: [ckey] commends [theykey].")
 			message_admins("[ckey] commends [theykey].")
 			REDMOON REMOVAL END */
 		else if(action == "Поругать" || action == "Uncommend")
-			add_uncommend(theykey, ckey)
-			to_chat(src,"[selection] получит негативный комментарий (или даже -PQ, если это первый uncommend).")
+			if(add_uncommend(theykey, ckey))
+				to_chat(src,"[selection] получит негативный комментарий (или даже -PQ, если это первый uncommend).")
+				prefs.commendedsomeone = TRUE // REDMOON ADD
 	return
 
 // Handles notifying funeralized players on login, or forcing them back to lobby, depending on configs. Called on /client/New().

@@ -37,12 +37,12 @@
 	В конце концов, спросите себя — <b>\"Это игра такая жестокая или это игрок перегнул палку?\"</b>"))
 
 	var/raisin = stripped_input(src, \
-	"Бро, перед тем, как ты это сделаешь, посмотри в чат.", "Он точно заслужил это?", "", null)
+	"\"Я точно знаю, что ими двигало?\"", "Он точно заслужил это?", "", null)
 	if(!raisin)
 		to_chat(src, span_boldwarning("Причина не указана."))
 		fdel(json_file)
 		WRITE_FILE(json_file, json_encode(json))
-		return
+		return FALSE
 
 	if(curcomm >= 0) // Если комменд -1 или более, то нельзя дальше анкоммендить
 		adjust_playerquality(-1, ckey(key), fakekey, raisin)
@@ -50,6 +50,8 @@
 		json[giver] = curcomm
 		fdel(json_file)
 		WRITE_FILE(json_file, json_encode(json))
+		return TRUE
 	else
 		give_comment(-1, ckey(key), fakekey, raisin)
+		return TRUE
 

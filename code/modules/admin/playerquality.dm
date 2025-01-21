@@ -223,7 +223,7 @@
 	var/raisin = stripped_input(src, "Укажите краткую причину этого изменения", "Будь крутым, а не гнилым", "", null)
 	if(!raisin)
 		to_chat(src, span_boldwarning("Причина не указана."))
-		return
+		return FALSE // REDMOON ADD - добавил FALSE
 	// REDMOON ADD END
 
 	if(curcomm <= 0) // REDMOON EDIT - если больше 1, то коммендить нельзя - WAS: if(curcomm == 1)
@@ -236,8 +236,11 @@
 		json[giver] = curcomm
 		fdel(json_file)
 		WRITE_FILE(json_file, json_encode(json))
+		return TRUE
 	else
 		give_comment(1, ckey(key), fakekey, raisin)
+		return TRUE
+
 	// REDMOON ADD END
 
 /proc/get_commends(key)
