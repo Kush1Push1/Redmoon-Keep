@@ -81,8 +81,9 @@
 			msg += " - GM: [admin]"
 		if(reason)
 			msg += " - RSN: [reason]"
-		TGS_NOTIFY_ADMINS("[admin] [amt>0 ? "повысил" : "снял"] PQ [key][abs(amt) > 1 ? " на [amt]" : ""] за: \"<i>[reason]</i>\"")
+		message_admins("[admin] [amt>0 ? "повысил" : "снял"] PQ [key][abs(amt) > 1 ? " на [amt]" : ""] за: \"<i>[reason]</i>\"") // REDMOON EDIT
 		log_admin("[admin] adjusted [key]'s PQ by [amt] for reason: [reason]")
+		send2irc("PQ", "[admin] [amt>0 ? "повысил" : "снял"] [key][abs(amt) > 1 ? " на [amt]" : ""] за: \"<i>[reason]</i>\"") // REDMOON ADD
 
 /client/proc/check_pq()
 	set category = "GameMaster"
