@@ -26,12 +26,12 @@
 	desc = "High quality rocks of stone used for construction."
 	item_type = /obj/item/natural/stone
 	held_items = list(2, 0)
-	payout_price = 0
+	payout_price = 2
 	withdraw_price = 4
 	transport_fee = 3
 	export_price = 4
 	importexport_amt = 10
-	passive_generation = 15
+	passive_generation = 5
 
 /datum/roguestock/stockpile/coal
 	name = "Coal"
@@ -86,10 +86,10 @@
 	desc = "Chunks of unrefined gold."
 	item_type = /obj/item/rogueore/gold
 	held_items = list(0, 0)
-	payout_price = 10
-	withdraw_price = 20
+	payout_price = 50
+	withdraw_price = 75
 	transport_fee = 10
-	export_price = 15
+	export_price = 75
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/silver
@@ -97,10 +97,10 @@
 	desc = "Chunks of unrefined silver."
 	item_type = /obj/item/rogueore/silver
 	held_items = list(0, 0)
-	payout_price = 10
-	withdraw_price = 20
+	payout_price = 75
+	withdraw_price = 100
 	transport_fee = 10
-	export_price = 15
+	export_price = 100
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/cloth
@@ -132,10 +132,10 @@
 	desc = "Cured Leather ready to be worked."
 	item_type = /obj/item/natural/hide/cured
 	held_items = list(2, 0)
-	payout_price = 10
-	withdraw_price = 15
+	payout_price = 5
+	withdraw_price = 7
 	transport_fee = 1
-	export_price = 15
+	export_price = 7
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/hide
@@ -143,10 +143,10 @@
 	desc = "Stripped hide from animals."
 	item_type = /obj/item/natural/hide
 	held_items = list(0, 0)
-	payout_price = 5
-	withdraw_price = 10
+	payout_price = 10
+	withdraw_price = 15
 	transport_fee = 3
-	export_price = 10
+	export_price = 15
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -155,10 +155,10 @@
 	desc = "Hide with a long winter coat from animals."
 	item_type = /obj/item/natural/fur
 	held_items = list(0, 0)
-	payout_price = 5
-	withdraw_price = 15
+	payout_price = 15
+	withdraw_price = 23
 	transport_fee = 5
-	export_price = 15
+	export_price = 23
 	importexport_amt = 5
 	passive_generation = 1
 
@@ -179,7 +179,7 @@
 	desc = "Spelt grain."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/wheat
 	held_items = list(0, 4)
-	payout_price = 1
+	payout_price = 2
 	withdraw_price = 3
 	transport_fee = 1
 	export_price = 3
@@ -191,7 +191,7 @@
 	desc = "A cereal grain."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/oat
 	held_items = list(0, 4)
-	payout_price = 1
+	payout_price = 2
 	withdraw_price = 3
 	transport_fee = 1
 	export_price = 3
@@ -203,7 +203,7 @@
 	desc = "Harvested produce."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/apple
 	held_items = list(0, 0)
-	payout_price = 2
+	payout_price = 3
 	withdraw_price = 5
 	transport_fee = 1
 	export_price = 5
@@ -216,7 +216,7 @@
 	item_type = /obj/item/reagent_containers/food/snacks/rogue/meat/steak
 	held_items = list(0, 0)
 	payout_price = 5
-	withdraw_price = 10
+	withdraw_price = 8
 	transport_fee = 2
 	export_price = 8
 	importexport_amt = 5
@@ -227,10 +227,10 @@
 	desc = "Harvested produce."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/beet
 	held_items = list(0, 0)
-	payout_price = 2
+	payout_price = 5
 	withdraw_price = 6
 	transport_fee = 2
-	export_price = 6
+	export_price = 8
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -239,10 +239,10 @@
 	desc = "Harvested produce."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/cabbage/rogue
 	held_items = list(0, 0)
-	payout_price = 2
+	payout_price = 5
 	withdraw_price = 6
 	transport_fee = 2
-	export_price = 6
+	export_price = 8
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -251,10 +251,10 @@
 	desc = "Harvested produce."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/potato/rogue
 	held_items = list(0, 0)
-	payout_price = 2
+	payout_price = 5
 	withdraw_price = 6
 	transport_fee = 2
-	export_price = 6
+	export_price = 8
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -263,10 +263,10 @@
 	desc = "Harvested produce."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/onion/rogue
 	held_items = list(0, 0)
-	payout_price = 2
+	payout_price = 5
 	withdraw_price = 6
 	transport_fee = 2
-	export_price = 6
+	export_price = 8
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -276,9 +276,9 @@
 	item_type = /obj/item/reagent_containers/food/snacks/rogue/meat/poultry
 	held_items = list(0, 0)
 	payout_price = 5
-	withdraw_price = 10
+	withdraw_price = 8
 	transport_fee = 2
-	export_price = 10
+	export_price = 8
 	importexport_amt = 5
 	passive_generation = 2
 
@@ -287,10 +287,10 @@
 	desc = "Egg laid by a hen."
 	item_type = /obj/item/reagent_containers/food/snacks/egg
 	held_items = list(0, 0)
-	payout_price = 2
-	withdraw_price = 6
+	payout_price = 3
+	withdraw_price = 5
 	transport_fee = 2
-	export_price = 6
+	export_price = 5
 	importexport_amt = 5
 	passive_generation = 2
 
