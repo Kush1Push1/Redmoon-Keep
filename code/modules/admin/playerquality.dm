@@ -235,8 +235,8 @@
 //	if(get_playerquality(key) < 29)
 
 		adjust_playerquality(1, ckey(key), fakekey, raisin) // REDMOON EDIT - was adjust_playerquality(1, ckey(key))
-		send2irc("PQ", "[fakekey == ckey ? "[ckey]" : "[fake_key] ([ckey])"] повысил [key] за: \"<i>[raisin]</i>\"") // REDMOON ADD
-	// REDMOON ADD START - похвала без PQ
+		// REDMOON ADD START - похвала без PQ
+		send2irc("PQ", "[fakekey == ckey ? "[ckey]" : "[fake_key] ([ckey])"] [mob ? "([mob.real_name])" : ""] повысил [key] за: \"<i>[raisin]</i>\"") // REDMOON ADD
 		curcomm++
 		json[giver] = curcomm
 		fdel(json_file)
