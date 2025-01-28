@@ -1417,7 +1417,7 @@ Slots: [job.spawn_positions]</span>
 			if("ckey")
 				var/msg = "Add PLAYER CKEY of your spouse! Check it twice! Leave the field clear to have random spouse with other parameters."
 				if(usr?.client?.prefs?.be_russian)
-					msg = "Введите CKEY ИГРОКА вашей второй половинки! Проверьте его дважды! Оставьте поле пустым, чтобы была случайная пара (в соответствии с остальными требованиями)."
+					msg = "Введите CKEY ИГРОКА вашей второй половинки! Вы и второй игрок должны правильно записать CKEY друг друга, чтобы это работало! Оставьте поле пустым, чтобы была случайная пара (в соответствии с остальными требованиями)."
 				var/potential_spouse_ckey = input(usr, msg, "Bloodbinding", null) as text
 				if(!potential_spouse_ckey)
 					spouse_ckey = null
@@ -1426,7 +1426,7 @@ Slots: [job.spawn_positions]</span>
 			if("name")
 				var/msg = "Add NAME of your spouse (also, add \"Ser\" before name, if they will be knight)! Check it twice! This option is needed in case of your Ckey's spouse to join as other character than you meant them to have. Leave the field clear to have random spouse with other parameters."
 				if(usr?.client?.prefs?.be_russian)
-					msg = "Введите ИМЯ ПЕРСОНАЖА вашей второй половинки (добавьте Ser перед именем, если это рыцарь)! Проверьте его дважды! Эта опция нужна на случай, чтобы вторая половинка с введёным CKEY не зашла за не того персонажа и вы не стали парой. Оставьте поле пустым, чтобы была случайная пара (в соответствии с остальными требованиями)."
+					msg = "Введите ИМЯ ПЕРСОНАЖА вашей второй половинки (добавьте Ser перед именем, если это рыцарь)! Вы и второй игрок должны правильно записать имена своих персонажей, чтобы это работало! Эта опция нужна на случай, чтобы вторая половинка с введёным CKEY не зашла за не того персонажа и вы не стали парой. Оставьте поле пустым, чтобы была случайная пара (в соответствии с остальными требованиями)."
 				var/potential_spouse_name = input(usr, msg, "Bloodbinding", null) as text
 				if(!potential_spouse_name)
 					spouse_name = null
