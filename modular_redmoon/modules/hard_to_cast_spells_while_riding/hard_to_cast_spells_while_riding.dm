@@ -25,7 +25,6 @@
 	var/mob/living/simple_animal/hostile/buckle_mob = parent
 
 	buckle_mob.get_sound("pain")
-	AddElement(/datum/element/flee_from_target, 10 SECONDS)
 	force_dismount(user)
 
 	user.set_resting(TRUE, TRUE)
@@ -39,41 +38,3 @@
 	user.apply_damage(50, BRUTE, damaged_during_falling)
 	user.emote("scream")
 	return TRUE
-
-/**
- * Attached to a mob with an AI controller, simply sets a flag on whether or not to run away based on current health values.
- */
-/datum/element/flee_from_target
-	/// От кого убегаем
-	var/target
-	/// Как долго
-	var/how_long = 0
-
-/datum/element/flee_from_target/Attach(datum/target, atom/threat, how_long_fleeing = 10 SECONDS)
-	. = ..()
-	if(!isliving(target))
-		return ELEMENT_INCOMPATIBLE
-	var/mob/living/living_target = target
-	if(!living_target.ai_controller)
-		return ELEMENT_INCOMPATIBLE
-	src.target = target
-	src.how_long = how_long_fleeing
-
-/datum/element/flee_from_target/Detach(datum/source)
-	target = null
-	. = ..()
-
-/// When the mob's health changes, check what the blackboard state should be
-/datum/element/flee_from_target/New(mob/living/source)
-	if(!source.ai_controller)
-		return
-
-	source.ai_controller.CancelActions()
-	source.ai_controller.set_blackboard_key(BB_BASIC_MOB_FLEEING, TRUE)
-
-	addtimer(CALLBACK(src, PROC_REF(cancel_flee), source), how_long, flags = TIMER_UNIQUE)
-
-/datum/element/flee_from_target/proc/cancel_flee(mob/living/source)
-	source?.ai_controller?.set_blackboard_key(BB_BASIC_MOB_FLEEING, FALSE)
-	source.ai_controller.CancelActions()
-	qdel()
