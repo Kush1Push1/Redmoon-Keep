@@ -312,23 +312,8 @@ SUBSYSTEM_DEF(family)
 
 			// REDMOON ADD START - memory_for_family_members
 			// только персонажами с нужным CKEY могут быть партнёрами, если он выставлен
-			var/check_for_spouse_ckey = member.client.prefs.spouse_ckey
-			var/check_for_spouse_name = member.client.prefs.spouse_name
-
-			if(check_for_spouse_name)
-				if(target.real_name == check_for_spouse_name)
-					if(check_for_spouse_ckey) // Могут быть одинаковые обычные имена
-						if(target.client.ckey == lowertext(check_for_spouse_ckey))
-							return TRUE // Обходится проверка на возраст и альтернативные гениталии
-						else
-							return FALSE
-					else
-						return TRUE // Обходится проверка на возраст и альтернативные гениталии
-				else
-					return FALSE
-
-			if(check_for_spouse_ckey)
-				if(target.client.ckey == lowertext(check_for_spouse_ckey))
+			if(member.client.prefs.spouse_ckey)
+				if(target.client.ckey == lowertext(member.client.prefs.spouse_ckey))
 					return TRUE // Обходится проверка на возраст и альтернативные гениталии
 				else
 					return FALSE

@@ -436,15 +436,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(usr?.client?.prefs?.be_russian)
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Душа второй половинки: [spouse_ckey ? spouse_ckey : "(Случайная)"]</b></a></small>"
 					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=name'><b>Имя второй половинки: [spouse_name ? spouse_name : "(Случайнон)"]</b></a></small>"
-					dat += "<BR>"
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Фамилия семьи (выбирает муж): [family_surname ? family_surname : "(Нет)"]</b></a></small>"
 					dat += "<BR>"
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>У мужа/жены допустимо иное начало: [allow_alt_genitals_for_spouse ? "Да" : "Нет"]</b></a></small>"
 				else
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Spouse soul: [spouse_ckey ? spouse_ckey : "(Random)"]</b></a></small>"
-					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=name'><b>Name of soulmate: [spouse_name ? spouse_name : "(Random)"]</b></a></small>"
 					dat += "<BR>"
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Family surname (husband chooses): [family_surname ? family_surname : "(None)"]</b></a></small>"
 					dat += "<BR>"
@@ -1422,15 +1418,6 @@ Slots: [job.spawn_positions]</span>
 				if(!potential_spouse_ckey)
 					spouse_ckey = null
 				spouse_ckey = potential_spouse_ckey
-			// memory_for_family_members - возможность выставить имя персонажа, с которым хочется создать семью
-			if("name")
-				var/msg = "Add NAME of your spouse (also, add \"Ser\" before name, if they will be knight)! Check it twice! This option is needed in case of your Ckey's spouse to join as other character than you meant them to have. Leave the field clear to have random spouse with other parameters."
-				if(usr?.client?.prefs?.be_russian)
-					msg = "Введите ИМЯ ПЕРСОНАЖА вашей второй половинки (добавьте Ser перед именем, если это рыцарь)! Вы и второй игрок должны правильно записать имена своих персонажей, чтобы это работало! Эта опция нужна на случай, чтобы вторая половинка с введёным CKEY не зашла за не того персонажа и вы не стали парой. Оставьте поле пустым, чтобы была случайная пара (в соответствии с остальными требованиями)."
-				var/potential_spouse_name = input(usr, msg, "Bloodbinding", null) as text
-				if(!potential_spouse_name)
-					spouse_name = null
-				spouse_name = potential_spouse_name
 			// memory_for_family_members - возможность выставить название семьи
 			if("surname")
 				var/msg = "Add surname your family will be known as."
