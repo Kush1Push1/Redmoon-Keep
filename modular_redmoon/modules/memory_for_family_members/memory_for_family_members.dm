@@ -10,3 +10,35 @@
 	var/family_surname = null
 	var/allow_alt_genitals_for_spouse = FALSE
 
+/datum/controller/subsystem/family/proc/SetupFamilies_Short(mob/living/carbon/human/newcomer)
+	var/add_to_potentials_poll = TRUE
+	for(var/mob/living/carbon/human/candidate in family_candidates)
+		if(lowertext(candidate.client?.prefs.spouse_ckey) == newcomer.ckey) // у кандидата должен стоять ckey, который прописан у newcomer
+			if(lowertext(newcomer.client.prefs.spouse_ckey) == candidate.ckey) // у newcomer должен стоять ckey, который прописан у candidate
+				// Если фамилии не одинаковые, дропаем семью
+				if(candidate.family_surname != newcomer.family_surname)
+					break
+				var/family_head_is_newcomer = FALSE
+				var/datum/family/F
+				if(newcomer.gender == MALE)
+					family_head_is_newcomer = TRUE
+					F = makeFamily(newcomer)
+				else
+					F = makeFamily(candidate)
+				// Такая же проверка, как при создании семьи. На всякий случай, чтобы избежать знать в браке с простолюдинами и другие проблемы
+				if(F.checkFamilyCompat(candidate,newcomer,REL_TYPE_SPOUSE) && F.checkFamilyCompat(newcomer,candidate,REL_TYPE_SPOUSE))
+					if(family_head_is_newcomer)
+						F.addMember(candidate)
+					else
+						F.addMember(newcomer)
+					F.addRel(newcomer,candidate,getMatchingRel(REL_TYPE_SPOUSE),TRUE)
+					F.addRel(candidate,newcomer,REL_TYPE_SPOUSE,TRUE)
+
+					family_candidates -= candidate // Remove the matched candidate
+					add_to_potentials_poll = FALSE
+				else
+					qdel(F) // Удаляем лишнюю семью
+				break
+	// Если не удалось найти пару, добавляем в пулл ждунов
+	if(add_to_potentials_poll)
+		family_candidates += newcomer

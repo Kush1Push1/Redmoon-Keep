@@ -66,17 +66,13 @@ SUBSYSTEM_DEF(family)
 	if(!length(family_candidates))
 		return
 	var/total_families
-
+	var/reserved_family_candidates = family_candidates // REDMOON ADD - memory_for_family_members
 	var/list/current_families = list()
 
 	var/list/head_candidates = list()
 	for(var/c in family_candidates)
 		var/mob/living/carbon/human/H = c
 		if(H.gender == MALE)
-			// REDMOON ADD START - memory_for_family_members присвоение главе семьи фамилии семьи
-			if(H.family_surname)
-				H.real_name = "[H.real_name] [H.family_surname]"
-			// REDMOON ADD END
 			head_candidates += H
 
 	family_candidates = shuffle(family_candidates)
@@ -104,7 +100,7 @@ SUBSYSTEM_DEF(family)
 					if(F.checkFamilyCompat(H,connecting_member,rel_type) && F.checkFamilyCompat(connecting_member,H,rel_type)) //suitable. Add them to the family and connect them. (Note using checkFamilyCompat for both falls apart for anything other than spouses. The checks should be moved to a different proc at some point.)
 						// BLUEMOON ADD START - memory_for_family_members - присвоение фамилий
 						if(connecting_member.family_surname)
-							H.real_name = "[H.real_name] [connecting_member.family_surname]"
+							H.real_name = "[H.client.prefs.real_name] [connecting_member.family_surname]"
 						// REDMOON ADD END
 						F.addMember(H)
 						F.addRel(H,connecting_member,getMatchingRel(rel_type),TRUE)
@@ -112,8 +108,11 @@ SUBSYSTEM_DEF(family)
 
 						current_families -= F
 						family_candidates -= H // Remove the matched candidate
+						reserved_family_candidates -= H // REDMOON ADD - memory_for_family_members
+						reserved_family_candidates -= connecting_member // REDMOON ADD - memory_for_family_members
 						continue can_loop // Continue to next candidate instead of breaking completely
 
+	family_candidates = reserved_family_candidates // REDMOON ADD - memory_for_family_members - сюда входят и главы семей и женщины без мужей
 	for(var/fam in families) //Remove families with only one member.
 		var/datum/family/F = fam
 		if(length(F.members) <= 1)
@@ -221,6 +220,7 @@ SUBSYSTEM_DEF(family)
 		R.holder = null
 		R.target = null
 		qdel(R)
+	SSfamily.families -= src // REDMOON ADD
 
 /datum/family/proc/getRelations(mob/living/carbon/human/member, rel_type) //Returns all relations of the specified type.
 	var/list/rels = list()

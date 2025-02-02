@@ -436,13 +436,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(usr?.client?.prefs?.be_russian)
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Душа второй половинки: [spouse_ckey ? spouse_ckey : "(Случайная)"]</b></a></small>"
 					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Фамилия семьи (выбирает муж): [family_surname ? family_surname : "(Нет)"]</b></a></small>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Фамилия семьи: [family_surname ? family_surname : "(Нет)"]</b></a></small>"
 					dat += "<BR>"
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>У мужа/жены допустимо иное начало: [allow_alt_genitals_for_spouse ? "Да" : "Нет"]</b></a></small>"
 				else
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Spouse soul: [spouse_ckey ? spouse_ckey : "(Random)"]</b></a></small>"
 					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Family surname (husband chooses): [family_surname ? family_surname : "(None)"]</b></a></small>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Family surname: [family_surname ? family_surname : "(None)"]</b></a></small>"
 					dat += "<BR>"
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>Spouse can have beginning of other gender: [allow_alt_genitals_for_spouse ? "Yes" : "No"]</b></a></small>"
 				dat += "<BR>"
@@ -1420,9 +1420,9 @@ Slots: [job.spawn_positions]</span>
 				spouse_ckey = potential_spouse_ckey
 			// memory_for_family_members - возможность выставить название семьи
 			if("surname")
-				var/msg = "Add surname your family will be known as."
+				var/msg = "Add surname your family will be known as. You can join after roundstart to form a family if you set up your spouse soul."
 				if(usr?.client?.prefs?.be_russian)
-					msg = "Введите фамилию, под которой будет известна ваша семья."
+					msg = "Введите фамилию, под которой будет известна ваша семья. Вы можете зайти после начала раунда за членов одной семьи, если выставите душу второй половинки."
 				var/potential_family_surname = input(usr, msg, "Family History", null) as text
 				if(!potential_family_surname)
 					family_surname = null
