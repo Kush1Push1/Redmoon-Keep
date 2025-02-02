@@ -17,7 +17,13 @@
 					spread = rand(0, distro) // REDMOON EDIT - изменяем механику разброса - WAS round((my_spread - 0.5) * distro)		
 				else //Smart spread
 					spread = round((i / pellets - 0.5) * distro)
-				// REDMOON ADD START - ranged_weapon_balancing - снижение разброса в зависимости от навыков стреляющего
+				// REDMOON ADD START
+				// ranged_weapon_balancing - снижение разброса в зависимости от навыков стреляющего
+				if(user.buckled)
+					if(isanimal(user.buckled)) // TODO: добавить сюда обходку для набегателей с конными лучниками
+						to_chat(user, span_warning("It's hard to shoot accurate while mounting!"))
+						spread += 4.5
+				// ranged_weapon_balancing - снижение разброса в зависимости от навыков стреляющего
 				var/obj/item/weapon = fired_from
 				spread = max(0, spread - user.mind.get_skill_level(weapon.associated_skill) * 3)
 				// REDMOON ADD END
