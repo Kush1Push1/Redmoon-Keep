@@ -9,3 +9,6 @@
 
 /obj/item/natural/cured/essence
 	sellprice = 15 // корм дровосеков
+
+/obj/item/reagent_containers/powder
+	sellprice = 1 // Фикс возможности перемолоть камень за 2 маммона в пыль за 10 маммонов
