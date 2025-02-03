@@ -1,3 +1,5 @@
+// ranged_weapon_balancing - смотрите по этому тэгу
+
 /obj/item/ammo_casing/caseless/rogue/bolt
 	randomspread = TRUE // Добавляем разброс по дефолту
 	variance = 15 // Стандартный разброс, который снижается с наличием навыка и стоянием на месте
