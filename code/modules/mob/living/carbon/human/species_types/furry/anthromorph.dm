@@ -63,10 +63,10 @@
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
-		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles,
-		ORGAN_SLOT_PENIS = /obj/item/organ/penis/knotted,
-		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts,
-		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina,
+//		ORGAN_SLOT_TESTICLES = /obj/item/organ/testicles, // REDMOON REMOVAL - убираем форсирование половых органов
+//		ORGAN_SLOT_PENIS = /obj/item/organ/penis/knotted, // REDMOON REMOVAL - убираем форсирование половых органов
+//		ORGAN_SLOT_BREASTS = /obj/item/organ/breasts, // REDMOON REMOVAL - убираем форсирование половых органов
+//		ORGAN_SLOT_VAGINA = /obj/item/organ/vagina, // REDMOON REMOVAL - убираем форсирование половых органов
 		)
 	bodypart_features = list(
 		/datum/bodypart_feature/hair/head,
@@ -124,6 +124,8 @@
 		/datum/body_marking/drake_eyes,
 		/datum/body_marking/tonage,
 		/datum/body_marking/spotted,
+		/datum/body_marking/harlequin,
+		/datum/body_marking/harlequinreversed,
 	)
 	descriptor_choices = list(
 		/datum/descriptor_choice/height,

@@ -32,6 +32,7 @@
 	sleeved = null
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = NON_DWARVEN_RACE_TYPES
+	// Has sprite without crop for hands AND no sleeves
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	color = CLOTHING_BLACK
@@ -91,6 +92,7 @@
 	icon_state = "puritan_shirt"
 	allowed_race = CLOTHED_RACES_TYPES
 	salvage_result = /obj/item/natural/silk
+	ignore_sleeves_code = TRUE // No sleeves, otherwise arms will be over the sprite
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	icon_state = "sailorblues"
@@ -241,6 +243,17 @@
 	. = ..()
 	color = pick("#e6e5e5", "#52BE80", "#C39BD3", "#EC7063","#5DADE2")
 
+/obj/item/clothing/suit/roguetown/shirt/dress/maiddress
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "maid dress"
+	desc = "A distinctive black dress that should be kept clean and tidy - unless you want to be disciplined."
+	body_parts_covered = CHEST|GROIN|LEGS|VITALS
+	icon = 'icons/roguetown/clothing/maiddress/maid.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/maiddress/onmob/maid.dmi'
+	sleeved = 'icons/roguetown/clothing/maiddress/onmob/sleeves_shirts.dmi'
+	icon_state = "maiddress"
+	item_state = "maiddress"
+
 // 
 //   Velvet Dress
 //
@@ -254,6 +267,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/nobledresses/onmob/shirts.dmi'
 	icon_state = "velvetdress"
 	item_state = "velvetdress"
+	ignore_sleeves_code = TRUE // No sleeves, otherwise arms will be over the sprite
 
 /obj/item/clothing/suit/roguetown/shirt/dress/velvetdress/black
 	color = CLOTHING_BLACK
@@ -278,6 +292,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/nobledresses/onmob/shirts.dmi'
 	icon_state = "nobledress"
 	item_state = "nobledress"
+	ignore_sleeves_code = TRUE // No sleeves, otherwise arms will be over the sprite
 
 /obj/item/clothing/suit/roguetown/shirt/dress/nobledress/black
 	color = CLOTHING_BLACK

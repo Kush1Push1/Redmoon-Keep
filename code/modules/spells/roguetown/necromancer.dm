@@ -34,7 +34,7 @@
 			return TRUE
 		target.visible_message(span_info("Necrotic energy floods over [target]!"), span_userdanger("I feel colder as the dark energy floods into me!"))
 		if(iscarbon(target))
-			target.Paralyze(50)
+			target.apply_status_effect(/datum/status_effect/debuff/weaken_living)
 		else
 			target.adjustBruteLoss(20)
 		return TRUE
@@ -143,26 +143,30 @@
 		to_chat(user, span_warning("I cannot raise the living."))
 		return FALSE
 
+	if(HAS_TRAIT(target, TRAIT_SPECIALUNDEAD))
+		to_chat(user, span_warning("This is an undead far beyond my perview. I cannot make it mine."))
+		return FALSE
+
 	var/obj/item/bodypart/target_head = target.get_bodypart(BODY_ZONE_HEAD)
-	var/obj/item/bodypart/target_larm = target.get_bodypart(BODY_ZONE_L_ARM)
-	var/obj/item/bodypart/target_rarm = target.get_bodypart(BODY_ZONE_R_ARM)
-	var/obj/item/bodypart/target_lleg = target.get_bodypart(BODY_ZONE_L_LEG)
-	var/obj/item/bodypart/target_rleg = target.get_bodypart(BODY_ZONE_R_LEG)
+	// var/obj/item/bodypart/target_larm = target.get_bodypart(BODY_ZONE_L_ARM)
+	// var/obj/item/bodypart/target_rarm = target.get_bodypart(BODY_ZONE_R_ARM)
+	// var/obj/item/bodypart/target_lleg = target.get_bodypart(BODY_ZONE_L_LEG)
+	// var/obj/item/bodypart/target_rleg = target.get_bodypart(BODY_ZONE_R_LEG)
 	if(!target_head)
 		to_chat(user, span_warning("This corpse is headless."))
 		return FALSE
-	if(!target_larm)
-		to_chat(user, span_warning("This corpse is missing a left arm."))
-		return FALSE
-	if(!target_rarm)
-		to_chat(user, span_warning("This corpse is missing a right arm."))
-		return FALSE
-	if(!target_lleg)
-		to_chat(user, span_warning("This corpse is missing a left leg."))
-		return FALSE
-	if(!target_rleg)
-		to_chat(user, span_warning("This corpse is missing a right leg."))
-		return FALSE
+	// if(!target_larm)
+	// 	to_chat(user, span_warning("This corpse is missing a left arm."))
+	// 	return FALSE
+	// if(!target_rarm)
+	// 	to_chat(user, span_warning("This corpse is missing a right arm."))
+	// 	return FALSE
+	// if(!target_lleg)
+	// 	to_chat(user, span_warning("This corpse is missing a left leg."))
+	// 	return FALSE
+	// if(!target_rleg)
+	// 	to_chat(user, span_warning("This corpse is missing a right leg."))
+	// 	return FALSE
 
 	var/offer_refused = FALSE
 
@@ -191,12 +195,12 @@
 		if(LAZYLEN(candidates))
 			var/mob/C = pick(candidates)
 			target.turn_to_minion(user, C.ckey)
-			target.visible_message(span_warning("[target.real_name]'s eyes light up with an eerie glow."), runechat_message = TRUE)
+			target.visible_message(span_warning("[target.real_name]'s eyes light up with an STRONG glow."), runechat_message = TRUE)
 
 		//no candidates, raise as npc
 		else
 			target.turn_to_minion(user)
-			target.visible_message(span_warning("[target.real_name]'s eyes light up with a weak glow."), runechat_message = TRUE)
+			target.visible_message(span_warning("[target.real_name]'s eyes light up with a WEAK glow."), runechat_message = TRUE)
 
 		return TRUE
 
@@ -232,26 +236,30 @@
 		to_chat(user, span_warning("I cannot raise the living."))
 		return FALSE
 
+	if(HAS_TRAIT(target, TRAIT_SPECIALUNDEAD))
+		to_chat(user, span_warning("This is an undead far beyond my perview. I cannot make it mine."))
+		return FALSE
+
 	var/obj/item/bodypart/target_head = target.get_bodypart(BODY_ZONE_HEAD)
-	var/obj/item/bodypart/target_larm = target.get_bodypart(BODY_ZONE_L_ARM)
-	var/obj/item/bodypart/target_rarm = target.get_bodypart(BODY_ZONE_R_ARM)
-	var/obj/item/bodypart/target_lleg = target.get_bodypart(BODY_ZONE_L_LEG)
-	var/obj/item/bodypart/target_rleg = target.get_bodypart(BODY_ZONE_R_LEG)
+	// var/obj/item/bodypart/target_larm = target.get_bodypart(BODY_ZONE_L_ARM)
+	// var/obj/item/bodypart/target_rarm = target.get_bodypart(BODY_ZONE_R_ARM)
+	// var/obj/item/bodypart/target_lleg = target.get_bodypart(BODY_ZONE_L_LEG)
+	// var/obj/item/bodypart/target_rleg = target.get_bodypart(BODY_ZONE_R_LEG)
 	if(!target_head)
 		to_chat(user, span_warning("This corpse is headless."))
 		return FALSE
-	if(!target_larm)
-		to_chat(user, span_warning("This corpse is missing a left arm."))
-		return FALSE
-	if(!target_rarm)
-		to_chat(user, span_warning("This corpse is missing a right arm."))
-		return FALSE
-	if(!target_lleg)
-		to_chat(user, span_warning("This corpse is missing a left leg."))
-		return FALSE
-	if(!target_rleg)
-		to_chat(user, span_warning("This corpse is missing a right leg."))
-		return FALSE
+	// if(!target_larm)
+	// 	to_chat(user, span_warning("This corpse is missing a left arm."))
+	// 	return FALSE
+	// if(!target_rarm)
+	// 	to_chat(user, span_warning("This corpse is missing a right arm."))
+	// 	return FALSE
+	// if(!target_lleg)
+	// 	to_chat(user, span_warning("This corpse is missing a left leg."))
+	// 	return FALSE
+	// if(!target_rleg)
+	// 	to_chat(user, span_warning("This corpse is missing a right leg."))
+	// 	return FALSE
 
 	//Sanitychecker for lesser raise undead skeleton cap
 	if(target.necrotarget == TRUE)

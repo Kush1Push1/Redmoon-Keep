@@ -657,16 +657,21 @@
 
 //---------------------------------------alch reactions----------------------------------------------//
 
+
+/datum/chemical_reaction/alch
+	name = "debug alch reaction"
+	mix_sound = 'sound/items/fillbottle.ogg'
+	id = /datum/reagent/alch
+	required_container = /obj/item/reagent_containers/glass/alembic
+
 /datum/chemical_reaction/alch/lesserhealth
 	name = "lesser health pot"
-	mix_sound = 'sound/items/fillbottle.ogg'
 	id = /datum/reagent/medicine/lesserhealthpot
 	results = list(/datum/reagent/medicine/lesserhealthpot = 45) //15 oz
 	required_reagents = list(/datum/reagent/alch/syrum_meat = 24, /datum/reagent/alch/syrum_ash = 24)
 
 /datum/chemical_reaction/alch/health //purify minor health pot into half a bottle by using essence of clarity (swampweed)
 	name = "health pot purification"
-	mix_sound = 'sound/items/fillbottle.ogg'
 	id = /datum/reagent/medicine/healthpot
 	results = list(/datum/reagent/medicine/healthpot = 22.5) //about 7.5 oz
 	required_reagents = list(/datum/reagent/medicine/lesserhealthpot = 45, /datum/reagent/alch/syrum_swamp_weed = 24)
@@ -674,7 +679,6 @@
 
 /datum/chemical_reaction/alch/greaterhealth //purify health pot into half a bottle of super by using essence of poison (poison berry) which used to be in the old red recipe
 	name = "greater health pot purification"
-	mix_sound = 'sound/items/fillbottle.ogg'
 	id = /datum/reagent/medicine/greaterhealthpot
 	results = list(/datum/reagent/medicine/greaterhealthpot = 22.5) //about 7.5 oz
 	required_reagents = list(/datum/reagent/medicine/healthpot = 45, /datum/reagent/alch/syrum_poison_berry = 24)
@@ -721,6 +725,22 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	for(var/i = 1, i <= created_volume, i++)
 		new /obj/item/reagent_containers/powder/moondust(location)
 
+/datum/chemical_reaction/alch/puresalt
+	name = "puresalt"
+	id = "puresalt"
+	required_reagents = list(/datum/reagent/water/salty = 30) //Boil off the water to get pure salt
+	results = list(/datum/reagent/rawsalt = 15)
+	
+/datum/chemical_reaction/alch/saltsea
+	name = "saltsea"
+	id = "saltsea"
+	required_reagents = list(/datum/reagent/rawsalt = 15)
+
+/datum/chemical_reaction/alch/saltsea/on_reaction(datum/reagents/holder, created_volume)	
+	var/location = get_turf(holder.my_atom)
+	for(var/i = 1, i <= created_volume, i++)
+		new /obj/item/reagent_containers/powder/salt(location)
+
 /datum/chemical_reaction/alch/spice
 	name = "spiceify"
 	id = "spiceify"
@@ -757,14 +777,14 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	bloody_icon_state = "bodyblood"
 	sewrepair = TRUE
 
-/obj/item/storage/backpack/rogue/backpack/rucksack/ComponentInitialize()
-	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		STR.max_combined_w_class = 42
-		STR.max_w_class = WEIGHT_CLASS_NORMAL
-		STR.max_items = 10
-		STR.not_while_equipped = TRUE
+// /obj/item/storage/backpack/rogue/backpack/rucksack/ComponentInitialize()
+// 	. = ..()
+// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+// 	if(STR)
+// 		STR.max_combined_w_class = 42
+// 		STR.max_w_class = WEIGHT_CLASS_NORMAL
+// 		STR.max_items = 10
+// 		STR.not_while_equipped = TRUE
 
 /obj/item/rogueweapon/surgery/saw/improv
 	name = "improvised saw"
@@ -837,22 +857,22 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	update_icon()
 	to_chat(user, span_notice("[src] is now [fancy_open ? "open" : "closed"]."))
 
-/obj/item/storage/fancy/pilltin/ComponentInitialize()
-	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		STR.max_combined_w_class = 42
-		STR.max_w_class = WEIGHT_CLASS_NORMAL
-		STR.max_items = 12
-		STR.set_holdable(list(/obj/item/reagent_containers/pill))
+// /obj/item/storage/fancy/pilltin/ComponentInitialize()
+// 	. = ..()
+// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+// 	if(STR)
+// 		STR.max_combined_w_class = 42
+// 		STR.max_w_class = WEIGHT_CLASS_NORMAL
+// 		STR.max_items = 12
+// 		STR.set_holdable(list(/obj/item/reagent_containers/pill))
 
 /obj/item/storage/fancy/pilltin/wake
 	name = "pill tin (wake)"
 
-/obj/item/storage/fancy/pilltin/wake/PopulateContents()
-	new /obj/item/reagent_containers/pill/caffpill(src)
-	new /obj/item/reagent_containers/pill/caffpill(src)
-	new /obj/item/reagent_containers/pill/caffpill(src)
+// /obj/item/storage/fancy/pilltin/wake/PopulateContents()
+// 	new /obj/item/reagent_containers/pill/caffpill(src)
+// 	new /obj/item/reagent_containers/pill/caffpill(src)
+// 	new /obj/item/reagent_containers/pill/caffpill(src)
 
 /obj/item/storage/fancy/skit
 	name = "surgery kit"
@@ -903,35 +923,35 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	update_icon()
 	to_chat(user, span_notice("[src] is now [fancy_open ? "open" : "closed"]."))
 
-/obj/item/storage/fancy/skit/ComponentInitialize()
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 10
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 42
-	STR.set_holdable(list(
-		/obj/item/rogueweapon/surgery/scalpel,
-		/obj/item/rogueweapon/surgery/saw,
-		/obj/item/rogueweapon/surgery/hemostat,
-		/obj/item/rogueweapon/surgery/retractor,
-		/obj/item/rogueweapon/surgery/bonesetter,
-		/obj/item/rogueweapon/surgery/cautery,
-		/obj/item/natural/worms/leech/cheele,
-		/obj/item/needle,
-		/obj/item/needle/thorn,
-		/obj/item/needle/pestra
-	))
+// /obj/item/storage/fancy/skit/ComponentInitialize()
+// 	..()
+// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+// 	STR.max_items = 10
+// 	STR.max_w_class = WEIGHT_CLASS_NORMAL
+// 	STR.max_combined_w_class = 42
+// 	STR.set_holdable(list(
+// 		/obj/item/rogueweapon/surgery/scalpel,
+// 		/obj/item/rogueweapon/surgery/saw,
+// 		/obj/item/rogueweapon/surgery/hemostat,
+// 		/obj/item/rogueweapon/surgery/retractor,
+// 		/obj/item/rogueweapon/surgery/bonesetter,
+// 		/obj/item/rogueweapon/surgery/cautery,
+// 		/obj/item/natural/worms/leech/cheele,
+// 		/obj/item/needle,
+// 		/obj/item/needle/thorn,
+// 		/obj/item/needle/pestra
+// 	))
 
-/obj/item/storage/fancy/skit/PopulateContents()
-	new /obj/item/rogueweapon/surgery/scalpel(src)
-	new /obj/item/rogueweapon/surgery/saw(src)
-	new /obj/item/rogueweapon/surgery/hemostat(src)
-	new /obj/item/rogueweapon/surgery/hemostat(src)
-	new /obj/item/rogueweapon/surgery/retractor(src)
-	new /obj/item/rogueweapon/surgery/bonesetter(src)
-	new /obj/item/rogueweapon/surgery/cautery(src)
-	new /obj/item/natural/worms/leech/cheele(src)
-	new /obj/item/needle/pestra(src)
+// /obj/item/storage/fancy/skit/PopulateContents()
+// 	new /obj/item/rogueweapon/surgery/scalpel(src)
+// 	new /obj/item/rogueweapon/surgery/saw(src)
+// 	new /obj/item/rogueweapon/surgery/hemostat(src)
+// 	new /obj/item/rogueweapon/surgery/hemostat(src)
+// 	new /obj/item/rogueweapon/surgery/retractor(src)
+// 	new /obj/item/rogueweapon/surgery/bonesetter(src)
+// 	new /obj/item/rogueweapon/surgery/cautery(src)
+// 	new /obj/item/natural/worms/leech/cheele(src)
+// 	new /obj/item/needle/pestra(src)
 
 /obj/item/storage/fancy/ifak
 	name = "personal patch kit"
@@ -942,10 +962,10 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	throwforce = 1
 	slot_flags = null
 
-/obj/item/storage/fancy/ifak/PopulateContents()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	for(var/i = 1 to STR.max_items)
-		new spawn_type(src)
+// /obj/item/storage/fancy/ifak/PopulateContents()
+// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+// 	for(var/i = 1 to STR.max_items)
+// 		new spawn_type(src)
 
 /obj/item/storage/fancy/ifak/update_icon()
 	if(fancy_open)
@@ -987,33 +1007,33 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 	update_icon()
 	to_chat(user, span_notice("[src] is now [fancy_open ? "open" : "closed"]."))
 
-/obj/item/storage/fancy/ifak/ComponentInitialize()
-	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 8
-	STR.max_w_class = WEIGHT_CLASS_NORMAL
-	STR.max_combined_w_class = 42
-	STR.set_holdable(list(
-		/obj/item/reagent_containers/hypospray/medipen/sealbottle/reju,
-		/obj/item/reagent_containers/hypospray/medipen/sty/detox,
-		/obj/item/natural/cloth/bandage,
-		/obj/item/natural/bundle/cloth/bandage,
-		/obj/item/natural/bundle/cloth/bandage/full,
-		/obj/item/reagent_containers/pill/pnkpill,
-		/obj/item/candle,
-		/obj/item/needle,
-		/obj/item/needle/thorn,
-		/obj/item/needle/pestra,
-	))
+// /obj/item/storage/fancy/ifak/ComponentInitialize()
+// 	. = ..()
+// 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
+// 	STR.max_items = 8
+// 	STR.max_w_class = WEIGHT_CLASS_NORMAL
+// 	STR.max_combined_w_class = 42
+// 	STR.set_holdable(list(
+// 		/obj/item/reagent_containers/hypospray/medipen/sealbottle/reju,
+// 		/obj/item/reagent_containers/hypospray/medipen/sty/detox,
+// 		/obj/item/natural/cloth/bandage,
+// 		/obj/item/natural/bundle/cloth/bandage,
+// 		/obj/item/natural/bundle/cloth/bandage/full,
+// 		/obj/item/reagent_containers/pill/pnkpill,
+// 		/obj/item/candle,
+// 		/obj/item/needle,
+// 		/obj/item/needle/thorn,
+// 		/obj/item/needle/pestra,
+// 	))
 
-/obj/item/storage/fancy/ifak/PopulateContents()
-	new /obj/item/reagent_containers/hypospray/medipen/sealbottle/reju(src)
-	new /obj/item/natural/bundle/cloth/bandage/full(src)
-	new /obj/item/reagent_containers/hypospray/medipen/sty/detox(src)
-	new /obj/item/reagent_containers/pill/pnkpill(src)
-	new /obj/item/candle/yellow(src)
-	new /obj/item/needle(src)
-	new /obj/item/book/rogue/medical_notebook(src)
+// /obj/item/storage/fancy/ifak/PopulateContents()
+// 	new /obj/item/reagent_containers/hypospray/medipen/sealbottle/reju(src)
+// 	new /obj/item/natural/bundle/cloth/bandage/full(src)
+// 	new /obj/item/reagent_containers/hypospray/medipen/sty/detox(src)
+// 	new /obj/item/reagent_containers/pill/pnkpill(src)
+// 	new /obj/item/candle/yellow(src)
+// 	new /obj/item/needle(src)
+// 	new /obj/item/book/rogue/medical_notebook(src)
 
 /obj/item/reagent_containers/hypospray/medipen/sealbottle
 	name = "sealed bottle item"
@@ -1244,7 +1264,7 @@ end recipe count: 8 ash, 8 minced meat, 4 swampweed, 2 poisonberry to make 1 bot
 
 /obj/item/reagent_containers/glass/alembic
 	name = "metal alembic"
-	possible_item_intents = list(INTENT_POUR, INTENT_SPLASH)
+	possible_item_intents = list(INTENT_POUR, INTENT_SPLASH, /datum/intent/fill) //It's janky and annoying to need to fill the alembic this way, but also Moricode is stupid and I'll refactor it later.
 	desc = "so you're an alchemist then?"
 	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "alembic_empty"

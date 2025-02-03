@@ -223,13 +223,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	///////////
 	//CONNECT//
 	///////////
-#if (PRELOAD_RSC == 0)
-GLOBAL_LIST_EMPTY(external_rsc_urls)
-#endif
 
 /client/New(TopicData)
 	var/tdata = TopicData //save this for later use
-//	chatOutput = new /datum/chatOutput(src)
+	chatOutput = new /datum/chatOutput(src)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
 	if(connection != "seeker" && connection != "web")//Invalid connection type.
@@ -281,6 +278,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	fps = prefs.clientfps
+
+	if(prefs.prefer_old_chat == FALSE)
+		spawn() // Goonchat does some non-instant checks in start()
+			chatOutput.start()
 
 	if(fexists(roundend_report_file()))
 		verbs += /client/proc/show_previous_roundend_report
@@ -963,27 +964,20 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 /client/proc/send_resources()
 #if (PRELOAD_RSC == 0)
 	var/static/next_external_rsc = 0
-	if(GLOB.external_rsc_urls && GLOB.external_rsc_urls.len)
-		next_external_rsc = WRAP(next_external_rsc+1, 1, GLOB.external_rsc_urls.len+1)
-		preload_rsc = GLOB.external_rsc_urls[next_external_rsc]
+	var/list/external_rsc_urls = CONFIG_GET(keyed_list/external_rsc_urls)
+	if(length(external_rsc_urls))
+		next_external_rsc = WRAP(next_external_rsc+1, 1, external_rsc_urls.len+1)
+		preload_rsc = external_rsc_urls[next_external_rsc]
 #endif
-	//get the common files
-	getFiles(
-		'html/search.js',
-		'html/panels.css',
-		'html/browser/common.css',
-		'html/browser/scannernew.css',
-		'html/browser/playeroptions.css',
-		)
-	spawn (10) //removing this spawn causes all clients to not get verbs.
+
+	spawn (10) //removing this spawn causes all clients to not get verbs. (this can't be addtimer because these assets may be needed before the mc inits)
+
+		//load info on what assets the client has
+		src << browse('code/modules/asset_cache/validate_assets.html', "window=asset_cache_browser")
+
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
-		getFilesSlow(src, SSassets.preload, register_asset = FALSE)
-//		#if (PRELOAD_RSC == 0)
-//		for (var/name in GLOB.vox_sounds)
-//			var/file = GLOB.vox_sounds[name]
-//			Export("##action=load_rsc", file)
-//			stoplag()
-//		#endif
+		if (CONFIG_GET(flag/asset_simple_preload))
+			addtimer(CALLBACK(SSassets.transport, TYPE_PROC_REF(/datum/asset_transport, send_assets_slow), src, SSassets.transport.preload), 5 SECONDS)
 
 //Hook, override it to run code when dir changes
 //Like for /atoms, but clients are their own snowflake FUCK
@@ -1166,7 +1160,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/theykey = selections[selection]
 	var/action 
 	if(usr?.client?.prefs?.be_russian)
-		action = alert(src, "Как вы хотите оценить [selection]?", "Выбор действия", "Похвалить", "Покарать", "Отмена")
+		action = alert(src, "Как вы хотите оценить [selection]?", "Выбор действия", "Похвалить", "Поругать", "Отмена")
 	else
 		action = alert(src, "How do you want to evaluate [selection]?", "Action selection", "Commend", "Uncommend", "Cancellation")
 	if(action == "Отмена" || action == "Cancellation")
@@ -1180,46 +1174,21 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	if(!can_commend(forced))
 		return
 	if(theykey)
-		prefs.commendedsomeone = TRUE
+		// REDMOON REMOVAL - перенесено вниз - WAS: prefs.commendedsomeone = TRUE 
 		if(action == "Похвалить" || action == "Commend")
-			add_commend(theykey, ckey)
-			to_chat(src,"[selection] commended.")
+			if(add_commend(theykey, ckey))
+				to_chat(src,"[selection] получит похвалу (или даже \"спасибо\", если это первый commend).")
+				prefs.commendedsomeone = TRUE // REDMOON ADD
+			/* REDMOON REMOVAL START - логирование добавлено в add_commend
 			log_game("COMMEND: [ckey] commends [theykey].")
 			log_admin("COMMEND: [ckey] commends [theykey].")
 			message_admins("[ckey] commends [theykey].")
-		else if(action == "Покарать" || action == "Uncommend")
-			add_uncommend(theykey, ckey)
-			to_chat(src,"[selection] uncommended.")
-			log_game("COMMEND: [ckey] uncommends [theykey].")
-			log_admin("COMMEND: [ckey] uncommends [theykey].")
-			message_admins("[ckey] uncommends [theykey].")
+			REDMOON REMOVAL END */
+		else if(action == "Поругать" || action == "Uncommend")
+			if(add_uncommend(theykey, ckey))
+				to_chat(src,"[selection] получит негативный комментарий (или даже -PQ, если это первый uncommend).")
+				prefs.commendedsomeone = TRUE // REDMOON ADD
 	return
-
-/client/proc/add_uncommend(key, giver)
-	if(!giver || !key)
-		return
-	var/curcomm = 0
-	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/commends.json")
-	if(!fexists(json_file))
-		WRITE_FILE(json_file, "{}")
-	var/list/json = json_decode(file2text(json_file))
-	if(json[giver])
-		curcomm = json[giver]
-	curcomm++
-	json[giver] = curcomm
-	fdel(json_file)
-	WRITE_FILE(json_file, json_encode(json))
-
-	var/fakekey = src.ckey
-	if(src.ckey in GLOB.anonymize)
-		fakekey = get_fake_key(src.ckey)
-
-	var/raisin = stripped_input(src, "Укажите краткую причину этого изменения", "Симулятор Бога", "", null)
-	if(!raisin)
-		to_chat(src, span_boldwarning("Причина не указана."))
-		return
-
-	adjust_playerquality(-1, ckey(key), fakekey, raisin)
 
 // Handles notifying funeralized players on login, or forcing them back to lobby, depending on configs. Called on /client/New().
 /client/proc/funeral_login()
