@@ -5,7 +5,13 @@
 	sellprice = 30 // было 50. Хватит продавать ИХ
 
 /obj/item/natural/fur
-	sellprice = 23 // как в стокпайле
+	sellprice = 15 // как в стокпайле
+
+/obj/item/natural/hide
+	sellprice = 15 // нельзя выгодно продать голым на корабле (в обход казначея)
+
+/obj/item/natural/hide/cured
+	sellprice = 10 // нельзя выгодно продать голым на корабле (в обход казначея)
 
 /obj/item/natural/cured/essence
 	sellprice = 15 // корм дровосеков

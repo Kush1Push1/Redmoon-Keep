@@ -14,14 +14,14 @@
 	export_price = 65
 
 /datum/roguestock/stockpile/cured
-	payout_price = 10
-	withdraw_price = 15
-	export_price = 15
-
-/datum/roguestock/stockpile/hide
 	payout_price = 5
 	withdraw_price = 10
 	export_price = 10
+
+/datum/roguestock/stockpile/hide
+	payout_price = 10
+	withdraw_price = 15
+	export_price = 15
 
 /datum/roguestock/stockpile/fur
 	payout_price = 10
