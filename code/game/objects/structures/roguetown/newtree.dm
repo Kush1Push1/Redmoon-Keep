@@ -69,9 +69,9 @@
 	if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/flora/roguetree/stump) in NT))//if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
 		new /obj/structure/flora/roguetree/stump(NT)
 	playsound(src, 'sound/misc/treefall.ogg', 100, FALSE)
-	if(tree_not_in_bog) // REDMOON ADD START - ECONOMY-FIX // Оповещение для лесоруба, чтобы шёл бить лес
-		if(prob(20))
-			visible_message(span_warning(user.client.prefs.be_russian ? "Дерево было уже слишком старым. Лес в болото значительно качественнее..." : "The tree was already too old for good gatherting. The one in the bog would be more profitable...")) // REDMOON ADD END 
+//	if(tree_not_in_bog) // REDMOON ADD START - ECONOMY-FIX // Оповещение для лесоруба, чтобы шёл бить лес
+//		if(prob(20))
+//			visible_message(span_warning(user.client.prefs.be_russian ? "Дерево было уже слишком старым. Лес в болото значительно качественнее..." : "The tree was already too old for good gatherting. The one in the bog would be more profitable...")) // REDMOON ADD END 
 	. = ..()
 
 /obj/structure/flora/newtree/attack_hand(mob/user)
