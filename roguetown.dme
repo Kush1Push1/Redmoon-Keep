@@ -2131,6 +2131,7 @@
 #include "modular_redmoon\modules\economy_fixes\stockpile.dm"
 #include "modular_redmoon\modules\commend_comments\commend_comments.dm"
 #include "modular_redmoon\modules\economy_fixes\tailoring.dm"
+#include "modular_redmoon\modules\economy_fixes\towners_should_work_in_bog.dm"
 #include "modular_redmoon\modules\events\goblininvasion.dm"
 #include "modular_redmoon\modules\events\haunts.dm"
 #include "modular_redmoon\modules\events\poltergeist.dm"

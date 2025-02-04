@@ -184,7 +184,7 @@
 		lumber_amount = rand(lumber_amount, max(lumber_amount, round(skill_level / 2)))
 		var/essense_sound_played = FALSE //This is here so the sound wont play multiple times if the essense itself spawns multiple times
 		for(var/i = 0; i < lumber_amount; i++)
-			if(prob(skill_level + user.goodluck(2)))
+			if(prob(skill_level + user.goodluck(2)) && istype(get_area(loc), /area/rogue/outdoors/bog)) // REDMOON EDIT - ECONOMY-FIX - Дендор не одобряет лесорубство вне болота - WAS: if(prob(skill_level + user.goodluck(2)))
 				new /obj/item/grown/log/tree/small/essence(get_turf(src))
 				if(!essense_sound_played)
 					essense_sound_played = TRUE
