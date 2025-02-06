@@ -13,9 +13,34 @@
 	if(!istype(get_area(loc), /area/rogue/outdoors/bog))
 		static_debris = list(/obj/item/grown/log/tree/small = 1)
 		tree_not_in_bog = TRUE
+		desc += " Seems like this tree is very old. The one in the Bog would have better wood."
 		if(istype(get_turf(src), /turf/open/transparent/openspace))
 			static_debris = list() // отсутствие древесины в целом, фармите болото, дровосеки
 			tree_not_in_bog = FALSE // некому показывать
+	. = ..()
+
+/obj/structure/flora/newtree/obj_destruction(damage_flag)
+	if(tree_not_in_bog)
+		if(prob(20))
+			visible_message(span_info("The tree was too old. The one the Bog have better wood."), vision_distance = 2)
+	. = ..()
+
+/obj/structure/flora/roguetree
+	var/tree_not_in_bog = FALSE // оповещение для дровосека, чтобы шёл рубить болото
+
+/obj/structure/flora/roguetree/Initialize()
+	if(!istype(get_area(loc), /area/rogue/outdoors/bog))
+		static_debris = list(/obj/item/grown/log/tree/small = 1)
+		tree_not_in_bog = TRUE
+		desc += " Seems like this tree is very old. The one in the Bog would have better wood."
+		stump_type = null
+	. = ..()
+
+/obj/structure/flora/roguetree/obj_destruction(damage_flag)
+	if(tree_not_in_bog)
+		if(prob(20))
+			visible_message(span_info("The tree was too old and rotten. The one the Bog would have better wood."), vision_distance = 2)
+
 	. = ..()
 
 // Добыча в шахтах рокхилла - не особо прибыльное дело, но кузнец явно скажет спасибо. Золото и другие ценные руды можно добыть за городом
