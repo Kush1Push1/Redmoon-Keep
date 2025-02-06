@@ -39,7 +39,7 @@
 	return FALSE
 
 /obj/item/natural/worms/check_for_bait_location()
-	if(!istype(get_area(src), /area/rogue/outdoors/bog) || !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
+	if(!istype(get_area(src), /area/rogue/outdoors/bog) && !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
 		fishloot = list(\
 			/obj/item/trash/applecore = 50,
 			/obj/item/trash/pearcore = 25, //Pears, in Rockhill? Perish the thought.
@@ -75,7 +75,7 @@
 	return FALSE
 
 /obj/item/natural/worms/grubs/check_for_bait_location()
-	if(!istype(get_area(src), /area/rogue/outdoors/bog) || !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
+	if(!istype(get_area(src), /area/rogue/outdoors/bog) && !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
 		fishloot = list(\
 			/obj/item/trash/applecore = 625,
 			/obj/item/trash/pearcore = 625,
