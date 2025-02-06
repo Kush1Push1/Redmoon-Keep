@@ -48,6 +48,18 @@
 	check_for_bog_area()
 	. = ..()
 
+/turf/closed/mineral/random/rogue
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/copper = 15,/turf/closed/mineral/rogue/coal = 25)
+	mineralChance = 25
+
+/turf/closed/mineral/random/rogue/med
+	mineralChance = 30
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 3,/turf/closed/mineral/rogue/silver = 2,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/copper = 10,/turf/closed/mineral/rogue/tin = 10,/turf/closed/mineral/rogue/coal = 5, /turf/closed/mineral/rogue/gem = 3)
+
+/turf/closed/mineral/random/rogue/high
+	mineralChance = 50
+	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 9,/turf/closed/mineral/rogue/silver = 5,/turf/closed/mineral/rogue/iron = 20,/turf/closed/mineral/rogue/copper = 10,/turf/closed/mineral/rogue/tin = 10, /turf/closed/mineral/rogue/gem = 5)
+
 /turf/closed/mineral/random/proc/check_for_bog_area()
 	return TRUE
 
@@ -58,6 +70,68 @@
 /turf/closed/mineral/random/rogue/high/check_for_bog_area()
 	if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
 		mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/copper = 15,/turf/closed/mineral/rogue/coal = 25)
+
+/turf/closed/mineral/rogue
+	var/ore_overlay = null
+	var/ore_overlay_icon = 'icons/roguetown/items/ore.dmi'
+
+/turf/closed/mineral/rogue/proc/update_ore_overlay()
+	var/ore_overlay_icon_state = get_ore_overlay_icon_state()
+	var/mutable_appearance/M = mutable_appearance(ore_overlay_icon, ore_overlay_icon_state, layer = ABOVE_NORMAL_TURF_LAYER)
+	M.pixel_y = rand(-12, 12)
+	M.pixel_x = rand(-12, 12)
+
+	var/matrix/M_matrix = new
+	M_matrix.Scale(0.3,rand(0.3, 0.6))
+	M_matrix.Turn(rand(1,360))
+	M.transform = M_matrix
+	add_overlay(M)
+
+/turf/closed/mineral/rogue/proc/get_ore_overlay_icon_state()
+	return "[ore_overlay][rand(1,3)]"
+
+/turf/closed/mineral/rogue/Initialize()
+	. = ..()
+	if(ore_overlay)
+		update_ore_overlay()
+
+/turf/closed/mineral/rogue/gold
+	ore_overlay = "oregold"
+
+/turf/closed/mineral/rogue/silver
+	ore_overlay = "oresilv"
+
+/turf/closed/mineral/rogue/salt
+	ore_overlay = "salt"
+	ore_overlay_icon = 'icons/roguetown/items/produce.dmi'
+
+/turf/closed/mineral/rogue/salt/get_ore_overlay_icon_state()
+	return ore_overlay // нет рандомных иконок
+
+/turf/closed/mineral/rogue/copper
+	ore_overlay = "orecop"
+
+/turf/closed/mineral/rogue/tin
+	ore_overlay = "oretin"
+
+/turf/closed/mineral/rogue/iron
+	ore_overlay = "oreiron"
+
+/turf/closed/mineral/rogue/coal
+	ore_overlay = "orecoal"
+
+/turf/closed/mineral/rogue/cinnabar
+	ore_overlay = "orecinnabar"
+
+/turf/closed/mineral/rogue/cinnabar/get_ore_overlay_icon_state()
+	return ore_overlay // нет рандомных иконок
+
+/turf/closed/mineral/rogue/gem
+	ore_overlay = "saphire"
+	ore_overlay_icon = 'icons/roguetown/items/gems.dmi'
+
+/turf/closed/mineral/rogue/gem/get_ore_overlay_icon_state()
+	return pick("saphire", "ruby", "emerald", "topaz", "diamond", "quartz") // нет рандомных иконок, но есть множество всяких иконок
 
 // Рыбаку ловить у города для удачного подъёма смысла мало
 /obj/item/proc/check_for_bait_location()
