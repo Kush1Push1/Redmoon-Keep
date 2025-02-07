@@ -387,7 +387,7 @@ SUBSYSTEM_DEF(ticker)
 				var/datum/job/J = SSjob.GetJob(H.job)
 				if(!J)
 					continue
-				if(SSjob.GetJob(H.job).family_blacklisted)
+				if(SSjob.GetJob(H.job).family_blacklisted && !H.client.prefs.spouse_ckey) // REDMOON EDIT - memory_for_family_members - выставленный соигрок в семью обходит ограничения (можно быть мужем проститутки или женой бездомного) - WAS if(SSjob.GetJob(H.job).family_blacklisted
 					continue
 				if(SSfamily.special_role_blacklist.Find(H.mind.special_role))
 					continue
