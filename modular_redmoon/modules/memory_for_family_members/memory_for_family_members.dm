@@ -1,14 +1,19 @@
 // Check comments with "memory_for_family_members" for all related code.
 
 /mob/living/carbon/human
-	var/allow_alt_genitals_for_spouse = FALSE // Разрешает партнёрше/партнёру иметь альтернативные гениталии
 	var/spouse_ckey = null // Ckey второго члена семьи (жены или мужа)
 	var/family_surname = null // Фамилия семьи
+	var/list/family_genitals = list()
 
 /datum/preferences
 	var/spouse_ckey = null
 	var/family_surname = null
-	var/allow_alt_genitals_for_spouse = FALSE
+	var/list/family_genitals = list()
+
+/datum/preferences/proc/setup_family_genitals()
+	family_species = list()
+	for(var/A in list("Male", "Female"))
+		family_species += A
 
 /datum/controller/subsystem/family/proc/SetupFamilies_Short(mob/living/carbon/human/newcomer)
 	var/add_to_potentials_poll = TRUE
@@ -18,19 +23,10 @@
 				// Если фамилии не одинаковые, дропаем семью
 				if(candidate.family_surname != newcomer.family_surname)
 					break
-				var/family_head_is_newcomer = FALSE
-				var/datum/family/F
-				if(newcomer.gender == MALE)
-					family_head_is_newcomer = TRUE
-					F = makeFamily(newcomer)
-				else
-					F = makeFamily(candidate)
+				var/datum/family/F = makeFamily(newcomer)
 				// Такая же проверка, как при создании семьи. На всякий случай, чтобы избежать знать в браке с простолюдинами и другие проблемы
 				if(F.checkFamilyCompat(candidate,newcomer,REL_TYPE_SPOUSE) && F.checkFamilyCompat(newcomer,candidate,REL_TYPE_SPOUSE))
-					if(family_head_is_newcomer)
-						F.addMember(candidate)
-					else
-						F.addMember(newcomer)
+					F.addMember(candidate)
 					F.addRel(newcomer,candidate,getMatchingRel(REL_TYPE_SPOUSE),TRUE)
 					F.addRel(candidate,newcomer,REL_TYPE_SPOUSE,TRUE)
 
