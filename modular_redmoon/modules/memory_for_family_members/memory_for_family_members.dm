@@ -11,9 +11,9 @@
 	var/list/family_genitals = list()
 
 /datum/preferences/proc/setup_family_genitals()
-	family_species = list()
+	family_genitals = list()
 	for(var/A in list("Male", "Female"))
-		family_species += A
+		family_genitals += A
 
 /datum/controller/subsystem/family/proc/SetupFamilies_Short(mob/living/carbon/human/newcomer)
 	var/add_to_potentials_poll = TRUE
