@@ -554,7 +554,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(humanc)
 		try_apply_character_post_equipment(humanc)
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
-	// REDMOON ADD START - memory_for_family_members - попытка создать семью с персонажем в раунде
+	// REDMOON ADD START - family_changes - попытка создать семью с персонажем в раунде
 	if(humanc.spouse_ckey)
 		if(!(SSjob.GetJob(humanc.job).family_blacklisted))
 			SSfamily.SetupFamilies_Short(humanc)
@@ -700,7 +700,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	. = H
 	new_character = .
 
-	// REDMOON ADD START - memory_for_family_members - фамилии для семей
+	// REDMOON ADD START - family_changes - фамилии для семей
 	if(H.family_surname && H.family == FAMILY_FULL)
 		new_character.real_name = "[new_character.real_name] [H.family_surname]"
 	// REDMOON ADD END

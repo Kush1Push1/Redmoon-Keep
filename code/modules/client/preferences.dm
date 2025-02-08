@@ -193,7 +193,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		var/datum/species/S = GLOB.species_list[species_name]
 		family_species += S.id
 
-	setup_family_genitals() // REDMOON ADD - memory_for_family_members - выставление допустимых партнёров
+	setup_family_genitals() // REDMOON ADD - family_changes - выставление допустимых партнёров
 
 	family_gender = list(MALE,FEMALE)
 
@@ -434,7 +434,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					family_gender = list(MALE)
 				dat += " <small><a href='?_src_=prefs;preference=familypref;res=race'><b>Race</b></a></small>"
 				dat += "<BR>"
-				// REDMOON ADD START - memory_for_family_members 
+				// REDMOON ADD START - family_changes 
 				if(usr.client.prefs.be_russian)
 					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Душа второй половинки: [spouse_ckey ? spouse_ckey : "(Случайная)"]</b></a></small>"
 					dat += "<BR>"
@@ -1411,7 +1411,7 @@ Slots: [job.spawn_positions]</span>
 						else
 							family_species += choices[choice]
 			// REDMOON ADD START
-			// memory_for_family_members - возможность выставить CKEY игрока, с которым хочется создать семью
+			// family_changes - возможность выставить CKEY игрока, с которым хочется создать семью
 			if("ckey")
 				var/msg = "Add PLAYER CKEY of your spouse! Check it twice! Leave the field clear to have random spouse with other parameters."
 				if(usr.client.prefs.be_russian)
@@ -1420,7 +1420,7 @@ Slots: [job.spawn_positions]</span>
 				if(!potential_spouse_ckey)
 					spouse_ckey = null
 				spouse_ckey = potential_spouse_ckey
-			// memory_for_family_members - возможность выставить название семьи
+			// family_changes - возможность выставить название семьи
 			if("surname")
 				var/msg = "Add surname your family will be known as. You can join after roundstart to form a family if you set up your spouse soul."
 				if(usr.client.prefs.be_russian)
@@ -1429,7 +1429,7 @@ Slots: [job.spawn_positions]</span>
 				if(!potential_family_surname)
 					family_surname = null
 				family_surname = potential_family_surname
-			// memory_for_family_members - выставление допустимых гениталий у партнёра
+			// family_changes - выставление допустимых гениталий у партнёра
 			if("genitals")
 				if(usr.client.prefs.be_russian)
 					to_chat(usr, span_warning("<hr>\
@@ -2031,7 +2031,7 @@ Slots: [job.spawn_positions]</span>
 						to_chat(user, span_warning("You may switch your character and choose any role, if you don't meet the requirements (if any are specified) it won't be applied"))
 
 				if("family")
-					// REDMOON ADD START - memory_for_family_members - оповещение о правилах семей
+					// REDMOON ADD START - family_changes - оповещение о правилах семей
 					if(usr.client.prefs.be_russian)
 						to_chat(usr, span_warning("<hr>\
 						<b>Обязательные условия для семей:</b>\

@@ -51,7 +51,7 @@ SUBSYSTEM_DEF(family)
 			name += " the [pick("ill","unfortunate")] lucked" //fallback on the impossible chance it CANNOT make a unique name.
 
 	var/datum/family/F = new()
-	// REDMOON ADD START - memory_for_family_members - имя семьи
+	// REDMOON ADD START - family_changes - имя семьи
 	if(head.family_surname)
 		F.name = head.family_surname
 	else
@@ -66,13 +66,13 @@ SUBSYSTEM_DEF(family)
 	if(!length(family_candidates))
 		return
 	var/total_families
-	var/reserved_family_candidates = family_candidates // REDMOON ADD - memory_for_family_members
+	var/reserved_family_candidates = family_candidates // REDMOON ADD - family_changes
 	var/list/current_families = list()
 
 	var/list/head_candidates = list()
 	for(var/c in family_candidates)
 		var/mob/living/carbon/human/H = c
-		if(H.getorganslot(ORGAN_SLOT_PENIS) && H.family_surname) // REDMOON EDIT - memory_for_family_members - фута может образовывать семью WAS if(H.gender == MALE)
+		if(H.getorganslot(ORGAN_SLOT_PENIS) && H.family_surname) // REDMOON EDIT - family_changes - фута может образовывать семью WAS if(H.gender == MALE)
 			head_candidates += H
 
 	family_candidates = shuffle(family_candidates)
@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(family)
 		if(head)
 			var/datum/family/F = makeFamily(head)
 			current_families += F
-//			family_candidates -= head - REDMOON REMOVAL - memory_for_family_members - футы и мужчины учавствуют в выборке
+//			family_candidates -= head - REDMOON REMOVAL - family_changes - футы и мужчины учавствуют в выборке
 			head_candidates -= head
 
 		total_families--
@@ -98,7 +98,7 @@ SUBSYSTEM_DEF(family)
 					connecting_member = F.members[name]:resolve()
 					var/rel_type = F.tryConnect(H,connecting_member)
 					if(F.checkFamilyCompat(H,connecting_member,rel_type) && F.checkFamilyCompat(connecting_member,H,rel_type)) //suitable. Add them to the family and connect them. (Note using checkFamilyCompat for both falls apart for anything other than spouses. The checks should be moved to a different proc at some point.)
-						// BLUEMOON ADD START - memory_for_family_members - присвоение фамилий
+						// BLUEMOON ADD START - family_changes - присвоение фамилий
 						H.real_name = "[H.client.prefs.real_name] [connecting_member.family_surname]"
 						if(H.family)
 							qdel(H.family)
@@ -110,11 +110,11 @@ SUBSYSTEM_DEF(family)
 
 						current_families -= F
 						family_candidates -= H // Remove the matched candidate
-						reserved_family_candidates -= H // REDMOON ADD - memory_for_family_members
-						reserved_family_candidates -= connecting_member // REDMOON ADD - memory_for_family_members
+						reserved_family_candidates -= H // REDMOON ADD - family_changes
+						reserved_family_candidates -= connecting_member // REDMOON ADD - family_changes
 						continue can_loop // Continue to next candidate instead of breaking completely
 
-	family_candidates = reserved_family_candidates // REDMOON ADD - memory_for_family_members - сюда входят и главы семей и женщины без мужей
+	family_candidates = reserved_family_candidates // REDMOON ADD - family_changes - сюда входят и главы семей и женщины без мужей
 	for(var/fam in families) //Remove families with only one member.
 		var/datum/family/F = fam
 		if(length(F.members) <= 1)
@@ -254,7 +254,7 @@ SUBSYSTEM_DEF(family)
 	if(!R)
 		R = new /datum/relation/relative(holder,target)
 	relations += R
-	// REDMOON ADD START - memory_for_family_members
+	// REDMOON ADD START - family_changes
 	// информация в memories. Модулярнее сделать не получилось.
 	if(holder.mind)
 		holder.mind.store_memory("<b>[target.real_name] ([target.job])</b> is my <b>[R.name]</b>. [target.p_they(TRUE)] is [target.age] [target.dna.species.name].")
@@ -262,7 +262,7 @@ SUBSYSTEM_DEF(family)
 	if(announce)
 		spawn(1)
 			to_chat(holder,"<span class='notice'><b>[target.real_name] ([target.job])</b> is my <b>[R.name]</b>. [target.p_they(TRUE)] is [target.age] [target.dna.species.name]. I remember that.</span>") // REDMOON EDIT - was to_chat(holder,"<span class='notice'>My [R.name], [target.real_name] ([target.dna.species.name], [target.job], [target.age]) is here alongside me.</span>")
-			// REDMOON ADD START - memory_for_family_members - оповещение об альтернативных гениталиях 
+			// REDMOON ADD START - family_changes - оповещение об альтернативных гениталиях 
 			var/altered_genitals = FALSE
 			switch(target.gender)
 				if(MALE)
@@ -284,11 +284,11 @@ SUBSYSTEM_DEF(family)
 /datum/family/proc/checkFamilyCompat(mob/living/carbon/human/target, mob/living/carbon/human/member, rel_type) //Checks target's suitability for being in a family with the family member.
 	switch(rel_type)
 		if(REL_TYPE_SPOUSE)
-			if(member == target) // REDMOON ADD START - memory_for_family_members - из-за того, что глава семьи тоже ролится в списках на семейство, необходимое дополнение
+			if(member == target) // REDMOON ADD START - family_changes - из-за того, что глава семьи тоже ролится в списках на семейство, необходимое дополнение
 				return FALSE // REDMOON ADD END
 			if(!member.client)
 				return
-			/* REDMOON REMOVAL START - memory_for_family_members - мешает проверкам на гениталии ниже
+			/* REDMOON REMOVAL START - family_changes - мешает проверкам на гениталии ниже
 			//Check gender.
 			if(!member.client.prefs.family_gender.Find(target.gender))
 				return FALSE 
@@ -297,7 +297,7 @@ SUBSYSTEM_DEF(family)
 			//Check species.
 			if(!member.client.prefs.family_species.Find(target.dna.species.id))
 				return FALSE
-			/* REDMOON REMOVAL START - memory_for_family_members 
+			/* REDMOON REMOVAL START - family_changes 
 			- Перенесено в проверку согласия на гениталии
 			//Check sex.
 			if(member.gender == target.gender) //Ensure that member & target don't share the same sex.
@@ -316,7 +316,7 @@ SUBSYSTEM_DEF(family)
 			if(HAS_TRAIT(member, TRAIT_NOBLE) && !HAS_TRAIT(target, TRAIT_NOBLE))
 				return
 
-			// REDMOON ADD START - memory_for_family_members
+			// REDMOON ADD START - family_changes
 			// Свадьба без возможности деторождения не поддерживается Эорой
 			if((target.getorganslot(ORGAN_SLOT_PENIS) && !target.getorganslot(ORGAN_SLOT_VAGINA)) && (member.getorganslot(ORGAN_SLOT_PENIS) && !member.getorganslot(ORGAN_SLOT_VAGINA)))
 				return FALSE
@@ -457,11 +457,11 @@ proc/getMatchingRel(var/rel_type)
 	var/mob/living/carbon/human/T = target:resolve()
 	if(T)
 		if(T.gender == MALE)
-			if(!T.getorganslot(ORGAN_SLOT_PENIS)) // REDMOON ADD START - memory_for_family_members
+			if(!T.getorganslot(ORGAN_SLOT_PENIS)) // REDMOON ADD START - family_changes
 				return "Spouse" // // REDMOON ADD END - Для кантбоев всё-таки не выставляем "мужа" в роли...
 			return "Husband"
 		if(T.gender == FEMALE)
-			if(T.getorganslot(ORGAN_SLOT_PENIS)) // // REDMOON ADD START - memory_for_family_members
+			if(T.getorganslot(ORGAN_SLOT_PENIS)) // // REDMOON ADD START - family_changes
 				return "Spouse" // REDMOON ADD END - Фута считается парой
 			return "Wife"
 	return "Spouse"

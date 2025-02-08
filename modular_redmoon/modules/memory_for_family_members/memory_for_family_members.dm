@@ -1,4 +1,4 @@
-// Check comments with "memory_for_family_members" for all related code.
+// Check comments with "family_changes" for all related code.
 
 /mob/living/carbon/human
 	var/spouse_ckey = null // Ckey второго члена семьи (жены или мужа)
