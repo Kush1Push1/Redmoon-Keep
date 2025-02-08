@@ -99,7 +99,7 @@
 
 	if(baited.check_for_bait_location()) // REDMOON ADD START - economy_fix - рыбачить не в болоте можно разве что за еду
 		if(prob(5))
-			to_chat(current_fisherman, user.client.prefs.be_russian ? "Здесь хорошего улова не дождёшься... В реке у болот шансы выше." : "I will not catch anything valuable here, but fish... Bog river would be more fitting.") // REDMOON ADD END
+			to_chat(current_fisherman, user.client.prefs.be_russian ? "Здесь я драгоценности не выловлю... В реке у болот шансы выше." : "I will not catch any treasure here, but fish... Bog river would be more fitting.") // REDMOON ADD END
 	var/caught_thing = pickweight(baited.fishloot)
 	new caught_thing(current_fisherman.loc)
 	amt2raise = current_fisherman.STAINT * 2
