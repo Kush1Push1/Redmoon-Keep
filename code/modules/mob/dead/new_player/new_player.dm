@@ -697,6 +697,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		mind.transfer_to(H)					//won't transfer key since the mind is not active
 
 	H.name = real_name
+
 	. = H
 	new_character = .
 

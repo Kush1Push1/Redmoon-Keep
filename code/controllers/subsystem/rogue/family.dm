@@ -222,7 +222,7 @@ SUBSYSTEM_DEF(family)
 		R.holder = null
 		R.target = null
 		qdel(R)
-	SSfamily.families -= src // REDMOON ADD
+	SSfamily.families -= src // REDMOON ADD - удаляем пустой weakref
 
 /datum/family/proc/getRelations(mob/living/carbon/human/member, rel_type) //Returns all relations of the specified type.
 	var/list/rels = list()

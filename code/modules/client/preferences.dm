@@ -2035,23 +2035,21 @@ Slots: [job.spawn_positions]</span>
 					if(usr.client.prefs.be_russian)
 						to_chat(usr, span_warning("<hr>\
 						<b>Обязательные условия для семей:</b>\
-						<br>Вы должны зайти с начала раунда. \
-						<br>Барон, консорт и наследники - одна семья. \
-						<br>У аколитов и жрецов не может быть семьи. \
-						<br>У бандитов, лагеря гоблинов (кроме рабов), мигрантов и беженцев нет семей. \
-						<br>Семья не может официально быть однополой. \
-						<br>Молодой и старый не могут быть парой (если не выставлена душа или имя партнёра).\
-						<br>Дворяне не могут иметь супругу из нижнего сословья и наоборот."))
+						<br>● Барон, консорт и наследники - одна семья. \
+						<br>● Дворяне не могут иметь пару из нижнего сословья и наоборот. \
+						<br><b>Если не выставлена душа второй половинки, то:</b> \
+						<br>● Бандиты, проститутки, заключенные, рабы, гоблины, бездомные и лунатики не могут сформировать семью. \
+						<br>● Для случайной семьи, нужно зайти с начала раунда. Если выставлена душа второй половинки И фамилия, то одинаковые фамилии автоматически формируют семью после начала раунда. \
+						<br>● Молодой и старый персонажи не могут быть парой."))
 					else
 						to_chat(usr, span_warning("<hr>\
 						<b>Mandatory rules for families:</b>\
-						<br>You MUST not be late-joiner (roundstart only). \
-						<br>Baron, Consort and heirs are in one family. \
-						<br>You cannot have family as an acolyte or the priest. \
-						<br>You cannot be outsider role (bandits, goblins (except slaves), refuges and migrants). \
-						<br>You cannot be official same-sex family. It is dark ages. \
-						<br>You cannot have too much of age difference (adult with old) (to overcome, add soulmate's ckey or name). \
-						<br>You cannot be noble and have your spouse in lower class."))
+						<br>● Baron, Consort and heirs are in one family. \
+						<br>● You cannot be noble and have your spouse in lower class. \
+						<br><b>If you will not setup Spouse Soul, then:</b> \
+						<br>● Bandits, whores, prisoners, slaves, goblins, beggers and lunatics cannot form up families. \
+						<br>● You can only form up a family at round-start (you have to setup Spouse Soul and Family Surname to form up a family after latejoin).\
+						<br>● You cannot have too much of age difference (adult with old)."))
 					// REDMOON ADD END
 					if(family == FAMILY_NONE)
 						family = FAMILY_FULL
@@ -2489,7 +2487,7 @@ Slots: [job.spawn_positions]</span>
 	
 	character.char_accent = char_accent
 
-	redmoon_copy_character(character, icon_updates, roundstart_checks, character_setup, antagonist)
+	redmoon_copy_character(character, icon_updates, roundstart_checks, character_setup, antagonist) // REDMOON ADD - family_changes - наши функции внутри
 
 /datum/preferences/proc/get_default_name(name_id)
 	switch(name_id)
