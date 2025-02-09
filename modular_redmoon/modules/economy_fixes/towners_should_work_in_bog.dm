@@ -10,13 +10,14 @@
 	var/tree_not_in_bog = FALSE // оповещение для дровосека, чтобы шёл рубить болото
 
 /obj/structure/flora/newtree/Initialize()
-	if(!istype(get_area(loc), /area/rogue/outdoors/bog))
-		static_debris = list(/obj/item/grown/log/tree/small = 1)
-		tree_not_in_bog = TRUE
-		desc += " Seems like this tree is very old. The one in the Bog would have better wood."
-		if(istype(get_turf(src), /turf/open/transparent/openspace))
-			static_debris = list() // отсутствие древесины в целом, фармите болото, дровосеки
-			tree_not_in_bog = FALSE // некому показывать
+	if(!is_centcom_level(z)) // Чтобы бандиты и вампиры могли добывать у себя спокойно
+		if(!istype(get_area(loc), /area/rogue/outdoors/bog))
+			static_debris = list(/obj/item/grown/log/tree/small = 1)
+			tree_not_in_bog = TRUE
+			desc += " Seems like this tree is very old. The one in the Bog would have better wood."
+			if(istype(get_turf(src), /turf/open/transparent/openspace))
+				static_debris = list() // отсутствие древесины в целом, фармите болото, дровосеки
+				tree_not_in_bog = FALSE // некому показывать
 	. = ..()
 
 /obj/structure/flora/newtree/obj_destruction(damage_flag)
@@ -29,11 +30,12 @@
 	var/tree_not_in_bog = FALSE // оповещение для дровосека, чтобы шёл рубить болото
 
 /obj/structure/flora/roguetree/Initialize()
-	if(!istype(get_area(loc), /area/rogue/outdoors/bog))
-		static_debris = list(/obj/item/grown/log/tree/small = 1)
-		tree_not_in_bog = TRUE
-		desc += " Seems like this tree is very old. The one in the Bog would have better wood."
-		stump_type = null
+	if(!is_centcom_level(z)) // Чтобы бандиты и вампиры могли добывать у себя спокойно
+		if(!istype(get_area(loc), /area/rogue/outdoors/bog))
+			static_debris = list(/obj/item/grown/log/tree/small = 1)
+			tree_not_in_bog = TRUE
+			desc += " Seems like this tree is very old. The one in the Bog would have better wood."
+			stump_type = null
 	. = ..()
 
 /obj/structure/flora/roguetree/obj_destruction(damage_flag)
