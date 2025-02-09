@@ -49,27 +49,49 @@
 	. = ..()
 
 /turf/closed/mineral/random/rogue
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/copper = 15,/turf/closed/mineral/rogue/coal = 25)
-	mineralChance = 25
+    mineralChance = 20
+    mineralSpawnChanceList = list(
+		/turf/closed/mineral/rogue/salt = 5, // 10%
+		/turf/closed/mineral/rogue/iron = 15, // 30%
+		/turf/closed/mineral/rogue/copper = 10, // 20%
+		/turf/closed/mineral/rogue/coal = 20) // 40%
 
 /turf/closed/mineral/random/rogue/med
-	mineralChance = 30
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 3,/turf/closed/mineral/rogue/silver = 2,/turf/closed/mineral/rogue/iron = 33,/turf/closed/mineral/rogue/copper = 10,/turf/closed/mineral/rogue/tin = 10,/turf/closed/mineral/rogue/coal = 5, /turf/closed/mineral/rogue/gem = 3)
+    mineralChance = 30 // 1430 у лавы, 4097 в пещере, 14400 в шахте, 1254 в месте бойни
+    mineralSpawnChanceList = list(
+		/turf/closed/mineral/rogue/salt = 5, // 10%
+		/turf/closed/mineral/rogue/gold = 3, // 6%
+		/turf/closed/mineral/rogue/silver = 1, // 2%
+		/turf/closed/mineral/rogue/iron = 25, // 50%
+		/turf/closed/mineral/rogue/copper = 5, // 10%
+		/turf/closed/mineral/rogue/tin = 5, // 10%
+		/turf/closed/mineral/rogue/coal = 5, // 10%
+		/turf/closed/mineral/rogue/gem = 1) // 2%
 
-/turf/closed/mineral/random/rogue/high
-	mineralChance = 50
-	mineralSpawnChanceList = list(/turf/closed/mineral/rogue/gold = 9,/turf/closed/mineral/rogue/silver = 5,/turf/closed/mineral/rogue/iron = 20,/turf/closed/mineral/rogue/copper = 10,/turf/closed/mineral/rogue/tin = 10, /turf/closed/mineral/rogue/gem = 5)
+/turf/closed/mineral/random/rogue/high // 701 у лавы всего, 111 в месте бойни
+    mineralChance = 50 
+    mineralSpawnChanceList = list( // ДЕЛИМ ЦИФРЫ БЛОКОВ НА 2, Т.К. ШАНС СПАВНА 50%
+		/turf/closed/mineral/rogue/gold = 2, // 10% или около 70 блоков у лавы (7000-9100 маммонов через корабль)
+		/turf/closed/mineral/rogue/silver = 1,  // 5% или около 35 блоков у лавы
+		/turf/closed/mineral/rogue/iron = 10,  // 50% или около 350 блоков у лавы
+		/turf/closed/mineral/rogue/copper = 3,  // 15% или около 105 блоков у лавы
+		/turf/closed/mineral/rogue/tin = 3,  // 15% или около 105 блоков у лавы
+		/turf/closed/mineral/rogue/gem = 1) // 5% или около 35 блоков у лавы
 
-/turf/closed/mineral/random/proc/check_for_bog_area()
+/turf/closed/mineral/random/proc/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
 	return TRUE
 
-/turf/closed/mineral/random/rogue/med/check_for_bog_area()
-	if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
-		mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/copper = 15,/turf/closed/mineral/rogue/coal = 25)
+/turf/closed/mineral/random/rogue/med/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
+	if(SSmapping.config.map_file == "rockhill.dmm") // На тестовой карте можно иметь где угодно
+		if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves)) // Только болотные пещеры
+			mineralSpawnChanceList = standart_mineral.mineralSpawnChanceList // Копируются значения у обычного камня, чтобы не нужно было изменять карту
+			mineralChance = standart_mineral.mineralChance // Копируются значения у обычного камня, чтобы не нужно было изменять карту
 
-/turf/closed/mineral/random/rogue/high/check_for_bog_area()
-	if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
-		mineralSpawnChanceList = list(/turf/closed/mineral/rogue/salt = 5,/turf/closed/mineral/rogue/iron = 15,/turf/closed/mineral/rogue/copper = 15,/turf/closed/mineral/rogue/coal = 25)
+/turf/closed/mineral/random/rogue/high/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
+	if(SSmapping.config.map_file == "rockhill.dmm")
+		if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
+			mineralSpawnChanceList = standart_mineral.mineralSpawnChanceList
+			mineralChance = standart_mineral.mineralChance 
 
 /turf/closed/mineral/rogue
 	var/ore_overlay = null
