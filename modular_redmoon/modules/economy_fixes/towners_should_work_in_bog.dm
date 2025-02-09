@@ -80,20 +80,28 @@
 		/turf/closed/mineral/rogue/tin = 3,  // 15% или около 105 блоков у лавы
 		/turf/closed/mineral/rogue/gem = 1) // 5% или около 35 блоков у лавы
 
-/turf/closed/mineral/random/proc/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
+/turf/closed/mineral/random/proc/check_for_bog_area()
 	return TRUE
 
-/turf/closed/mineral/random/rogue/med/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
+/turf/closed/mineral/random/rogue/med/check_for_bog_area()
 	if(SSmapping.config.map_file == "rockhill.dmm") // На тестовой карте можно иметь где угодно
 		if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves)) // Только болотные пещеры
-			mineralSpawnChanceList = standart_mineral.mineralSpawnChanceList // Копируются значения у обычного камня, чтобы не нужно было изменять карту
-			mineralChance = standart_mineral.mineralChance // Копируются значения у обычного камня, чтобы не нужно было изменять карту
+			mineralChance = 20
+			mineralSpawnChanceList = list(
+				/turf/closed/mineral/rogue/salt = 5, // 10%
+				/turf/closed/mineral/rogue/iron = 15, // 30%
+				/turf/closed/mineral/rogue/copper = 10, // 20%
+				/turf/closed/mineral/rogue/coal = 20) // 40%
 
-/turf/closed/mineral/random/rogue/high/check_for_bog_area(var/turf/closed/mineral/random/rogue/standart_mineral)
+/turf/closed/mineral/random/rogue/high/check_for_bog_area()
 	if(SSmapping.config.map_file == "rockhill.dmm")
 		if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
-			mineralSpawnChanceList = standart_mineral.mineralSpawnChanceList
-			mineralChance = standart_mineral.mineralChance 
+			mineralChance = 20
+			mineralSpawnChanceList = list(
+				/turf/closed/mineral/rogue/salt = 5, // 10%
+				/turf/closed/mineral/rogue/iron = 15, // 30%
+				/turf/closed/mineral/rogue/copper = 10, // 20%
+				/turf/closed/mineral/rogue/coal = 20) // 40%
 
 /turf/closed/mineral/rogue
 	var/ore_overlay = null
