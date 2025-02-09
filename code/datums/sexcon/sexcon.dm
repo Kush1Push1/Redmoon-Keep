@@ -199,6 +199,10 @@
 		playsound(target, pick(list('sound/misc/mat/mouthend (1).ogg','sound/misc/mat/mouthend (2).ogg')), 100, FALSE, ignore_walls = FALSE)
 	else
 		playsound(target, 'sound/misc/mat/endin.ogg', 50, TRUE, ignore_walls = FALSE)
+	if(user.patron.type == /datum/patron/inhumen/baotha) // REDMOON ADD START - baotha_steals_triumphs
+		baotha_process(user, target) // Баотит даёт
+	else
+		baotha_process(target, user) // REDMOON ADD END - баотит принимает
 	after_ejaculation()
 	if(!oral)
 		after_intimate_climax()
@@ -220,7 +224,12 @@
 /datum/sex_controller/proc/after_ejaculation()
 	user.add_stress(/datum/stressevent/cumok)
 	set_arousal(40)
-	adjust_charge(-CHARGE_FOR_CLIMAX)
+	if(user.patron) // REDMOON ADD START - Эора и Баота позволяют своему юзверю быть очень выносливым
+		if(user.patron.type != /datum/patron/inhumen/baotha || user.patron.type != /datum/patron/divine/eora)
+			if(prob(10))
+				to_chat(user, span_love((user.client.prefs.be_russian ? "Мой бог... Даёт мне сил продолжать! Славься!" : "My god... Grants me power to continue! Praise!")))
+		else // REDMOON ADD END
+			adjust_charge(-CHARGE_FOR_CLIMAX)
 	user.emote("sexmoanhvy", forced = TRUE)
 	user.playsound_local(user, 'sound/misc/mat/end.ogg', 100)
 	last_ejaculation_time = world.time
@@ -578,6 +587,9 @@
 		if("toggle_finished")
 			do_until_finished = !do_until_finished
 		if("set_arousal")
+			if(user.patron.type == /datum/patron/inhumen/baotha) // REDMOON ADD START - baotha_steals_triumphs - чтобы баотиты за секунду не воровали триумфы
+				to_chat(user, user.client.prefs.be_russian ? span_warning("Мне нужно довести себя... Баота не даёт получить удовольствие так легко!") : span_warning("I have to reach this myself... Baotha doesn't allows me to reach so easily!"))
+				return // REDMOON ADD END
 			var/amount = input(user, "Value above 120 will immediately cause orgasm!", "Set Arousal", arousal) as num
 			set_arousal(amount)
 		if("freeze_arousal")
