@@ -1,5 +1,9 @@
 // Искать связанный код по тэгу "baotha_steals_triumphs"
 
+/datum/sex_controller
+	/// Количество совершенных действий. Нужно, чтобы баотиты за секунду не воровали чужие триумфы.
+	var/actions_made = 0
+
 /datum/controller/subsystem/ticker
 	var/list/violated_by_baotha = list()
 
@@ -25,6 +29,9 @@
 	if(baotha_cultist.patron.type != /datum/patron/inhumen/baotha)
 		return FALSE
 	if(victim.patron.type == /datum/patron/inhumen/baotha)
+		return FALSE
+	if(actions_made < 12)
+		to_chat(baotha_cultist, baotha_cultist.client.prefs.be_russian ? span_warning("Мне нужно получить больше удовольствия, чтобы осквернить!") : span_warning("I need to get more pleasure from them to corrupt!"))
 		return FALSE
 	var/amount_to_change_nutrition = min(50, NUTRITION_LEVEL_FULL - baotha_cultist.nutrition)
 	var/amount_to_change_hydration = min(50, HYDRATION_LEVEL_FULL - baotha_cultist.nutrition)
