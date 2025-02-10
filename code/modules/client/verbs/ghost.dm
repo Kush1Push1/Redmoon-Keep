@@ -78,6 +78,12 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 		O.ckey = ckey
 		O.set_patron(prefs.selected_patron)
 		O.prevmind = prevmind // for if we get buried later
+		if(!O.prevmind.known_skills.len)
+			O.mind.skill_experience = O.prevmind.backup_skill_experience // REDMOON ADD - after_death_stats_fix - передача навыков погибшего к призраку в подземное мире
+			O.mind.known_skills = O.prevmind.backup_known_skills // REDMOON ADD
+		else
+			O.mind.skill_experience = O.prevmind.skill_experience // REDMOON ADD - after_death_stats_fix - передача навыков погибшего к призраку в подземное мире
+			O.mind.known_skills = O.prevmind.known_skills // REDMOON ADD
 		SSdroning.area_entered(get_area(O), O.client)
 		break
 	verbs -= GLOB.ghost_verbs

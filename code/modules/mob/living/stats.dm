@@ -107,153 +107,41 @@
 			statindex[index] = list("stat" = stat, "amt" = amt)
 //			statindex[index]["stat"] = stat
 //			statindex[index]["amt"] = amt
-	var/newamt = 0
+//	var/newamt = 0
 	switch(stat)
 		if("strength")
 			if(isseelie(src))
 				STASTR = 1
 				return
-			newamt = STASTR + amt
-			if(BUFSTR < 0)
-				BUFSTR = BUFSTR + amt
-				if(BUFSTR > 0)
-					newamt = STASTR + BUFSTR
-					BUFSTR = 0
-			if(BUFSTR > 0)
-				BUFSTR = BUFSTR + amt
-				if(BUFSTR < 0)
-					newamt = STASTR + BUFSTR
-					BUFSTR = 0
-			while(newamt < 1)
-				newamt++
-				BUFSTR--
-			while(newamt > 20)
-				newamt--
-				BUFSTR++
-			STASTR = newamt
+			BUFSTR += amt
+			STASTR = CLAMP(ROUNDSTART_STASTR + BUFSTR, 1, 20)
 
 		if("perception")
-			newamt = STAPER + amt
-			if(BUFPER < 0)
-				BUFPER = BUFPER + amt
-				if(BUFPER > 0)
-					newamt = STAPER + BUFPER
-					BUFPER = 0
-			if(BUFPER > 0)
-				BUFPER = BUFPER + amt
-				if(BUFPER < 0)
-					newamt = STAPER + BUFPER
-					BUFPER = 0
-			while(newamt < 1)
-				newamt++
-				BUFPER--
-			while(newamt > 20)
-				newamt--
-				BUFPER++
-			STAPER = newamt
+			BUFPER += amt
+			STAPER = CLAMP(ROUNDSTART_STAPER + BUFPER, 1, 20)
 			see_override = initial(src.see_invisible) + (STAPER/2.78) // This may be a mistake.
 			update_sight() //Needed.
 			update_fov_angles()
 
 		if("intelligence")
-			newamt = STAINT + amt
-			if(BUFINT < 0)
-				BUFINT = BUFINT + amt
-				if(BUFINT > 0)
-					newamt = STAINT + BUFINT
-					BUFINT = 0
-			if(BUFINT > 0)
-				BUFINT = BUFINT + amt
-				if(BUFINT < 0)
-					newamt = STAINT + BUFINT
-					BUFINT = 0
-			while(newamt < 1)
-				newamt++
-				BUFINT--
-			while(newamt > 20)
-				newamt--
-				BUFINT++
-			STAINT = newamt
+			BUFINT += amt
+			STAINT = CLAMP(ROUNDSTART_STAINT + BUFINT, 1, 20)
 
 		if("constitution")
-			newamt = STACON + amt
-			if(BUFCON < 0)
-				BUFCON = BUFCON + amt
-				if(BUFCON > 0)
-					newamt = STACON + BUFCON
-					BUFCON = 0
-			if(BUFCON > 0)
-				BUFCON = BUFCON + amt
-				if(BUFCON < 0)
-					newamt = STACON + BUFCON
-					BUFCON = 0
-			while(newamt < 1)
-				newamt++
-				BUFCON--
-			while(newamt > 20)
-				newamt--
-				BUFCON++
-			STACON = newamt
+			BUFCON += amt
+			STACON = CLAMP(ROUNDSTART_STACON + BUFCON, 1, 20)
 
 		if("endurance")
-			newamt = STAEND + amt
-			if(BUFEND < 0)
-				BUFEND = BUFEND + amt
-				if(BUFEND > 0)
-					newamt = STAEND + BUFEND
-					BUFEND = 0
-			if(BUFEND > 0)
-				BUFEND = BUFEND + amt
-				if(BUFEND < 0)
-					newamt = STAEND + BUFEND
-					BUFEND = 0
-			while(newamt < 1)
-				newamt++
-				BUFEND--
-			while(newamt > 20)
-				newamt--
-				BUFEND++
-			STAEND = newamt
+			BUFEND += amt
+			STAEND = CLAMP(ROUNDSTART_STAEND + BUFEND, 1, 20)
 
 		if("speed")
-			newamt = STASPD + amt
-			if(BUFSPE < 0)
-				BUFSPE = BUFSPE + amt
-				if(BUFSPE > 0)
-					newamt = STASPD + BUFSPE
-					BUFSPE = 0
-			if(BUFSPE > 0)
-				BUFSPE = BUFSPE + amt
-				if(BUFSPE < 0)
-					newamt = STASPD + BUFSPE
-					BUFSPE = 0
-			while(newamt < 1)
-				newamt++
-				BUFSPE--
-			while(newamt > 20)
-				newamt--
-				BUFSPE++
-			STASPD = newamt
+			BUFSPE += amt
+			STASPD = CLAMP(ROUNDSTART_STASPD + BUFSPE, 1, 20)
 
 		if("fortune")
-			newamt = STALUC + amt
-			if(BUFLUC < 0)
-				BUFLUC = BUFLUC + amt
-				if(BUFLUC > 0)
-					newamt = STALUC + BUFLUC
-					BUFLUC = 0
-			if(BUFLUC > 0)
-				BUFLUC = BUFLUC + amt
-				if(BUFLUC < 0)
-					newamt = STALUC + BUFLUC
-					BUFLUC = 0
-			while(newamt < 1)
-				newamt++
-				BUFLUC--
-			while(newamt > 20)
-				newamt--
-				BUFLUC++
-			STALUC = newamt
+			BUFLUC += amt
+			STALUC = CLAMP(ROUNDSTART_STALUC + BUFLUC, 1, 20)
 
 /proc/generic_stat_comparison(userstat as num, targetstat as num)
 	var/difference = userstat - targetstat
