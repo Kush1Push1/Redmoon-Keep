@@ -587,9 +587,10 @@
 		if("toggle_finished")
 			do_until_finished = !do_until_finished
 		if("set_arousal")
-			if(user.patron.type == /datum/patron/inhumen/baotha) // REDMOON ADD START - baotha_steals_triumphs - чтобы баотиты за секунду не воровали триумфы
-				to_chat(user, user.client.prefs.be_russian ? span_warning("Мне нужно довести себя... Баота не даёт получить удовольствие так легко!") : span_warning("I have to reach this myself... Baotha doesn't allows me to reach so easily!"))
-				return // REDMOON ADD END
+			if(target != user)
+				if(user.patron.type == /datum/patron/inhumen/baotha) // REDMOON ADD START - baotha_steals_triumphs - чтобы баотиты за секунду не воровали триумфы
+					to_chat(user, user.client.prefs.be_russian ? span_warning("Мне нужно довести себя... Баота не даёт получить удовольствие так легко!") : span_warning("I have to reach this myself... Baotha doesn't allows me to reach so easily!"))
+					return // REDMOON ADD END
 			var/amount = input(user, "Value above 120 will immediately cause orgasm!", "Set Arousal", arousal) as num
 			set_arousal(amount)
 		if("freeze_arousal")
