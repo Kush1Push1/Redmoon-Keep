@@ -159,6 +159,7 @@
 /obj/structure/table/roguetree/stump
 	name = "tree stump"
 	desc = "Someone cut this tree down."
+	icon = 'icons/roguetown/misc/foliagetall.dmi' // REDMOON ADD - фикс для пеньков-столов после мёрджа с апстримом
 	icon_state = "t1stump"
 	opacity = 0
 	max_integrity = 100
