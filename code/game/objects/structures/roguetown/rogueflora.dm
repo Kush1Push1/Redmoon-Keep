@@ -184,7 +184,7 @@
 		playsound(src, 'sound/misc/woodhit.ogg', 100, TRUE)
 		if(!do_after(user, lumber_time, target = user))
 			return
-		if(tree_not_in_bog) // REDMOON ADD START - economy_fix - деревья в окрестностях Рокхилла приносят мало древисины
+		if(!istype(get_area(loc), /area/rogue/outdoors/bog)) // REDMOON ADD START - economy_fix - деревья в окрестностях Рокхилла приносят мало древисины
 			lumber_amount = 1
 		else // REDMOON ADD END
 			lumber_amount = rand(lumber_amount, max(lumber_amount, round(skill_level / 2)))
