@@ -277,6 +277,7 @@
 			shit += "[x]"
 	// REDMOON ADD START
 	// family_changes - вывод статистики в конце раунда о количестве семей
+	shit += "<br><font color='#115726'><span class='bold'>Tried to form up a familty: </span></font> [length(SSfamily.family_candidates)]"
 	shit += "<br><font color='#22833f'><span class='bold'>Rockhill had <b>[SSfamily.families.len]</b> families.</span></font>" // делится на 2, т.к. по 1 зачислятеся за каждое новое отношение
 	// start_reports_with_gender_lists - вывод статистики в конце раунда о половой принадлежности
 	var/count_of_joined_characters = males + females + males_with_vagina + females_with_penis
