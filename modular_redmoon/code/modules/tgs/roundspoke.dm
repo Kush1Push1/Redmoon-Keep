@@ -154,7 +154,7 @@
 	var/datum/tgs_chat_embed/field/pleasures = new ("💦Наслаждений: ", "[SSticker.cums]")
 	var/datum/tgs_chat_embed/field/violated_by_baotha = new (":smiling_imp:Осквернено Баотой: ", "[SSticker.violated_by_baotha.len]") // baotha_steals_triumphs
 	var/datum/tgs_chat_embed/field/confessors = new (":orthodox_cross:Исповедники: ", "[GLOB.confessors.len]")
-	var/datum/tgs_chat_embed/field/families = new (":ring:Семьи: ", "[SSfamily.families.len]")
+	var/datum/tgs_chat_embed/field/families = new (":ring:Семьи: ", "[SSfamily.families.len]") // family_changes
 	var/datum/tgs_chat_embed/field/boys = new (":man_beard:Мужчины: ", "[SSticker.males] ([percent_of_males]%)")
 	var/datum/tgs_chat_embed/field/womens = new (":woman:Женщины: ", "[SSticker.females] ([percent_of_females]%)")
 	var/datum/tgs_chat_embed/field/femboys = new (":man:Кантбои: ", "[SSticker.males_with_vagina] ([percent_of_males_with_vagina]%)")

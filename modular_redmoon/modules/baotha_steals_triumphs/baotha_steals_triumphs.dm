@@ -24,7 +24,7 @@
 	victim.whisper("Славься, Баота...!")
 
 /datum/sex_controller/proc/baotha_process(var/mob/living/baotha_cultist, var/mob/living/victim)
-	if(target == user)
+	if(baotha_cultist == victim)
 		return FALSE
 	if(baotha_cultist.patron.type != /datum/patron/inhumen/baotha)
 		return FALSE

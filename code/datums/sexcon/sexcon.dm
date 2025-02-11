@@ -193,7 +193,9 @@
 	add_cum_floor(get_turf(target))
 	after_ejaculation()
 
-/datum/sex_controller/proc/cum_into(oral = FALSE)
+/datum/sex_controller/proc/cum_into(oral = FALSE, mob/living/target_mob = null) // REDMOON EDIT - baotha_steals_triumphs - добавлен target_mob для правильного просчёта, кого корраптят
+	if(target_mob) // REDMOON ADD - baotha_steals_triumphs - для правильного просчёта, кого корраптят
+		target = target_mob // REDMOON ADD
 	log_combat(user, target, "Came inside the target")
 	if(oral)
 		playsound(target, pick(list('sound/misc/mat/mouthend (1).ogg','sound/misc/mat/mouthend (2).ogg')), 100, FALSE, ignore_walls = FALSE)
@@ -653,6 +655,8 @@
 			break
 		action.on_perform(user, target)
 		actions_made++ // REDMOON ADD - baotha_steals_triumphs
+		if(target.sexcon) // REDMOON ADD - baotha_steals_triumphs
+			target.sexcon.actions_made++ // REDMOON ADD - baotha_steals_triumphs
 		// It could want to finish afterwards the performed action
 		if(action.is_finished(user, target))
 			break
