@@ -67,8 +67,10 @@
 
 	stored_skills = owner.known_skills.Copy()
 	stored_experience = owner.skill_experience.Copy()
-/*	owner.known_skills = list() - REDMOON REMOVAL - after_death_stats_fix - если не убрать, то у призрака нет скиллов (нужны после воскрешения)*/
-/*	owner.skill_experience = list() - REDMOON REMOVAL - after_death_stats_fix - если не убрать, то у призрака нет скиллов (нужны после воскрешения)*/
+	owner.backup_known_skills = owner.known_skills // REDMOON ADD - after_death_stats_fix - сохранение скиллов погибшего для загробного мира
+	owner.backup_skill_experience = owner.skill_experience // REDMOON ADD - after_death_stats_fix - сохранение скиллов погибшего для загробного мира
+	owner.known_skills = list()
+	owner.skill_experience = list()
 
 
 	return ..()
@@ -139,9 +141,6 @@
 /datum/antagonist/zombie/proc/transform_deadite()
 
 	if(owner)
-		owner.backup_known_skills = owner.known_skills
-		owner.backup_skill_experience = owner.skill_experience
-		owner.known_skills = list() 
 		owner.skill_experience = list()
 
 	var/mob/living/carbon/human/zombie = owner.current

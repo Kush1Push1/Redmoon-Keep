@@ -35,14 +35,6 @@
 	BUFSPE = 0
 	BUFLUC = 0
 
-/datum/antagonist/zombie/on_gain()
-	..()
-	STASTR = owner.current.ROUNDSTART_STASTR
-	STASPD = owner.current.ROUNDSTART_STASPD
-	STAINT = owner.current.ROUNDSTART_STAINT
-	STACON = owner.current.ROUNDSTART_STACON
-	STAEND = owner.current.ROUNDSTART_STAEND
-
 /mob/living/proc/recalculate_stats()
 /// Проклятое. Написано так, чтобы не нужно было переписывать код change_stat. 
 /// Нужно добавлять везде, где фигурирует воскрешение, т.к. в противном случае, учитываются значения дебафов, которые были ПРИ смерти и ПОСЛЕ смерти.

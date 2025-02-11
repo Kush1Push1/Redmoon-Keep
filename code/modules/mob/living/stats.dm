@@ -107,41 +107,167 @@
 			statindex[index] = list("stat" = stat, "amt" = amt)
 //			statindex[index]["stat"] = stat
 //			statindex[index]["amt"] = amt
-//	var/newamt = 0
+//	var/newamt = 0 - REDMOON REMOVAL - не востребованная переменная
 	switch(stat)
 		if("strength")
 			if(isseelie(src))
 				STASTR = 1
 				return
-			BUFSTR += amt
-			STASTR = CLAMP(ROUNDSTART_STASTR + BUFSTR, 1, 20)
+/*			newamt = STASTR + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFSTR < 0)
+				BUFSTR = BUFSTR + amt
+				if(BUFSTR > 0)
+					newamt = STASTR + BUFSTR
+					BUFSTR = 0
+			if(BUFSTR > 0)
+				BUFSTR = BUFSTR + amt
+				if(BUFSTR < 0)
+					newamt = STASTR + BUFSTR
+					BUFSTR = 0
+			while(newamt < 1)
+				newamt++
+				BUFSTR--
+			while(newamt > 20)
+				newamt--
+				BUFSTR++
+			STASTR = newamt - REDMOON REMOVAL END*/
+			BUFSTR += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STASTR = CLAMP(ROUNDSTART_STASTR + BUFSTR, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 		if("perception")
-			BUFPER += amt
-			STAPER = CLAMP(ROUNDSTART_STAPER + BUFPER, 1, 20)
+/*			newamt = STAPER + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFPER < 0)
+				BUFPER = BUFPER + amt
+				if(BUFPER > 0)
+					newamt = STAPER + BUFPER
+					BUFPER = 0
+			if(BUFPER > 0)
+				BUFPER = BUFPER + amt
+				if(BUFPER < 0)
+					newamt = STAPER + BUFPER
+					BUFPER = 0
+			while(newamt < 1)
+				newamt++
+				BUFPER--
+			while(newamt > 20)
+				newamt--
+				BUFPER++
+			STAPER = newamt	- REDMOON REMOVAL END*/
+			BUFPER += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STAPER = CLAMP(ROUNDSTART_STAPER + BUFPER, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 			see_override = initial(src.see_invisible) + (STAPER/2.78) // This may be a mistake.
 			update_sight() //Needed.
 			update_fov_angles()
 
 		if("intelligence")
-			BUFINT += amt
-			STAINT = CLAMP(ROUNDSTART_STAINT + BUFINT, 1, 20)
+/*			newamt = STAINT + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFINT < 0)
+				BUFINT = BUFINT + amt
+				if(BUFINT > 0)
+					newamt = STAINT + BUFINT
+					BUFINT = 0
+			if(BUFINT > 0)
+				BUFINT = BUFINT + amt
+				if(BUFINT < 0)
+					newamt = STAINT + BUFINT
+					BUFINT = 0
+			while(newamt < 1)
+				newamt++
+				BUFINT--
+			while(newamt > 20)
+				newamt--
+				BUFINT++
+			STAINT = newamt - REDMOON REMOVAL END*/
+			BUFINT += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STAINT = CLAMP(ROUNDSTART_STAINT + BUFINT, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 		if("constitution")
-			BUFCON += amt
-			STACON = CLAMP(ROUNDSTART_STACON + BUFCON, 1, 20)
+/*			newamt = STACON + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFCON < 0)
+				BUFCON = BUFCON + amt
+				if(BUFCON > 0)
+					newamt = STACON + BUFCON
+					BUFCON = 0
+			if(BUFCON > 0)
+				BUFCON = BUFCON + amt
+				if(BUFCON < 0)
+					newamt = STACON + BUFCON
+					BUFCON = 0
+			while(newamt < 1)
+				newamt++
+				BUFCON--
+			while(newamt > 20)
+				newamt--
+				BUFCON++
+			STACON = newamt - REDMOON REMOVAL END*/
+			BUFCON += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STACON = CLAMP(ROUNDSTART_STACON + BUFCON, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 		if("endurance")
-			BUFEND += amt
-			STAEND = CLAMP(ROUNDSTART_STAEND + BUFEND, 1, 20)
+/*			newamt = STAEND + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFEND < 0)
+				BUFEND = BUFEND + amt
+				if(BUFEND > 0)
+					newamt = STAEND + BUFEND
+					BUFEND = 0
+			if(BUFEND > 0)
+				BUFEND = BUFEND + amt
+				if(BUFEND < 0)
+					newamt = STAEND + BUFEND
+					BUFEND = 0
+			while(newamt < 1)
+				newamt++
+				BUFEND--
+			while(newamt > 20)
+				newamt--
+				BUFEND++
+			STAEND = newamt - REDMOON REMOVAL END*/
+			BUFEND += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STAEND = CLAMP(ROUNDSTART_STAEND + BUFEND, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 		if("speed")
-			BUFSPE += amt
-			STASPD = CLAMP(ROUNDSTART_STASPD + BUFSPE, 1, 20)
+/*			newamt = STASPD + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFSPE < 0)
+				BUFSPE = BUFSPE + amt
+				if(BUFSPE > 0)
+					newamt = STASPD + BUFSPE
+					BUFSPE = 0
+			if(BUFSPE > 0)
+				BUFSPE = BUFSPE + amt
+				if(BUFSPE < 0)
+					newamt = STASPD + BUFSPE
+					BUFSPE = 0
+			while(newamt < 1)
+				newamt++
+				BUFSPE--
+			while(newamt > 20)
+				newamt--
+				BUFSPE++
+			STASPD = newamt - REDMOON REMOVAL END*/
+			BUFSPE += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STASPD = CLAMP(ROUNDSTART_STASPD + BUFSPE, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 		if("fortune")
-			BUFLUC += amt
-			STALUC = CLAMP(ROUNDSTART_STALUC + BUFLUC, 1, 20)
+/*			newamt = STALUC + amt - REDMOON REMOVAL START - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			if(BUFLUC < 0)
+				BUFLUC = BUFLUC + amt
+				if(BUFLUC > 0)
+					newamt = STALUC + BUFLUC
+					BUFLUC = 0
+			if(BUFLUC > 0)
+				BUFLUC = BUFLUC + amt
+				if(BUFLUC < 0)
+					newamt = STALUC + BUFLUC
+					BUFLUC = 0
+			while(newamt < 1)
+				newamt++
+				BUFLUC--
+			while(newamt > 20)
+				newamt--
+				BUFLUC++
+			STALUC = newamt - REDMOON REMOVAL END*/
+			BUFLUC += amt // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
+			STALUC = CLAMP(ROUNDSTART_STALUC + BUFLUC, 1, 20) // REDMOON ADD - after_death_stats_fix - фикс для статов после смерти и оверкапа статов
 
 /proc/generic_stat_comparison(userstat as num, targetstat as num)
 	var/difference = userstat - targetstat
