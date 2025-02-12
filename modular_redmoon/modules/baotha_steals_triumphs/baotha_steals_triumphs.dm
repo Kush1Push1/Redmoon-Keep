@@ -33,8 +33,8 @@
 	if(actions_made < 12)
 		to_chat(baotha_cultist, baotha_cultist.client.prefs.be_russian ? span_warning("Мне нужно получить больше удовольствия, чтобы осквернить!") : span_warning("I need to get more pleasure from them to corrupt!"))
 		return FALSE
-	var/amount_to_change_nutrition = min(50, NUTRITION_LEVEL_FULL - baotha_cultist.nutrition)
-	var/amount_to_change_hydration = min(50, HYDRATION_LEVEL_FULL - baotha_cultist.nutrition)
+	var/amount_to_change_nutrition = min(100, NUTRITION_LEVEL_FULL - baotha_cultist.nutrition)
+	var/amount_to_change_hydration = min(100, HYDRATION_LEVEL_FULL - baotha_cultist.nutrition)
 	if(victim.real_name in SSticker.violated_by_baotha)
 		target.adjust_nutrition(-amount_to_change_nutrition)
 		target.adjust_hydration(-amount_to_change_hydration)
