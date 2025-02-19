@@ -19,6 +19,7 @@
 				static_debris = list() // отсутствие древесины в целом, фармите болото, дровосеки
 				tree_not_in_bog = FALSE // некому показывать
 	. = ..()
+	//todo - сделать ограничение по X/Y карты
 
 /obj/structure/flora/newtree/obj_destruction(damage_flag)
 	if(tree_not_in_bog)
