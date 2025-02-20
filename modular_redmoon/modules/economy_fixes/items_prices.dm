@@ -18,3 +18,6 @@
 
 /obj/item/reagent_containers/powder
 	sellprice = 1 // Фикс возможности перемолоть камень за 2 маммона в пыль за 10 маммонов
+
+/obj/item/natural/silk
+	sellprice = 4
