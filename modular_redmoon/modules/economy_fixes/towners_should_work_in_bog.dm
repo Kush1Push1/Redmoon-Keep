@@ -70,24 +70,26 @@
 /turf/closed/mineral/random/rogue/med
     mineralChance = 30 // 1430 у лавы, 4097 в пещере, 14400 в шахте, 1254 в месте бойни
     mineralSpawnChanceList = list(
-		/turf/closed/mineral/rogue/salt = 5, // 10%
-		/turf/closed/mineral/rogue/gold = 3, // 6%
+		/turf/closed/mineral/rogue/salt = 5, // 8%
+		/turf/closed/mineral/rogue/gold = 3, // 5%
 		/turf/closed/mineral/rogue/silver = 1, // 2%
-		/turf/closed/mineral/rogue/iron = 25, // 50%
-		/turf/closed/mineral/rogue/copper = 5, // 10%
-		/turf/closed/mineral/rogue/tin = 5, // 10%
-		/turf/closed/mineral/rogue/coal = 5, // 10%
+		/turf/closed/mineral/rogue/iron = 25, // 41%
+		/turf/closed/mineral/rogue/copper = 5, // 8%
+		/turf/closed/mineral/rogue/tin = 5, // 8%
+		/turf/closed/mineral/rogue/coal = 5, // 8%
+		/turf/closed/mineral/rogue/cinnabar = 10, //16%
 		/turf/closed/mineral/rogue/gem = 1) // 2%
 
 /turf/closed/mineral/random/rogue/high // 701 у лавы всего, 111 в месте бойни
     mineralChance = 50 
-    mineralSpawnChanceList = list( // ДЕЛИМ ЦИФРЫ БЛОКОВ НА 2, Т.К. ШАНС СПАВНА 50%
-		/turf/closed/mineral/rogue/gold = 2, // 10% или около 70 блоков у лавы (7000-9100 маммонов через корабль)
-		/turf/closed/mineral/rogue/silver = 1,  // 5% или около 35 блоков у лавы
-		/turf/closed/mineral/rogue/iron = 10,  // 50% или около 350 блоков у лавы
-		/turf/closed/mineral/rogue/copper = 3,  // 15% или около 105 блоков у лавы
-		/turf/closed/mineral/rogue/tin = 3,  // 15% или около 105 блоков у лавы
-		/turf/closed/mineral/rogue/gem = 1) // 5% или около 35 блоков у лавы
+    mineralSpawnChanceList = list(
+		/turf/closed/mineral/rogue/gold = 2, // 8%
+		/turf/closed/mineral/rogue/silver = 1,  // 4%
+		/turf/closed/mineral/rogue/iron = 10,  // 43%
+		/turf/closed/mineral/rogue/copper = 3,  // 13%
+		/turf/closed/mineral/rogue/tin = 3,  // 13%
+		/turf/closed/mineral/rogue/cinnabar = 3, // 13%
+		/turf/closed/mineral/rogue/gem = 1) // 4%
 
 /turf/closed/mineral/random/proc/check_for_bog_area()
 	return TRUE
