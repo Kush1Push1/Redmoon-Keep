@@ -46,6 +46,14 @@
 
 	. = ..()
 
+// Проверка на bog-зону для пенька. Если в боге, то старое количество леса с 1 пня
+/obj/structure/table/roguetree/stump/proc/check_for_bog_area(mob/living/user)
+	if(!istype(get_area(loc), /area/rogue/outdoors/bog)) // REDMOON ADD START - economy_fix - деревья в окрестностях Рокхилла приносят мало древисины
+		return 1
+	else
+		var/skill_level = user.mind.get_skill_level(/datum/skill/labor/lumberjacking)
+		return  rand(1, max(1, round(skill_level / 2)))
+
 // Добыча в шахтах рокхилла - не особо прибыльное дело, но кузнец явно скажет спасибо. Золото и другие ценные руды можно добыть за городом
 /turf/closed/mineral/random/rogue/Initialize()
 	check_for_bog_area()
