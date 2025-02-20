@@ -65,6 +65,8 @@
 	STACON = zombie.ROUNDSTART_STACON // REDMOON EDIT - after_death_stats_fix - замена стандартного стата на раундстартовый
 	STAEND = zombie.ROUNDSTART_STAEND // REDMOON EDIT - after_death_stats_fix - замена стандартного стата на раундстартовый
 
+	stored_skills = owner.known_skills.Copy()
+	stored_experience = owner.skill_experience.Copy()
 	owner.backup_known_skills = owner.known_skills.Copy() // REDMOON EDIT - after_death_stats_fix - сохранение скиллов погибшего для загробного мира
 	owner.backup_skill_experience = owner.skill_experience.Copy() // REDMOON EDIT - after_death_stats_fix - сохранение скиллов погибшего для загробного мира
 	owner.known_skills = list()
