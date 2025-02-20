@@ -67,3 +67,38 @@
 	payout_price = 5
 	withdraw_price = 10
 	export_price = 10
+
+/datum/roguestock/stockpile/fishmince
+	name = "Fish Mince"
+	desc = "Descaled and ground fish meat."
+	item_type = /obj/item/reagent_containers/food/snacks/rogue/meat/mince/fish
+	held_items = list(0, 0)
+	payout_price = 2
+	withdraw_price = 4
+	transport_fee = 1
+	export_price = 3
+	importexport_amt = 10
+	passive_generation = 0
+
+/datum/roguestock/stockpile/fat
+	name = "Fat"
+	desc = "Greasy flesh from an animal."
+	item_type = /obj/item/reagent_containers/food/snacks/fat
+	held_items = list(0, 0)
+	payout_price = 3
+	withdraw_price = 5
+	transport_fee = 1
+	export_price = 5
+	importexport_amt = 5
+	passive_generation = 0
+
+/datum/roguestock/stockpile/honey
+	name = "Honey"
+	desc = "Definitely not spider milk. Delicacy."
+	item_type = /obj/item/reagent_containers/food/snacks/rogue/honey
+	held_items = list(0, 0)
+	payout_price = 3
+	withdraw_price = 5
+	transport_fee = 2
+	export_price = 5
+	importexport_amt = 1
