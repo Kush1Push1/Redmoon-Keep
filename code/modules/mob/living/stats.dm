@@ -89,6 +89,7 @@
 			set_eye_color(H, "#c71d76", "#c71d76")
 		if(isseelie(src))	//Check necessary to prevent seelie getting default stats when no other changes apply
 			change_stat("strength", -9)
+	save_stats_as_roundstarted() // REDMOON ADD - after_death_stats_fix
 
 /mob/living/proc/change_stat(stat, amt, index)
 	if(!stat)
