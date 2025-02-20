@@ -78,27 +78,33 @@
 	transport_fee = 1
 	export_price = 3
 	importexport_amt = 10
-	passive_generation = 0
 
 /datum/roguestock/stockpile/fat
 	name = "Fat"
 	desc = "Greasy flesh from an animal."
 	item_type = /obj/item/reagent_containers/food/snacks/fat
-	held_items = list(0, 0)
 	payout_price = 3
 	withdraw_price = 5
 	transport_fee = 1
 	export_price = 5
 	importexport_amt = 5
-	passive_generation = 0
 
 /datum/roguestock/stockpile/honey
 	name = "Honey"
 	desc = "Definitely not spider milk. Delicacy."
 	item_type = /obj/item/reagent_containers/food/snacks/rogue/honey
-	held_items = list(0, 0)
 	payout_price = 3
 	withdraw_price = 5
+	transport_fee = 2
+	export_price = 5
+	importexport_amt = 1
+
+/datum/roguestock/stockpile/silk
+	name = "Silk"
+	desc = "Silken strands. Their usage in clothing is exotic in all places save the underdark"
+	item_type = /obj/item/natural/silk
+	payout_price = 2
+	withdraw_price = 4
 	transport_fee = 2
 	export_price = 5
 	importexport_amt = 1
