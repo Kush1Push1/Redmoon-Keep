@@ -128,7 +128,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			to_chat(owner.current,span_danger("I am no longer a MANIAC!"))
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
-			dreamer.change_stat("strenght", 0, "maniac_role_str") // REDMOON ADD START - after_death_stats_fix - изменение статов роли по новой системе распределения
+			dreamer.change_stat("strength", 0, "maniac_role_str") // REDMOON ADD START - after_death_stats_fix - изменение статов роли по новой системе распределения
 			dreamer.change_stat("constitution", 0, "maniac_role_con") // REDMOON ADD START - after_death_stats_fix - изменение статов роли по новой системе распределения
 			dreamer.change_stat("endurance", 0, "maniac_role_end") // REDMOON ADD START - after_death_stats_fix - изменение статов роли по новой системе распределения
 			/* REDMOON REMOVAL START - after_death_stats_fix - для изменения статов используются функции выше
