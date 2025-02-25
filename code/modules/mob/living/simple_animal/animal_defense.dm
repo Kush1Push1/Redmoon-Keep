@@ -23,6 +23,12 @@
 			if(HAS_TRAIT(M, TRAIT_PACIFISM))
 				to_chat(M, span_warning("I don't want to hurt [src]!"))
 				return
+
+			if(summoner == M.real_name)
+				to_chat(M, span_notice("I felt an urge in [src] to attack me... Pathetic."))
+				to_chat(src, span_danger("I... Must not... Harm... My master..."))
+				return
+
 			M.do_attack_animation(src, M.used_intent.animname)
 			playsound(loc, attacked_sound, 25, TRUE, -1)
 			var/damage = M.get_punch_dmg()
@@ -112,6 +118,10 @@
 		if(HAS_TRAIT(M, TRAIT_PACIFISM))
 			to_chat(M, span_warning("I don't want to hurt [src]!"))
 			return
+		if(summoner == M.real_name)
+			to_chat(M, span_notice("I felt an urge in [src] to attack me... Pathetic."))
+			to_chat(src, span_danger("I... Must not... Harm... My master..."))
+			return
 		M.do_attack_animation(src, M.used_intent.animname)
 		playsound(loc, attacked_sound, 25, TRUE, -1)
 		var/damage = M.get_punch_dmg()
@@ -159,6 +169,10 @@
 	var/mob/living/carbon/human/user = M
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("I don't want to harm [target]!"))
+		return FALSE
+	if(user.summoner == target.real_name)
+		to_chat(target, span_notice("I felt an urge in [user] to attack me... Pathetic."))
+		to_chat(user, span_danger("I... Must not... Harm... My master..."))
 		return FALSE
 	if(user.IsKnockdown())
 		return FALSE

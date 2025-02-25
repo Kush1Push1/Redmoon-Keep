@@ -91,6 +91,11 @@
 		to_chat(user, span_warning("I don't want to harm other living beings!"))
 		return
 
+	if(user.summoner == M.real_name)
+		to_chat(M, span_notice("I felt an urge in [user] to attack me... Pathetic."))
+		to_chat(user, span_danger("I... Must not... Harm... My master..."))
+		return
+
 	M.lastattacker = user.real_name
 	M.lastattackerckey = user.ckey
 	if(M.mind)

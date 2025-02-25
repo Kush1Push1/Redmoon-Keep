@@ -312,6 +312,11 @@
 		to_chat(M, span_warning("I don't want to hurt anyone!"))
 		return FALSE
 
+	if(M.summoner == src.real_name)
+		to_chat(src, span_notice("I felt an urge in [M] to attack me... Pathetic."))
+		to_chat(M, span_danger("I... Must not... Harm... My master..."))
+		return FALSE
+
 	M.do_attack_animation(src, visual_effect_icon = M.a_intent.animname)
 	playsound(get_turf(M), pick(M.attack_sound), 100, FALSE)
 

@@ -1140,6 +1140,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("I don't want to harm [target]!"))
 		return FALSE
+
+	if(user.summoner == target.real_name)
+		to_chat(target, span_notice("I felt an urge in [user] to attack me... Pathetic."))
+		to_chat(user, span_danger("I... Must not... Harm... My master..."))
+		return
+
 	if(target.check_block())
 		target.visible_message(span_warning("[target] blocks [user]'s attack!"), \
 						span_danger("I block [user]'s attack!"), span_hear("I hear a swoosh!"), COMBAT_MESSAGE_RANGE, user)
@@ -1385,6 +1391,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/kicked(mob/living/carbon/human/user, mob/living/carbon/human/target)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("I don't want to harm [target]!"))
+		return FALSE
+	if(user.summoner == target.real_name)
+		to_chat(target, span_notice("I felt an urge in [user] to attack me... Pathetic."))
+		to_chat(user, span_danger("I... Must not... Harm... My master..."))
 		return FALSE
 	if(user.IsKnockdown())
 		return FALSE

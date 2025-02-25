@@ -244,6 +244,9 @@
 	if(aggressive && !faction_check_mob(L))
 		return TRUE
 
+	if(summoner == L.real_name)
+		return
+
 	return FALSE
 
 /mob/living/carbon/human/proc/handle_combat()

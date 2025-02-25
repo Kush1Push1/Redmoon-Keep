@@ -52,6 +52,8 @@
 			var/mob/living/minion = other_mob // REDMOON EDIT - ai_fixes - замена var/mob/living/simple_animal/minion на var/mob/living/minion, чтобы некромант мог контролировать поднятых из людей скелетов без игроков
 
 			if ((faction_ordering && caster.faction_check_mob(minion)) || (!faction_ordering && minion.summoner == caster.real_name)) // REDMOON EDIT - ai_fixes - замена name на real_name, т.к. кастер может надеть маску - WAS: caster.name
+				if(!minion.ai_controller) // REDMOON ADD - ai_fixes - Если за скелета зайдёт игрок и выйдет из него, то получится моб без ИИ. Нужно в будущем прикрутить ИИ.
+					continue // REDMOON ADD
 				minion.ai_controller.CancelActions() // REDMOON ADD - отмена всех приказов
 				minion.ai_controller.clear_blackboard_key(BB_FOLLOW_TARGET)
 				minion.ai_controller.ordered_to_attack = null // REDMOON ADD - сброс приказа на атаку
