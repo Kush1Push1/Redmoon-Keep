@@ -1141,10 +1141,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		to_chat(user, span_warning("I don't want to harm [target]!"))
 		return FALSE
 
+	// REDMOON ADD START - summons_cannot_attack_master - призванное существо в обычных условиях не может атаковать своего хозяина
 	if(user.summoner == target.real_name)
 		to_chat(target, span_notice("I felt an urge in [user] to attack me... Pathetic."))
 		to_chat(user, span_danger("I... Must not... Harm... My master..."))
 		return
+	// REDMOON ADD END
 
 	if(target.check_block())
 		target.visible_message(span_warning("[target] blocks [user]'s attack!"), \
@@ -1392,10 +1394,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, span_warning("I don't want to harm [target]!"))
 		return FALSE
+	// REDMOON ADD START - summons_cannot_attack_master - призванное существо в обычных условиях не может атаковать своего хозяина
 	if(user.summoner == target.real_name)
 		to_chat(target, span_notice("I felt an urge in [user] to attack me... Pathetic."))
 		to_chat(user, span_danger("I... Must not... Harm... My master..."))
 		return FALSE
+	// REDMOON ADD END
 	if(user.IsKnockdown())
 		return FALSE
 	if(user == target)
