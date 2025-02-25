@@ -40,6 +40,7 @@
 	L.update_body_parts(redraw = TRUE)
 
 /datum/antagonist/lich/proc/equip_lich()
+	redmoon_lich_fixes() // REDMOON ADD - lich_fixes - пакет исправлений для лича
 	owner.unknow_all_people()
 	for(var/datum/mind/MF in get_minds())
 		owner.become_unknown_to(MF)

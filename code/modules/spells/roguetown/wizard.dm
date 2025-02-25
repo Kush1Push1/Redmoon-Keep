@@ -1233,7 +1233,7 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 
 /mob/living/simple_animal/hostile/retaliate/rogue/wolf/familiar/Initialize(mapload, mob/user)
 	. = ..()
-	summoner = user
+	summoner = user.real_name // REDMOON EDIT - ai_fixes - замена name на real_name, т.к. кастер может надеть маску - WAS: user.name
 
 /obj/effect/proc_holder/spell/invoked/findfamiliar/cast(list/targets, mob/user = usr)
 	var/turf/target_turf = get_turf(targets[1])

@@ -140,8 +140,15 @@
 	var/mob/living/carbon/human/target = obj
 
 	if(target.stat != DEAD)
-		to_chat(user, span_warning("I cannot raise the living."))
-		return FALSE
+		// REDMOON ADD START - lich_fixes - возможность подчинять живую нежить
+		if(user.faction_check_mob(target))
+			if(target.summoner) // не убитая нежить и под чужим началом
+				to_chat(user, user.client.prefs.be_russian ? span_warning("Я чувствую, что эта нежить уже раб некроманта.") : span_warning("I feel this undead is serving to a necromancer."))
+				return FALSE
+		else // Попытка подчинить живую НЕ нежить
+		// REDMOON ADD END
+			to_chat(user, span_warning("I cannot raise the living."))
+			return FALSE
 
 	if(HAS_TRAIT(target, TRAIT_SPECIALUNDEAD))
 		to_chat(user, span_warning("This is an undead far beyond my perview. I cannot make it mine."))
@@ -185,6 +192,11 @@
 			to_chat(target, span_danger("You rise as a minion."))
 			target.turn_to_minion(user, target.ckey)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with an evil glow."), runechat_message = TRUE)
+			// REDMOON ADD START - lich_fixes - присвоение контроллера ИИ для поднятых из мобов скелетов без игрока
+			target.summoner = user.real_name
+			target.ai_controller = /datum/ai_controller/simple_skeleton
+			target.InitializeAIController()
+			// REDMOON ADD END
 			return TRUE
 
 	if(!target.ckey || offer_refused) //player is not inside body or has refused, poll for candidates
@@ -201,7 +213,12 @@
 		else
 			target.turn_to_minion(user)
 			target.visible_message(span_warning("[target.real_name]'s eyes light up with a WEAK glow."), runechat_message = TRUE)
-
+		
+		// REDMOON ADD START - lich_fixes - присвоение контроллера ИИ для поднятых из мобов скелетов без игрока
+		target.summoner = user.real_name
+		target.ai_controller = /datum/ai_controller/simple_skeleton
+		target.InitializeAIController()
+		// REDMOON ADD END
 		return TRUE
 
 	return FALSE
