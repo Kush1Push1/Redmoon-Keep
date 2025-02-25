@@ -26,6 +26,10 @@
 		var/mob/M = the_target
 		if(M.status_flags & GODMODE)
 			return FALSE
+		// REDMOON ADD START - ai_fixes - фикс атаки призываемого волка по своему хозяину
+		if(living_mob.summoner == M.real_name) // запрещаем саммонам даже думать об атаке хозяина
+			return FALSE 
+		// REDMOON ADD END
 
 	if(living_mob.see_invisible < the_target.invisibility)//Target's invisible to us, forget it
 		return FALSE
