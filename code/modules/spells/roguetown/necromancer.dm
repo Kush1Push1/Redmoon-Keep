@@ -559,6 +559,12 @@
 	target.death()
 	sleep(1 SECONDS)
 	target.client.try_descend()
+	// REDMOON ADD START - lich_fixes - развоплащённый скелеты не могут снова соглашаться на становление скелетом
+	var/list/L = GLOB.poll_ignore[POLL_IGNORE_NECROMANCER_SKELETON]
+	if(!L)
+		GLOB.poll_ignore[POLL_IGNORE_NECROMANCER_SKELETON] = list()
+	GLOB.poll_ignore[POLL_IGNORE_NECROMANCER_SKELETON] += M.ckey
+	// REDMOON ADD END
 	to_chat(user, span_warning("The disappointment is no more, its husk free for a more.. Malleable soul."))
 
 
