@@ -96,6 +96,7 @@
 		H.STAINT = 1
 		H.STACON = 3
 		H.STASTR = rand(8,17)
+		H.save_stats_as_roundstarted() // REDMOON ADD - after_death_stats_fix - такие статы станут раундстартовыми для скелета
 
 		H.verbs |= /mob/living/carbon/human/proc/praise
 		H.verbs |= /mob/living/carbon/human/proc/communicate
@@ -135,6 +136,7 @@
 						to_chat(HL.mind, span_warning("I sense an unholy presence loom near my soul."))
 						return
 					if(HL == SSticker.rulermob)
+						to_chat(user.mind, span_warning("Дохуя хочешь."))
 						return
 					if(istype(HL.wear_neck, /obj/item/clothing/neck/roguetown/psicross))
 						return

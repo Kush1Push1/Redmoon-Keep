@@ -94,7 +94,7 @@
 	xp_gain = TRUE
 
 /obj/effect/proc_holder/spell/invoked/raise_undead_lesser
-	name = "Lesser Raise Undead"
+	name = "Raise Lesser Undead"
 	cost = 6
 	desc = "Reanimate a corpse as a skeleton. You can maintain two sapient skeletons, the rest will be mindless. The body must have all limbs and its head."
 	clothes_req = FALSE
@@ -516,9 +516,9 @@
 		to_chat(user, span_warning("This one is already dead, best reanimate it."))
 		return
 
-	// if(!(target in user.minions))
-	// 	to_chat(user, span_warning("This is not one of mine."))
-	// 	return
+	if(!(target in user.minions))
+		to_chat(user, span_warning("This is not one of mine."))
+		return
 
 	if(!target.client)
 		target.death()

@@ -189,8 +189,10 @@
 				qdel(C)
 			wet = max(wet-1, 0)
 	
-	to_chat(user, span_info("I wipe \the [T.name] with [src]."))
-	playsound(user, "clothwipe", 100, TRUE)
+			to_chat(user, span_info("I wipe \the [T.name] with [src]."))
+			playsound(user, "clothwipe", 100, TRUE)
+		else
+			to_chat(user, span_warning("\The [name] is dry!"))
 
 
 // BANDAGING
@@ -335,7 +337,7 @@
 	experimental_inhand = FALSE
 	possible_item_intents = list(/datum/intent/use)
 	desc = "Stick alone.. Weak. Stick together.. Strong."
-	maxamount = 6
+	maxamount = 10
 	force = 0
 	throwforce = 0
 	firefuel = 5 MINUTES

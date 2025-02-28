@@ -6,7 +6,7 @@
 
 /datum/outfit/job/roguetown/manorguard/footman/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/helmet/sallet
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/guard
 	if(prob(50))
 		beltl = /obj/item/rogueweapon/sword
 	else
@@ -31,5 +31,4 @@
 		H.change_stat("strength", 2)
 		H.change_stat("constitution", 2)
 		H.change_stat("endurance", 1)
-	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)

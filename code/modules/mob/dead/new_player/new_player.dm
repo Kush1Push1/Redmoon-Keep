@@ -430,7 +430,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			return JOB_UNAVAILABLE_GENERIC
 	var/datum/species/pref_species = client.prefs.pref_species
 	if(length(job.allowed_races) && !(pref_species.type in job.allowed_races))
-		return JOB_UNAVAILABLE_RACE
+		if(!client.triumph_ids.Find("race_all"))
+			return JOB_UNAVAILABLE_RACE
 	var/list/allowed_sexes = list()
 	if(length(job.allowed_sexes))
 		allowed_sexes |= job.allowed_sexes
@@ -554,7 +555,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(humanc)
 		try_apply_character_post_equipment(humanc)
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
-
+	// REDMOON ADD START - family_changes - попытка создать семью с персонажем в раунде
+	if(humanc.spouse_ckey)
+		if(!(SSjob.GetJob(humanc.job).family_blacklisted))
+			SSfamily.SetupFamilies_Short(humanc)
+	// REDMOON ADD END
 
 /mob/dead/new_player/proc/LateChoices()
 	var/list/dat = list("<div class='notice' style='font-style: normal; font-size: 14px; margin-bottom: 2px; padding-bottom: 0px'>Round Duration: [DisplayTimeText(world.time - SSticker.round_start_time, 1)]</div>")
@@ -697,6 +702,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	. = H
 	new_character = .
 
+	// REDMOON ADD START - family_changes - фамилии для семей
+	if(H.family_surname && H.family == FAMILY_FULL)
+		new_character.real_name = "[new_character.real_name] [H.family_surname]"
+	// REDMOON ADD END
 	H.after_creation()
 
 	if(transfer_after)

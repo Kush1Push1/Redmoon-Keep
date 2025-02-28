@@ -70,6 +70,8 @@
 				used = list('sound/vo/male/gen/paincrit (1).ogg','sound/vo/male/gen/paincrit (2).ogg')
 			if("painmoan")
 				used = list('sound/vo/male/gen/painmoan (1).ogg','sound/vo/male/gen/painmoan (2).ogg','sound/vo/male/gen/painmoan (3).ogg','sound/vo/male/gen/painmoan (4).ogg','sound/vo/male/gen/painmoan (5).ogg')
+			if("lewdmoan")
+				used = 'sound/vo/male/gen/groan (1).ogg'
 			if("painscream")
 				used = list('sound/vo/male/gen/painscream (1).ogg','sound/vo/male/gen/painscream (2).ogg','sound/vo/male/gen/painscream (3).ogg')
 			if("rage")
@@ -102,5 +104,9 @@
 				used = list('sound/vo/hiss.ogg','sound/vo/hiss (2).ogg')
 			if("purr")
 				used = 'sound/vo/purr.ogg'
+			if("bark")
+				used = list('sound/vo/mobs/vw/bark (1).ogg', 'sound/vo/mobs/vw/bark (2).ogg', 'sound/vo/mobs/vw/bark (3).ogg', 'sound/vo/mobs/vw/bark (4).ogg', 'sound/vo/mobs/vw/bark (5).ogg', 'sound/vo/mobs/vw/bark (6).ogg', 'sound/vo/mobs/vw/bark (7).ogg')
+			if("growl")
+				used = list('sound/vo/mobs/vw/idle (1).ogg', 'sound/vo/mobs/vw/idle (2).ogg', 'sound/vo/mobs/vw/idle (3).ogg', 'sound/vo/mobs/vw/idle (4).ogg')
 
 	return used

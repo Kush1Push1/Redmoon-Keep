@@ -160,4 +160,5 @@
 			else
 				V.add_stress(/datum/stressevent/hatezizo)
 		CM.roundvoteend = TRUE
+		CM.round_ends_at = (world.time - SSticker.round_start_time) + ROUND_END_TIME
 		break

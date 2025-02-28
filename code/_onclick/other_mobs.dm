@@ -231,6 +231,13 @@
 		if(!apply_damage(dam2do, BRUTE, check_zone(def_zone), armor_block, user))
 			nodmg = TRUE
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
+		else
+			if(HAS_TRAIT(user, TRAIT_POISONBITE))
+				if(src.reagents)
+					var/poison = user.STACON/4
+					src.reagents.add_reagent(/datum/reagent/toxin/venom, poison)
+					//src.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
+					to_chat(user, span_warning("You inject venom into [src]!"))
 
 	var/datum/wound/caused_wound
 	if(!nodmg)
@@ -245,7 +252,7 @@
 		if(ishuman(src) && user.mind)
 			if(user.mind.has_antag_datum(/datum/antagonist/werewolf))
 				caused_wound?.werewolf_infect_attempt()
-				if(prob(30))
+				if(prob(60))
 					user.werewolf_feed(src)
 			// both player and npc deadites can infect
 			if(user.mind.has_antag_datum(/datum/antagonist/zombie) || istype(user, /mob/living/carbon/human/species/deadite))

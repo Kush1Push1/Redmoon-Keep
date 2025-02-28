@@ -108,6 +108,15 @@
 	icon_state = "bosskey"
 	lockid = "lord"
 
+/obj/item/key/lord/Initialize()
+	. = ..()
+	SSroguemachine.key = src
+
+/obj/item/key/lord/proc/anti_stall()
+	src.visible_message(span_warning("[src] crumbles to dust, the ashes spiriting away in the direction of the Keep."))
+	SSroguemachine.key = null //Do not harddel.
+	qdel(src) //Anti-stall
+
 /obj/item/key/lord/pre_attack(target, user, params)
 	. = ..()
 	if(istype(target, /obj/structure/closet))
@@ -535,3 +544,45 @@
 	desc = "This old key opens shop #2 behind the mayor's house."
 	icon_state = "rustkey"
 	lockid = "street_shop02"
+
+/obj/item/key/smallstreet_shop01
+	name = "Stall shop key #1"
+	desc = "This key opens peddler #1 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop01"
+
+/obj/item/key/smallstreet_shop02
+	name = "Stall shop key #2"
+	desc = "This key opens stall peddler #2 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop02"
+
+/obj/item/key/smallstreet_shop03
+	name = "Stall shop key #3"
+	desc = "This key opens stall peddler #3 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop03"
+
+/obj/item/key/smallstreet_shop04
+	name = "Stall shop key #4"
+	desc = "This key opens stall peddler #4 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop04"
+
+/obj/item/key/smallstreet_shop05
+	name = "Stall shop key #5"
+	desc = "This key opens stall peddler #5 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop05"
+
+/obj/item/key/smallstreet_shop06
+	name = "Stall shop key #6"
+	desc = "This key opens stall peddler #6 at the market square."
+	icon_state = "rustkey"
+	lockid = "smallstreet_shop06"
+
+/obj/item/key/smallstreet_master01
+	name = "Stall shop master key"
+	desc = "This key opens peddler selling shop keys."
+	icon_state = "rustkey"
+	lockid = "smallstreet_master01"

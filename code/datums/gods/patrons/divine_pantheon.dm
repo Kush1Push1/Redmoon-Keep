@@ -1,7 +1,7 @@
 /datum/patron/divine
 	name = null
 	associated_faith = /datum/faith/divine
-	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
+	t0 = list(/obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/touch/orison)
 
 /datum/patron/divine/astrata
 	name = "Astrata"
@@ -51,6 +51,10 @@
 	domain = "God of the Ocean, Storms and the Tide"
 	desc = "The Beloved Son, gifted primordial men food and water."
 	worshippers = "Men of the Sea, Primitive Aquatics"
+	t1 = /obj/effect/proc_holder/spell/invoked/abyssor_bends
+	t2 = /obj/effect/proc_holder/spell/invoked/abyssheal
+	t3 = /obj/effect/proc_holder/spell/invoked/call_mossback
+	mob_traits = list(TRAIT_WATERBREATHING)
 	confess_lines = list(
 		"ABYSSOR COMMANDS THE WAVES!",
 		"THE OCEAN'S FURY IS ABYSSOR'S WILL!",
@@ -62,6 +66,7 @@
 	domain = "God of War, Justice and Strength"
 	desc = "The strongest of Psydon's children, he watches man from afar."
 	worshippers = "Warriors, Sellswords & those who seek Justice"
+	mob_traits = list(TRAIT_STEELHEARTED)
 	t1 = /obj/effect/proc_holder/spell/invoked/burden
 	confess_lines = list(
 		"RAVOX IS JUSTICE!",
@@ -108,7 +113,7 @@
 	desc = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
 	mob_traits = list(TRAIT_EMPATH, TRAIT_ROT_EATER)
-	t0 = list(/obj/effect/proc_holder/spell/invoked/diagnose, /obj/effect/proc_holder/spell/invoked/lesser_heal) // Combine both spells on t0
+	t0 = list(/obj/effect/proc_holder/spell/invoked/diagnose, /obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/touch/orison) // Combine both spells on t0
 	t1 = /obj/effect/proc_holder/spell/invoked/heal
 	t2 = /obj/effect/proc_holder/spell/invoked/attach_bodypart
 	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
@@ -139,7 +144,6 @@
 	domain = "Goddess of Love, Life, and Beauty"
 	desc = "Eora's divine gift was family, and She taught man to make art and wine that he might live life to its fullest. She teaches love for family and beauty, and hates all that threaten them."
 	worshippers = "Lovers, Doting Grandparents, Harlots"
-	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/eoracurse
 	t2 = /obj/effect/proc_holder/spell/invoked/bud
 	t3 = /obj/effect/proc_holder/spell/invoked/eoracharm

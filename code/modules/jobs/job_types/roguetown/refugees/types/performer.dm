@@ -69,7 +69,7 @@
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 			cloak = /obj/item/clothing/cloak/raincloak/red
 			backl = /obj/item/storage/backpack/rogue/satchel
-			beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+			beltl = /obj/item/ammo_holder/bomb/smokebombs
 			beltr = /obj/item/rogueweapon/huntingknife/idagger
 			head = /obj/item/clothing/head/roguetown/bardhat //with this hat, they will get all the pussy(or dick depending on preference(or both ig))
 			neck = /obj/item/storage/belt/rogue/pouch/coins/poor
@@ -93,6 +93,7 @@
 			H.change_stat("perception", 2)
 			H.change_stat("speed", 2)
 			ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
+			ADD_TRAIT(H, TRAIT_BARDIC_TRAINING, TRAIT_GENERIC)
 
 		if("Harlequin")
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
@@ -110,6 +111,7 @@
 			pants = /obj/item/clothing/under/roguetown/tights
 			armor = /obj/item/clothing/suit/roguetown/shirt/jester
 			belt = /obj/item/storage/belt/rogue/leather
+			beltr = /obj/item/ammo_holder/bomb/smokebombs
 			beltl = /obj/item/storage/belt/rogue/pouch
 			head = /obj/item/clothing/head/roguetown/jester
 			neck = /obj/item/clothing/neck/roguetown/coif

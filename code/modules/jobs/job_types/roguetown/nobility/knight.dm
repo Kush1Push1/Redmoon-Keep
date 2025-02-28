@@ -43,7 +43,7 @@
 
 /datum/outfit/job/roguetown/knight/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/knight
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/decoratedknighthelm
 	gloves = /obj/item/clothing/gloves/roguetown/plate
 	pants = /obj/item/clothing/under/roguetown/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
@@ -89,4 +89,3 @@
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	H.verbs |= /mob/proc/haltyell

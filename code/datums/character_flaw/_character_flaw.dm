@@ -7,6 +7,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	"Narcoleptic"=/datum/charflaw/narcoleptic,
 	"Masochist"=/datum/charflaw/masochist,
 	"Paranoid"=/datum/charflaw/paranoid,
+	"Bad Eyesight" =/datum/charflaw/badsight,
 	"Cyclops (R)"=/datum/charflaw/noeyer,
 	"Cyclops (L)"=/datum/charflaw/noeyel,
 	"Wood Arm (R)"=/datum/charflaw/limbloss/arm_r,
@@ -138,7 +139,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 /datum/status_effect/debuff/badvision
 	id = "badvision"
 	alert_type = null
-	effectedstats = list("perception" = -20, "speed" = -5)
+	effectedstats = list("perception" = -10, "speed" = -3)
 	duration = 100
 
 /datum/charflaw/badsight/apply_post_equipment(mob/user)
@@ -281,7 +282,7 @@ GLOBAL_LIST_INIT(character_flaws, list(
 	var/do_update_msg = TRUE
 	if(new_mammon_amount >= required_mammons)
 		// Feel better
-		if(user.has_stress_event(/datum/stressevent/vice))
+		if(user.has_stress(/datum/stressevent/vice))
 			to_chat(user, span_blue("[new_mammon_amount] mammons... That's more like it.."))
 		user.remove_stress(/datum/stressevent/vice)
 		user.remove_status_effect(/datum/status_effect/debuff/addiction)
