@@ -76,7 +76,8 @@
 		return FALSE
 
 	if(length(allowed_races) && !(H.dna.species.type in allowed_races))
-		return FALSE
+		if(!(H.client.triumph_ids.Find("race_all")))
+			return FALSE
 
 	if(length(allowed_ages) && !(H.age in allowed_ages))
 		return FALSE
