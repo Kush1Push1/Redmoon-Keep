@@ -347,7 +347,7 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 	releasedrain = 50
 	chargedrain = 3
 	chargetime = 15
-	charge_max = 20 SECONDS
+	charge_max = 40 SECONDS
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	movement_interrupt = TRUE
@@ -400,7 +400,7 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 	var/exp_light = 0
 	var/exp_flash = 1
 	var/exp_fire = 0
-	damage = 15	//no armor really has burn protection. So assuming all three connect, 45 burn damage- average damage of fireball with firestacks nerfed. Thats a big 'if' however. Notably, won't cause wounds,
+	damage = 5		// 5 damage per impact, leading to 15 if all three hit. More notably, Each projectile adds 3 firestacks.
 	damage_type = BURN
 	homing = TRUE
 	nodamage = FALSE
@@ -413,12 +413,15 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 
 /obj/projectile/magic/aoe/rogue2/on_hit(target)
 	if(ismob(target))
-		var/mob/M = target
+		var/mob/living/M = target
 		if(M.anti_magic_check())
 			visible_message(span_warning("[src] fizzles on contact with [target]!"))
 			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 			qdel(src)
 			return BULLET_ACT_BLOCK
+		else
+			M.adjust_fire_stacks(3)
+			M.IgniteMob()
 	var/turf/T
 	if(isturf(target))
 		T = target
@@ -1230,10 +1233,11 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 	associated_skill = /datum/skill/magic/arcane
 	xp_gain = TRUE
 	cost = 3
+	ai_controller = /datum/ai_controller/volf/familiar // REDMOON ADD - ai_fixes - особый паттерн поведения, на атаку ближайшей цели
 
 /mob/living/simple_animal/hostile/retaliate/rogue/wolf/familiar/Initialize(mapload, mob/user)
 	. = ..()
-	summoner = user
+	summoner = user.real_name // REDMOON EDIT - ai_fixes - замена name на real_name, т.к. кастер может надеть маску - WAS: user.name
 
 /obj/effect/proc_holder/spell/invoked/findfamiliar/cast(list/targets, mob/user = usr)
 	var/turf/target_turf = get_turf(targets[1])
@@ -1402,13 +1406,14 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 /obj/effect/proc_holder/spell/invoked/mending/cast(list/targets, mob/living/user)
 	if(istype(targets[1], /obj/item))
 		var/obj/item/I = targets[1]
+		if(I.obj_broken == TRUE)
+			to_chat(user, span_warning("This item is too broken to repair!"))
+			return
 		if(I.obj_integrity < I.max_integrity)
 			var/repair_percent = 0.25
 			repair_percent *= I.max_integrity
 			I.obj_integrity = min(I.obj_integrity + repair_percent, I.max_integrity)
 			user.visible_message(span_info("[I] glows in a faint mending light."))
-			if(I.obj_broken == TRUE)
-				I.obj_broken = FALSE
 		else
 			user.visible_message(span_info("[I] appears to be in pefect condition."))
 			revert_cast()
@@ -1481,7 +1486,7 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 	releasedrain = 50
 	chargedrain = 1
 	chargetime = 50
-	charge_max = 50 SECONDS
+	charge_max = 100 SECONDS
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	movement_interrupt = TRUE
@@ -1613,6 +1618,7 @@ obj/effect/proc_holder/spell/targeted/summonweapon/cast(list/targets,mob/user = 
 
 		else	//Getting previously marked item
 			var/obj/item/rogueweapon/item_to_retrieve = marked_item
+
 			var/infinite_recursion = 0 //I don't want to know how someone could put something inside itself but these are wizards so let's be safe
 			while(!isturf(item_to_retrieve.loc) && infinite_recursion < 10) //if it's in something you get the whole thing.
 				if(isitem(item_to_retrieve.loc))
@@ -1630,7 +1636,8 @@ obj/effect/proc_holder/spell/targeted/summonweapon/cast(list/targets,mob/user = 
 								part.remove_embedded_object(item_to_retrieve)
 								to_chat(C, span_warning("The [item_to_retrieve] that was embedded in your [L] has mysteriously vanished. How fortunate!"))
 								break
-					item_to_retrieve = item_to_retrieve.loc
+					if(!isturf(item_to_retrieve.loc))
+						item_to_retrieve = item_to_retrieve.loc
 
 				infinite_recursion += 1
 
@@ -1659,7 +1666,7 @@ obj/effect/proc_holder/spell/targeted/summonweapon/cast(list/targets,mob/user = 
 	releasedrain = 50
 	chargedrain = 1
 	chargetime = 50
-	charge_max = 50 SECONDS
+	charge_max = 100 SECONDS
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	movement_interrupt = TRUE
