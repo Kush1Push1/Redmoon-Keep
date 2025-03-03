@@ -50,3 +50,15 @@
 	if(HAS_TRAIT(target, TRAIT_TAX_FREE_CHURCH))
 		return TRAIT_TAX_FREE_CHURCH
 	return FALSE
+
+/datum/controller/subsystem/treasury/proc/try_to_give_starting_money(mob/living/carbon/human/target, var/mammons_amount)
+	if(!ignores_taxes(target))
+		var/obj/item/roguecoin/mammons = new /obj/item/roguecoin/copper(target.loc)
+		mammons.set_quantity(mammons_amount)
+		var/obj/item/has_neck = target.get_item_by_slot(SLOT_NECK)
+		if(has_neck)
+			SEND_SIGNAL(target.wear_neck, COMSIG_TRY_STORAGE_INSERT, mammons, target, TRUE)
+		else
+			if(!target.equip_to_slot_if_possible(mammons, SLOT_IN_BACKPACK))
+				target.equip_to_slot_if_possible(mammons, SLOT_HANDS)
+		SStreasury.bank_accounts[target] = 0

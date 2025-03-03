@@ -2,14 +2,14 @@
 	var/taxes_check = FALSE // Аппарат проверяет, были ли уплачены налоги
 
 /obj/structure/roguemachine/atm/proc/skip_taxes(mob/user)
-	if(!(SStreasury.ignores_taxes(user, TRUE)))
+//	if(!(SStreasury.ignores_taxes(user, TRUE)))
+//		tax_process(user)
+//		return FALSE
+//	else
+	var/question = alert(user, "", "Question", user.client.prefs.be_russian ? "Налоги" : "Taxes", user.client.prefs.be_russian ? "Снять маммоны" : "Withdraw mammons")
+	if(question in list("Налоги", "Taxes"))
 		tax_process(user)
 		return FALSE
-	else
-		var/question = alert(user, "", "Question", user.client.prefs.be_russian ? "Налоги" : "Taxes", user.client.prefs.be_russian ? "Снять маммоны" : "Withdraw mammons")
-		if(question in list("Налоги", "Taxes"))
-			tax_process(user)
-			return FALSE
 	return TRUE
 
 /obj/structure/roguemachine/atm/proc/tax_process(mob/user)
