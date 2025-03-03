@@ -1,6 +1,8 @@
+#define BOG_AREA_ENDING_Y 194 // НУЖНО ОБСЛУЖИВАТЬ ПРИ ИЗМЕНЕНИИ КАРТЫ! Выше этого значения, деревья лес перестаёт считать себя болотным. Такой подход позволяет не трогать карту.
+
 // Охота в окрестностях города - бесполезная затея
 /obj/item/bait/attack_self(mob/user)
-	if(!istype(get_area(src), /area/rogue/outdoors/bog))
+	if(y > BOG_AREA_ENDING_Y) // деревья в окрестностях Рокхилла приносят мало древисины
 		to_chat(user, span_warning(user.client.prefs.be_russian ? "В окрестностях Рокхилла не осталось живности... В болотах шансов приманить кого-нибудь больше." : "There will not be enought wildlife here. I should place [src] in the bog..."))
 		return FALSE
 	. = ..()
@@ -11,7 +13,7 @@
 
 /obj/structure/flora/newtree/Initialize()
 	if(!is_centcom_level(z)) // Чтобы бандиты и вампиры могли добывать у себя спокойно
-		if(!istype(get_area(loc), /area/rogue/outdoors/bog))
+		if(y > BOG_AREA_ENDING_Y) // деревья в окрестностях Рокхилла приносят мало древисины
 			static_debris = list(/obj/item/grown/log/tree/small = 1)
 			tree_not_in_bog = TRUE
 			desc += " Seems like this tree is very old. The one in the Bog would have better wood."
@@ -19,7 +21,6 @@
 				static_debris = list() // отсутствие древесины в целом, фармите болото, дровосеки
 				tree_not_in_bog = FALSE // некому показывать
 	. = ..()
-	//todo - сделать ограничение по X/Y карты
 
 /obj/structure/flora/newtree/obj_destruction(damage_flag)
 	if(tree_not_in_bog)
@@ -32,7 +33,7 @@
 
 /obj/structure/flora/roguetree/Initialize()
 	if(!is_centcom_level(z)) // Чтобы бандиты и вампиры могли добывать у себя спокойно
-		if(!istype(get_area(loc), /area/rogue/outdoors/bog))
+		if(y > BOG_AREA_ENDING_Y) // деревья в окрестностях Рокхилла приносят мало древисины
 			static_debris = list(/obj/item/grown/log/tree/small = 1)
 			tree_not_in_bog = TRUE
 			desc += " Seems like this tree is very old. The one in the Bog would have better wood."
@@ -48,7 +49,7 @@
 
 // Проверка на bog-зону для пенька. Если в боге, то старое количество леса с 1 пня
 /obj/structure/table/roguetree/stump/proc/check_for_bog_area(mob/living/user)
-	if(!istype(get_area(loc), /area/rogue/outdoors/bog)) // REDMOON ADD START - economy_fix - деревья в окрестностях Рокхилла приносят мало древисины
+	if(y > BOG_AREA_ENDING_Y) // деревья в окрестностях Рокхилла приносят мало древисины
 		return 1
 	else
 		var/skill_level = user.mind.get_skill_level(/datum/skill/labor/lumberjacking)
@@ -181,7 +182,7 @@
 	return FALSE
 
 /obj/item/natural/worms/check_for_bait_location()
-	if(!istype(get_area(src), /area/rogue/outdoors/bog) && !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
+	if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
 		fishloot = list(\
 			/obj/item/trash/applecore = 50,
 			/obj/item/trash/pearcore = 25, //Pears, in Rockhill? Perish the thought.
@@ -217,7 +218,7 @@
 	return FALSE
 
 /obj/item/natural/worms/grubs/check_for_bait_location()
-	if(!istype(get_area(src), /area/rogue/outdoors/bog) && !istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
+	if(!istype(get_area(src), /area/rogue/under/cavewet/bogcaves))
 		fishloot = list(\
 			/obj/item/trash/applecore = 625,
 			/obj/item/trash/pearcore = 625,
@@ -252,3 +253,5 @@
 			/obj/item/kitchen/spoon = 45,)
 		return TRUE
 	return FALSE
+
+#undef BOG_AREA_ENDING_Y
