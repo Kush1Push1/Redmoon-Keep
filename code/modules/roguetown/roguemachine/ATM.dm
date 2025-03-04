@@ -89,10 +89,10 @@
 			var/mob/living/carbon/human/H = user
 			if(H in SStreasury.bank_accounts)
 				var/obj/item/roguecoin/mammons = P
-				if(mammons.quantity > SStreasury.bank_accounts[H])
+				if(mammons.get_real_price() > SStreasury.debt_list[H])
 					to_chat(user, span_info("I would overpay my taxes with it."))
 					return
-				SStreasury.generate_money_account(P.get_real_price(), H)
+				SStreasury.pay_debts(P.get_real_price(), H)
 				//if(!(H.job in GLOB.noble_positions) && !HAS_TRAIT(H, TRAIT_NOBLE))
 					//var/T = round(P.get_real_price() * SStreasury.tax_value)
 					//say("Your deposit was taxed [T] mammon.")
@@ -105,5 +105,5 @@
 
 /obj/structure/roguemachine/atm/examine(mob/user)
 	. += ..()
-	. += span_info("The current tax is [SStreasury.tax_value * 100] from the crown.")
+	. += span_info("The current tax is [SStreasury.tax_value * 100].")
 

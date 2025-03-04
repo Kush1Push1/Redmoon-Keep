@@ -26,19 +26,25 @@
 		return FALSE
 
 	var/text = "освобождён от налогов"
+	var/good_message = TRUE
 	switch(SStreasury.is_tax_paid(user))
 		if(TRAIT_TAX_FREE)
-			text = span_nicegreen("не облагается налогами по приказу короны")
+			text = "не облагается налогами по приказу короны"
 		if(TRAIT_NOBLE)
-			text = span_nicegreen("благородных кровей и не облагается налогами")
+			text = "благородных кровей и не облагается налогами"
 		if(TRAIT_TAX_FREE_TEACHER)
-			text = span_nicegreen("учит сложным вещам и не облагается налогами")
+			text = "учит сложным вещам и не облагается налогами"
 		if(TRAIT_TAX_FREE_SERVICE)
-			text = span_nicegreen("служит мечом и не облагается налогами")
+			text = "служит мечом и не облагается налогами"
 		if(TRAIT_TAX_FREE_CHURCH)
-			text = span_nicegreen("просвещает люд и не облагается налогами")
+			text = "просвещает люд и не облагается налогами"
 		if(TRUE)
-			text = span_yellowteamradio("уже оплатил налоги")
+			text = "уже оплатил[target.gender == FEMALE ? "а" : ""] налоги"
 		else
-			text = span_red("не оплатил налог. Нужно оплатить ещё [abs(SStreasury.bank_accounts[target])].")
-	to_chat(user, "[user] [text].")
+			text = "не оплатил[target.gender == FEMALE ? "а" : ""] налоги. Нужно оплатить ещё [abs(SStreasury.debt_list[target])]."
+			good_message = FALSE
+	if(good_message)
+		to_chat(user, span_nicegreen("[user] [text]."))
+	else
+		to_chat(user, span_red("[user] [text]."))
+

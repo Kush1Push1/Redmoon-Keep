@@ -31,9 +31,9 @@
 		if(TRAIT_TAX_FREE_CHURCH)
 			text = "просвещает люд и не облагается налогами"
 		if(TRUE)
-			text = "уже оплатил налоги"
+			text = "уже оплатил[user.gender == FEMALE ? "а" : ""] налоги"
 		else
-			text = "не оплатил налоги. Нужно оплатить ещё [abs(SStreasury.bank_accounts[user])]"
+			text = "не оплатил[user.gender == FEMALE ? "а" : ""] налоги. Нужно оплатить ещё [abs(SStreasury.debt_list[user])]"
 			good_message = FALSE
 	if(good_message)
 		say(span_nicegreen("[user] [text]."))

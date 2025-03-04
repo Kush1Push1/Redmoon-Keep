@@ -2360,6 +2360,7 @@
 #include "modular_redmoon\modules\taxes\jobs.dm"
 #include "modular_redmoon\modules\taxes\roguemachine.dm"
 #include "modular_redmoon\modules\taxes\spells.dm"
+#include "modular_redmoon\modules\taxes\tax_book.dm"
 #include "modular_redmoon\modules\taxes\treasury.dm"
 #include "modular_redmoon\modules\tetris\_bodyparts.dm"
 #include "modular_redmoon\modules\tetris\_gloves.dm"
