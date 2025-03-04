@@ -105,5 +105,5 @@
 
 /obj/structure/roguemachine/atm/examine(mob/user)
 	. += ..()
-	. += span_info("The current tax is [SStreasury.tax_value * 100] from the crown and [SStreasury.church_tith_value * 100] from the church.")
+	. += span_info("The current tax is [SStreasury.tax_value * 100] from the crown.")
 

@@ -1,5 +1,5 @@
 /datum/controller/subsystem/treasury
-	var/church_tith_value = 0.04
+//	var/church_tith_value = 0.04
 	var/list/should_pay_taxes = list()
 	var/list/should_pay_tith = list()
 
@@ -8,8 +8,8 @@
 		if(H in bank_accounts)
 			if(!ignores_taxes(H))
 				bank_accounts[H] -= tax_value * 100
-			if(!ignores_tith(H))
-				bank_accounts[H] -= church_tith_value * 100
+//			if(!ignores_tith(H))
+//				bank_accounts[H] -= church_tith_value * 100
 
 /datum/controller/subsystem/treasury/proc/is_tax_paid(mob/target)
 	if(HAS_TRAIT(target, TRAIT_NOBLE))
