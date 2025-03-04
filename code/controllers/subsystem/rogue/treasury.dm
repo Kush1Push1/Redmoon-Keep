@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(treasury)
 
 /datum/controller/subsystem/treasury/Initialize()
 	treasury_value = rand(800,1500)
-	queens_tax = rand(0.05, 0.15)
+	queens_tax = rand(0.05, 0.11)
 
 	for(var/path in subtypesof(/datum/roguestock/bounty))
 		var/datum/D = new path
