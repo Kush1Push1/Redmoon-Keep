@@ -255,13 +255,13 @@
 	if(HAS_TRAIT(target, TRAIT_GOODLOVER))
 		if(!user.mob_timers["cumtri"])
 			user.mob_timers["cumtri"] = world.time
-//			user.adjust_triumphs(1)
+			user.adjust_triumphs(1)
 			to_chat(user, span_love("Our loving is a true TRIUMPH!"))
 			user.add_stress(/datum/stressevent/cumgood)
 	if(HAS_TRAIT(user, TRAIT_GOODLOVER))
 		if(!target.mob_timers["cumtri"])
 			target.mob_timers["cumtri"] = world.time
-//			target.adjust_triumphs(1)
+			target.adjust_triumphs(1)
 			to_chat(target, span_love("Our loving is a true TRIUMPH!"))
 			user.add_stress(/datum/stressevent/cumgood)
 
