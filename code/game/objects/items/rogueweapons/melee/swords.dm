@@ -44,6 +44,8 @@
 		var/mutable_appearance/M = mutable_appearance('icons/roguetown/weapons/swordherald.dmi', picked_name)
 		M.alpha = 255
 		alpha = 255
+		bigboy = 0
+		gripsprite = TRUE
 		icon_state = picked_name
 		icon = 'icons/roguetown/weapons/swordherald.dmi'
 		lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
@@ -532,7 +534,7 @@
 	name = "rapier"
 	desc = "A duelist's weapon derived from western battlefield instruments, it features a tapered \
 	blade with a specialized stabbing tip."
-	icon = 'icons/roguetown/weapons/64.dmi'	
+	icon = 'icons/roguetown/weapons/64.dmi'
 	icon_state = "rapier"
 	max_integrity = 215
 	bigboy = TRUE
@@ -778,6 +780,11 @@
 			to_chat(H, span_userdanger("I'm hit by my BANE!"))
 			src.last_used = world.time
 
+/obj/item/rogueweapon/sword/sabre/elf/Initialize()
+	.=..()
+	var/datum/magic_item/mundane/silver/effect = new
+	AddComponent(/datum/component/magic_item, effect)
+
 /obj/item/rogueweapon/sword/gladius
 	force = 22
 	name = "Gladius"
@@ -814,7 +821,7 @@
 	penfactor = 20
 	swingdelay = 6
 	damfactor = 1.2
-	blade_class = BCLASS_BURN	
+	blade_class = BCLASS_BURN
 
 /datum/intent/sword/cut/sabre/freeze
 	clickcd = 10

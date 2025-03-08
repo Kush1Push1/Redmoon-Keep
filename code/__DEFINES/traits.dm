@@ -57,7 +57,7 @@
 #define TRAIT_SOUL_EXAMINE "Blessing of Necra" //can check bodies to see if they have departed
 #define TRAIT_ZIZO_MARKED "Blessing of Zizo" //basically just here so that they can avoid a negative moodlet
 #define TRAIT_CRACKHEAD "Blessing of Baotha" //will never overdose
-#define TRAIT_COMMIE "Blessing of Matthios" //recognized by bandits as an ally
+#define TRAIT_MATTHIOS_EYES "Matthios's Sight" //can see most expensive thing on a person
 #define TRAIT_CHOSEN "Consecrated Priest"
 #define TRAIT_NOCTURNAL "Noc's Moonlight" //Grants weak darkvision- lighting alpha 145, amplified for mages using the DV spell- alpha 200
 #define TRAIT_FORGEBLESSED "Malum's Devout" //Reduces the fatigue cost of smithing a bit.
@@ -86,6 +86,10 @@
 #define TRAIT_PUNISHMENT_CURSE "PunishmentCurse"
 #define TRAIT_LEPROSY "Leprosy"
 #define TRAIT_NUDE_SLEEPER "Nude Sleeper"
+#define TRAIT_WANTED "Wanted Brigand"
+#define TRAIT_COMMIE "Eye of a Brigand" //bandit trait
+#define TRAIT_DEATHBYSNUSNU "Bed Breaker" // double sex damage (requires strong intent)
+#define TRAIT_POISONBITE "Venomous Bite" // Adds tox damage on bites
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -165,7 +169,11 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_NUDE_SLEEPER = span_warning("I can't fall asleep unless I'm nude and in bed."),
 	TRAIT_TINY = span_info("I am tiny in size and quite fragile!"),
 	TRAIT_STUDENT = span_info("The scholar has taught me new skills!"),
-	TRAIT_DARKLING = span_info("I am a creature of the dark and am sensitive to the light. The hateful sun is especially harsh on my eyes, and I prefer to sleep during the dae.")
+	TRAIT_DARKLING = span_info("I am a creature of the dark and am sensitive to the light. The hateful sun is especially harsh on my eyes, and I prefer to sleep during the dae."),
+	TRAIT_BOG_TREKKING = "Expert in navigating these lands.",
+	TRAIT_DEATHBYSNUSNU = "With strong intent, I can shatter pelvises.", // Ham change
+	TRAIT_POISONBITE = "My bites inject venom into my target.", // Ham change
+	TRAIT_WANTED = span_info("You are wanted in this kingdom, if someone sees your face they might run away or attack you."),
 ))
 
 // trait accessor defines
@@ -314,6 +322,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune" // can bleed, but will never die from blood loss
 #define TRAIT_ZOMBIE_IMMUNE "zombie_immune" //immune to zombie infection
 #define TRAIT_NO_BITE "no_bite" //prevents biting
+#define TRAIT_NO_BLOOD "no_blood" // Cannot bleed or have blood
 
 //bodypart traits
 #define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
@@ -353,6 +362,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define INNATE_TRAIT "innate"
 
 // unique trait sources, still defines
+#define TRAIT_BOG_TREKKING "trekking"
 #define TRAIT_DARKVISION "darkvision"
 #define TRAIT_DARKVISION_BETTER "darkvisionbetter"
 #define CLONING_POD_TRAIT "cloning-pod"
