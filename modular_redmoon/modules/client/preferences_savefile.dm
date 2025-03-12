@@ -22,16 +22,19 @@
 	// rumors_addition
 	S["use_rumors"]										>> use_rumors
 
-
-	S["rumors_secret"]									>> rumors_secret
-	S["rumors_prefered_beginnings"]						>> rumors_prefered_beginnings
-	S["rumors_prefered_races"]							>> rumors_prefered_races
-
-	S["rumors_prefered_behavior_in_bed"]				>> rumors_prefered_behavior_in_bed
+	// String
+	S["rumors_prefered_behavior_in_combat"]				>> rumors_prefered_behavior_in_combat
 	S["rumors_prefered_behavior_with_problems"]			>> rumors_prefered_behavior_with_problems
 	S["rumors_prefered_behavior_in_work"]				>> rumors_prefered_behavior_in_work
+	S["rumors_genitals"]								>> rumors_genitals
+	S["rumors_family"]									>> rumors_family
+
+	// Списки
+	S["rumors_prefered_behavior_in_bed"]				>> rumors_prefered_behavior_in_bed
+	S["rumors_prefered_beginnings"]						>> rumors_prefered_beginnings
+	S["rumors_prefered_races"]							>> rumors_prefered_races
 	S["rumors_prefered_ways_to_relax"]					>> rumors_prefered_ways_to_relax
-	S["rumors_prefered_behavior_in_combat"]				>> rumors_prefered_behavior_in_combat
+	S["rumors_secret"]									>> rumors_secret
 
 	if(!islist(rumors_secret))
 		rumors_secret = list()
@@ -66,34 +69,44 @@
 	WRITE_FILE(S["family_surname"] 						, family_surname) // family_changes - фамилия семьи
 	WRITE_FILE(S["family_genitals"] 					, family_genitals) // family_changes - проверка на половые органы партнёра
 
-	WRITE_FILE(S["use_rumors"]							, use_rumors)
+	WRITE_FILE(S["use_rumors"]							, use_rumors) // rumors_addition
 
-	WRITE_FILE(S["rumors_secret"]						, rumors_secret) // rumors_addition
-	WRITE_FILE(S["rumors_prefered_beginnings"]			, rumors_prefered_beginnings) // rumors_addition
-	WRITE_FILE(S["rumors_prefered_races"]				, rumors_prefered_races) // rumors_addition
-
-	WRITE_FILE(S["rumors_prefered_behavior_in_bed"]		, rumors_prefered_behavior_in_bed) // rumors_addition
+	// String
 	WRITE_FILE(S["rumors_prefered_behavior_with_problems"]	, rumors_prefered_behavior_with_problems) // rumors_addition
 	WRITE_FILE(S["rumors_prefered_behavior_in_work"]	, rumors_prefered_behavior_in_work) // rumors_addition
-	WRITE_FILE(S["rumors_prefered_ways_to_relax"]		, rumors_prefered_ways_to_relax) // rumors_addition
 	WRITE_FILE(S["rumors_prefered_behavior_in_combat"]	, rumors_prefered_behavior_in_combat) // rumors_addition
+	WRITE_FILE(S["rumors_genitals"]						, rumors_genitals) // rumors_addition
+	WRITE_FILE(S["rumors_family"]						, rumors_family) // rumors_addition
+
+	// Списки
+	WRITE_FILE(S["rumors_prefered_beginnings"]			, rumors_prefered_beginnings) // rumors_addition
+	WRITE_FILE(S["rumors_prefered_races"]				, rumors_prefered_races) // rumors_addition
+	WRITE_FILE(S["rumors_prefered_behavior_in_bed"]		, rumors_prefered_behavior_in_bed) // rumors_addition
+	WRITE_FILE(S["rumors_prefered_ways_to_relax"]		, rumors_prefered_ways_to_relax) // rumors_addition
+	WRITE_FILE(S["rumors_secret"]						, rumors_secret) // rumors_addition
 
 /datum/preferences/proc/redmoon_copy_character(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE)
-	character.spouse_ckey = spouse_ckey // family_changes
-	character.family_surname = family_surname // family_changes
-	character.family_genitals = family_genitals
+	// family_changes
+	character.spouse_ckey = spouse_ckey
+	character.family_surname = family_surname
+	character.family_genitals = family_genitals 
 
-	character.use_rumors = use_rumors // rumors_addition
+ 	// rumors_addition
+	character.use_rumors = use_rumors
 
-	character.rumors_secret = rumors_secret // rumors_addition
-	character.rumors_prefered_beginnings= rumors_prefered_beginnings // rumors_addition
-	character.rumors_prefered_races = rumors_prefered_races // rumors_addition
+	// String
+	character.rumors_prefered_behavior_in_combat = rumors_prefered_behavior_in_combat
+	character.rumors_prefered_behavior_with_problems = rumors_prefered_behavior_with_problems
+	character.rumors_prefered_behavior_in_work = rumors_prefered_behavior_in_work
+	character.rumors_genitals = rumors_genitals
+	character.rumors_family = rumors_family
 
-	character.rumors_prefered_behavior_in_bed = rumors_prefered_behavior_in_bed // rumors_addition
-	character.rumors_prefered_behavior_with_problems = rumors_prefered_behavior_with_problems // rumors_addition
-	character.rumors_prefered_behavior_in_work = rumors_prefered_behavior_in_work // rumors_addition
-	character.rumors_prefered_ways_to_relax = rumors_prefered_ways_to_relax // rumors_addition
-	character.rumors_prefered_behavior_in_combat = rumors_prefered_behavior_in_combat // rumors_addition
+	// Списки
+	character.rumors_prefered_behavior_in_bed = rumors_prefered_behavior_in_bed
+	character.rumors_prefered_ways_to_relax = rumors_prefered_ways_to_relax
+	character.rumors_prefered_beginnings= rumors_prefered_beginnings
+	character.rumors_prefered_races = rumors_prefered_races
+	character.rumors_secret = rumors_secret
 
 /datum/preferences/proc/_load_loadout(S)
 	var/loadout_type

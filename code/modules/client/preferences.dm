@@ -447,18 +447,32 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				dat += "<BR>"
 			// rumors_addition
 			if(usr?.client?.prefs?.be_russian)
-				dat += "<b>Слухи:</b> <a href='?_src_=prefs;preference=rumors'>[use_rumors ? "Yes!" : "No"]</a><BR>"
+				dat += "<b>Слухи: </b> <a href='?_src_=prefs;preference=rumors'>[use_rumors ? "Ходят" : "Не ходят"]</a><BR>"
 			else
-				dat += "<b>Rumors:</b> <a href='?_src_=prefs;preference=rumors'>[use_rumors ? "Yes!" : "No"]</a><BR>"
+				dat += "<b>Rumors: </b> <a href='?_src_=prefs;preference=rumors'>[use_rumors ? "Yes!" : "No"]</a><BR>"
 			if(use_rumors)
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=species'><b>Какие расы нравятся</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=gender'><b>С кем любят фехтоват</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=bed'><b>Как ведут себя в постели</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=problems'><b>Решение проблем</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=combat'><b>Поведение в бою</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=relax'><b>Как любят отдыхать</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=work'><b>Отношение к работе</b></a></small><BR>"
-				dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=secret'><b>Какие слухи НЕ распространены</b></a></small><BR>"
+				if(usr?.client?.prefs?.be_russian)
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=gender'><b>Фехтование [rumors_prefered_beginnings.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=species'><b>Расы [rumors_prefered_races.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=bed'><b>Постель [rumors_prefered_behavior_in_bed.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=genitals'><b>Иное начало [rumors_genitals ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=problems'><b>Проблемы [rumors_prefered_behavior_with_problems ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=combat'><b>Бой [rumors_prefered_behavior_in_combat ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=relax'><b>Отдых [rumors_prefered_ways_to_relax ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=work'><b>Работа [rumors_prefered_behavior_in_work ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=family'><b>Семья [rumors_family ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=secret'><b>Скрытые слухи [rumors_secret ? "(&)" : ""]</b></a></small><BR>"
+				else
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=gender'><b>Fencing [rumors_prefered_beginnings.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=species'><b>Races [rumors_prefered_races.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=bed'><b>Bed [rumors_prefered_behavior_in_bed.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=genitals'><b>Other beginning [rumors_genitals ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=problems'><b>Problems [rumors_prefered_behavior_with_problems ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=combat'><b>Combat [rumors_prefered_behavior_in_combat ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=relax'><b>Relax [rumors_prefered_ways_to_relax ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=work'><b>Work [rumors_prefered_behavior_in_work ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=family'><b>Family [rumors_family ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=secret'><b>Hidden rumors [rumors_secret ? "(&)" : ""]</b></a></small><BR>"
 			// REDMOON ADD END
 			if(usr?.client?.prefs?.be_russian)
 				dat += "<b>Основная Рука:</b> <a href='?_src_=prefs;preference=domhand'>[domhand == 1 ? "Left-handed" : "Right-handed"]</a>"
@@ -1474,12 +1488,16 @@ Slots: [job.spawn_positions]</span>
 
 			if("species")
 				var/choice
+				var/additional_races = list("Werewolf", "Minotaur", "Demon", "Magic Beings", "Wildlife")
 				while(choice != "(DONE)")
 					var/list/choices = list()
 					for(var/A in GLOB.roundstart_races)
 						var/datum/species/S = GLOB.species_list[A]
 						var/index = "[(S.id in rumors_prefered_races) ? "(+)" : ""][S.name]"
 						choices[index] = S.id
+					for(var/B in additional_races)
+						var/index = "[(B in rumors_prefered_races) ? "(+)" : ""][B]"
+						choices[index] = B
 					choices += "(DONE)"
 					choice = input(usr, "Ходит слух, что я предпочитаю такие расы, как...") as anything in choices
 					if(choice != "(DONE)")
@@ -1525,14 +1543,30 @@ Slots: [job.spawn_positions]</span>
 					if(!(A in GLOB.rumors_prefered_behavior_in_bed_choices))
 						rumors_prefered_behavior_in_bed -= A
 
+			if("genitals")
+				rumors_genitals = input(usr, "Ходит ли слух, что у меня начало иного пола? (Сейчас - [rumors_genitals ? "Ходит" : "Нет"]).") as anything in list("Да", "Нет")
+				if(rumors_genitals == "Нет")
+					rumors_genitals = null
+
+			if("family")
+				rumors_family = input(usr, "[rumors_family ? "([rumors_family])." : "..."]") as anything in GLOB.rumors_family_choices
+				if(rumors_family == "(Нет слухов)")
+					rumors_family = null
+
 			if("problems")
-				rumors_prefered_behavior_with_problems = input(usr, "Ходит слух, что проблемы я предпочитаю...") as anything in GLOB.rumors_prefered_behavior_with_problems_choices
+				rumors_prefered_behavior_with_problems = input(usr, "Ходит слух, что проблемы решаю [rumors_prefered_behavior_with_problems ? "([rumors_prefered_behavior_with_problems])." : "..."]") as anything in GLOB.rumors_prefered_behavior_with_problems_choices
+				if(rumors_prefered_behavior_with_problems == "(Нет слухов)")
+					rumors_prefered_behavior_with_problems = null
 
 			if("combat")
-				rumors_prefered_behavior_in_combat = input(usr, "Ходит слух, что в бою я... ") as anything in GLOB.rumors_prefered_behavior_in_combat_choices
+				rumors_prefered_behavior_in_combat = input(usr, "Ходит слух, что в бою [rumors_prefered_behavior_in_combat ? "([rumors_prefered_behavior_in_combat])." : "..."]") as anything in GLOB.rumors_prefered_behavior_in_combat_choices
+				if(rumors_prefered_behavior_in_combat == "(Нет слухов)")
+					rumors_prefered_behavior_in_combat = null
 
 			if("work")
-				rumors_prefered_behavior_in_work = input(usr, "В труде я...") as anything in GLOB.rumors_prefered_behavior_in_work_choices
+				rumors_prefered_behavior_in_work = input(usr, "Ходит слух, что в труде [rumors_prefered_behavior_in_work ? "([rumors_prefered_behavior_in_work])." : "..."]") as anything in GLOB.rumors_prefered_behavior_in_work_choices
+				if(rumors_prefered_behavior_in_work == "(Нет слухов)")
+					rumors_prefered_behavior_in_work = null
 
 			if("secret")
 				var/choice
