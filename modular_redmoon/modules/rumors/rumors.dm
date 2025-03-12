@@ -9,13 +9,14 @@
 	var/rumors_family = null
 	var/rumors_genitals = null
 
-	var/list/rumors_overal = list()
 	var/list/rumors_secret = list()
 	var/list/rumors_prefered_beginnings = list()
 	var/list/rumors_prefered_races = list()
 	var/list/rumors_prefered_behavior_in_bed = list()
 	var/list/rumors_prefered_ways_to_relax = list()
-
+	var/list/rumors_overal = list()
+	var/list/rumors_overal_good = list()
+	var/list/rumors_dangerous = list()
 
 /mob/living/carbon/human
 	var/use_rumors = FALSE
@@ -26,12 +27,14 @@
 	var/rumors_family = null
 	var/rumors_genitals = null
 
-	var/list/rumors_overal = list()
 	var/list/rumors_secret = list()
 	var/list/rumors_prefered_beginnings = list()
 	var/list/rumors_prefered_races = list()
 	var/list/rumors_prefered_behavior_in_bed = list()
 	var/list/rumors_prefered_ways_to_relax = list()
+	var/list/rumors_overal = list()
+	var/list/rumors_overal_good = list()
+	var/list/rumors_dangerous = list()
 
 /mob/living/carbon/human/Topic(href, href_list)
 	if(href_list["task"] == "view_rumors")
@@ -127,13 +130,49 @@
 			else
 				dat += final_dat
 
+		if(LAZYLEN(rumors_overal))
+			var/rumored = "[rumors_overal[1]]"
+			var/count = 0
+			for(count = 2, count <= rumors_overal.len, count++)
+				rumored += ", [rumors_overal[count]]"
+			
+			var/final_dat = "<b>...Из негативных черт характера запоминается за</b> [rumored].<br>"
+			if(("rumors_bad" in rumors_secret) || is_foreigner)
+				secret_dat += final_dat
+			else
+				dat += final_dat
+
+		if(LAZYLEN(rumors_overal_good))
+			var/rumored = "[rumors_overal_good[1]]"
+			var/count = 0
+			for(count = 2, count <= rumors_overal_good.len, count++)
+				rumored += ", [rumors_overal_good[count]]"
+			
+			var/final_dat = "<b>...Из положительных черт характера запоминается за</b> [rumored].<br>"
+			if(("rumors_good" in rumors_secret) || is_foreigner)
+				secret_dat += final_dat
+			else
+				dat += final_dat
+
+		if(LAZYLEN(rumors_dangerous))
+			var/rumored = "[rumors_dangerous[1]]"
+			var/count = 0
+			for(count = 2, count <= rumors_dangerous.len, count++)
+				rumored += ", [rumors_dangerous[count]]"
+			
+			var/final_dat = "<b>...Подозревается в</b> [rumored].<br>"
+			if(("rumors_dangerous" in rumors_secret) || is_foreigner)
+				secret_dat += final_dat
+			else
+				dat += final_dat
+
 		if(secret_dat)
 			dat += "<span style='width: 100%; line-height: 18px; font-size: 12pt; color: firebrick'>"
 			dat += "<center><i>Следующие слухи неизвестны, но их можно брать в учёт при поиске персонажей для взаимодействия.</i></center><br>"
 			dat += "</span>"
 			dat += secret_dat
 
-		var/datum/browser/popup = new(user, "rumors", "<div align='center'>Ходят слухи, что [src]...</div>", 400, 500)
+		var/datum/browser/popup = new(user, "rumors", "<div align='center'>Ходят слухи, что [src]...</div>", 600, 500)
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return

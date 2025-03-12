@@ -35,6 +35,9 @@
 	S["rumors_prefered_races"]							>> rumors_prefered_races
 	S["rumors_prefered_ways_to_relax"]					>> rumors_prefered_ways_to_relax
 	S["rumors_secret"]									>> rumors_secret
+	S["rumors_overal"]									>> rumors_overal
+	S["rumors_overal_good"]								>> rumors_overal_good
+	S["rumors_dangerous"]								>> rumors_dangerous
 
 	if(!islist(rumors_secret))
 		rumors_secret = list()
@@ -46,6 +49,12 @@
 		rumors_prefered_behavior_in_bed = list()
 	if(!islist(rumors_prefered_ways_to_relax))
 		rumors_prefered_ways_to_relax = list()
+	if(!islist(rumors_overal))
+		rumors_overal = list()
+	if(!islist(rumors_overal_good))
+		rumors_overal_good = list()
+	if(!islist(rumors_dangerous))
+		rumors_dangerous = list()
 
 	_load_loadout(S)
 
@@ -84,6 +93,9 @@
 	WRITE_FILE(S["rumors_prefered_behavior_in_bed"]		, rumors_prefered_behavior_in_bed) // rumors_addition
 	WRITE_FILE(S["rumors_prefered_ways_to_relax"]		, rumors_prefered_ways_to_relax) // rumors_addition
 	WRITE_FILE(S["rumors_secret"]						, rumors_secret) // rumors_addition
+	WRITE_FILE(S["rumors_overal"]						, rumors_overal) // rumors_addition
+	WRITE_FILE(S["rumors_overal_good"]					, rumors_overal_good) // rumors_addition
+	WRITE_FILE(S["rumors_dangerous"]					, rumors_dangerous) // rumors_addition
 
 /datum/preferences/proc/redmoon_copy_character(mob/living/carbon/human/character, icon_updates = 1, roundstart_checks = TRUE, character_setup = FALSE, antagonist = FALSE)
 	// family_changes
@@ -107,6 +119,9 @@
 	character.rumors_prefered_beginnings= rumors_prefered_beginnings
 	character.rumors_prefered_races = rumors_prefered_races
 	character.rumors_secret = rumors_secret
+	character.rumors_overal = rumors_overal
+	character.rumors_overal_good = rumors_overal_good
+	character.rumors_dangerous = rumors_dangerous
 
 /datum/preferences/proc/_load_loadout(S)
 	var/loadout_type

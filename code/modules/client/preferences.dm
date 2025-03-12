@@ -461,6 +461,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=relax'><b>Отдых [rumors_prefered_ways_to_relax ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=work'><b>Работа [rumors_prefered_behavior_in_work ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=family'><b>Семья [rumors_family ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=flaws'><b>Недостатки характера [rumors_overal.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=advantages'><b>Преимущества характера [rumors_overal_good.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=dangerous'><b>Опасные [rumors_dangerous.len ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=secret'><b>Скрытые слухи [rumors_secret ? "(&)" : ""]</b></a></small><BR>"
 				else
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=gender'><b>Fencing [rumors_prefered_beginnings.len ? "(&)" : ""]</b></a></small><BR>"
@@ -472,6 +475,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=relax'><b>Relax [rumors_prefered_ways_to_relax ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=work'><b>Work [rumors_prefered_behavior_in_work ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=family'><b>Family [rumors_family ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=flaws'><b>Character's Flaws  [rumors_overal.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=advantages'><b>Character's Advantages [rumors_overal_good.len ? "(&)" : ""]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=dangerous'><b>Dangerous [rumors_dangerous.len ? "(&)" : ""]</b></a></small><BR>"
 					dat += " <small><a href='?_src_=prefs;preference=rumors_prefs;res=secret'><b>Hidden rumors [rumors_secret ? "(&)" : ""]</b></a></small><BR>"
 			// REDMOON ADD END
 			if(usr?.client?.prefs?.be_russian)
@@ -1488,7 +1494,7 @@ Slots: [job.spawn_positions]</span>
 
 			if("species")
 				var/choice
-				var/additional_races = list("Werewolf", "Minotaur", "Demon", "Magic Beings", "Wildlife")
+				var/additional_races = list("Werewolf", "Minotaur", "Demon", "Magic Beings", "Wildlife", "Literally Everyone")
 				while(choice != "(DONE)")
 					var/list/choices = list()
 					for(var/A in GLOB.roundstart_races)
@@ -1505,6 +1511,9 @@ Slots: [job.spawn_positions]</span>
 							rumors_prefered_races -= choices[choice]
 						else
 							rumors_prefered_races += choices[choice]
+				if(LAZYLEN(rumors_prefered_races) > 7)
+					to_chat(user, span_danger("Не растекайтесь мыслью по древу. Сделайте своего персонажа более структурированным (количество доступных слухов о расах - 7). Слух отчищен."))
+					rumors_prefered_races = list()
 
 			if("gender")
 				var/choice
@@ -1603,7 +1612,75 @@ Slots: [job.spawn_positions]</span>
 				for(var/A in rumors_prefered_ways_to_relax)
 					if(!(A in GLOB.rumors_prefered_ways_to_relax_choices))
 						rumors_prefered_ways_to_relax -= A
+				if(LAZYLEN(rumors_prefered_ways_to_relax) > 7)
+					to_chat(user, span_danger("Не растекайтесь мыслью по древу. Сделайте своего персонажа более структурированным (количество доступных слухов об отдыха - 7). Слух отчищен."))
+					rumors_prefered_ways_to_relax = list()
 
+			if("flaws")
+				var/choice
+				while(choice != "(DONE)")
+					var/list/choices = list()
+					for(var/A in GLOB.rumors_overal_choices)
+						var/index = "[(A in rumors_overal) ? "(+)" : ""][A]"
+						choices[index] = A
+					choices += "(DONE)"
+					choice = input(usr, "Ходят НЕПРАВДИВЕЙШИЕ слухи, что мне причесляют...") as anything in choices
+					if(choice != "(DONE)")
+						if(choices[choice] in rumors_overal)
+							rumors_overal -= choices[choice]
+						else
+							rumors_overal += choices[choice]
+				for(var/A in rumors_overal)
+					if(!(A in GLOB.rumors_overal_choices))
+						rumors_overal -= A
+				if(LAZYLEN(rumors_overal) > 4)
+					to_chat(user, span_danger("Не растекайтесь мыслью по древу. Сделайте своего персонажа более структурированным (количество доступных негативных черт характера - 4). Слух отчищен."))
+					rumors_overal = list()
+
+			if("advantages")
+				var/choice
+				while(choice != "(DONE)")
+					var/list/choices = list()
+					for(var/A in GLOB.rumors_overal_good_choices)
+						var/index = "[(A in rumors_overal_good) ? "(+)" : ""][A]"
+						choices[index] = A
+					choices += "(DONE)"
+					choice = input(usr, "Некоторые мне причесляют...") as anything in choices
+					if(choice != "(DONE)")
+						if(choices[choice] in rumors_overal_good)
+							rumors_overal_good -= choices[choice]
+						else
+							rumors_overal_good += choices[choice]
+				for(var/A in rumors_overal_good)
+					if(!(A in GLOB.rumors_overal_good_choices))
+						rumors_overal_good -= A
+				if(LAZYLEN(rumors_overal) < 2)
+					to_chat(user, span_danger("Если о вашем персонаже будут добрые слухи, то следовательно, должны быть и негативные (минимум 2). Слух отчищен."))
+					rumors_overal_good = list()
+				if(LAZYLEN(rumors_overal_good) > 4)
+					to_chat(user, span_danger("Не растекайтесь мыслью по древу. Сделайте своего персонажа более структурированным (количество доступных негативных черт характера - 4). Слух отчищен."))
+					rumors_overal_good = list()
+
+			if("dangerous")
+				var/choice
+				while(choice != "(DONE)")
+					var/list/choices = list()
+					for(var/A in GLOB.rumors_dangerous_choice)
+						var/index = "[(A in rumors_dangerous) ? "(+)" : ""][A]"
+						choices[index] = A
+					choices += "(DONE)"
+					choice = input(usr, "Меня подозревают в...") as anything in choices
+					if(choice != "(DONE)")
+						if(choices[choice] in rumors_dangerous)
+							rumors_dangerous -= choices[choice]
+						else
+							rumors_dangerous += choices[choice]
+				for(var/A in rumors_dangerous)
+					if(!(A in GLOB.rumors_dangerous_choice))
+						rumors_dangerous -= A
+				if(LAZYLEN(rumors_dangerous) > 2)
+					to_chat(user, span_danger("Не растекайтесь мыслью по древу. Сделайте своего персонажа более структурированным (количество доступных опасных слухов - 2). Слух отчищен."))
+					rumors_dangerous = list()
 			// REDMOON ADD END
 
 	else if(href_list["preference"] == "keybinds")
