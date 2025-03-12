@@ -207,7 +207,7 @@ GLOBAL_LIST_INIT(rumors_prefered_ways_to_relax_choices, list(
 			dat += "</span>"
 			dat += secret_dat
 
-		var/datum/browser/popup = new(user, "rumors", "<div align='center'>Ходят слухи, что [src]...</div>", 750, 500)
+		var/datum/browser/popup = new(user, "rumors", "<div align='center'>Ходят слухи, что [src]...</div>", 400, 500)
 		popup.set_content(dat.Join())
 		popup.open(FALSE)
 		return
