@@ -3,14 +3,14 @@
 /mob/living/carbon/human
 	var/spouse_ckey = null // Ckey второго члена семьи (жены или мужа)
 	var/family_surname = null // Фамилия семьи
-	var/list/family_genitals = list() // Допустимые гениталии у партнёра
+	var/list/family_genitals = list("Male", "Female") // Допустимые гениталии у партнёра
 	var/allow_latejoin_family = TRUE // Разрешается ли формирование семьи после начала раунда
 	var/old_real_name = null // Имя, которое присвоилось до выставления имени семьи
 
 /datum/preferences
 	var/spouse_ckey = null
 	var/family_surname = null
-	var/list/family_genitals = list()
+	var/list/family_genitals = list("Male", "Female")
 	var/allow_latejoin_family = TRUE
 
 /datum/controller/subsystem/family/proc/SetupFamilies_Short(mob/living/carbon/human/newcomer)

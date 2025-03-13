@@ -14,10 +14,8 @@
 
 	S["prefer_old_chat"]								>> prefer_old_chat
 
-	if(!islist(family_genitals))
-		family_genitals = list()
-		for(var/A in list("Male", "Female"))
-			family_genitals += A
+	if(!islist(family_genitals) || !LAZYLEN(family_genitals))
+		family_genitals = list("Male", "Female")
 
 	// rumors_addition
 	S["use_rumors"]										>> use_rumors
