@@ -2594,6 +2594,10 @@ Slots: [job.spawn_positions]</span>
 
 				// REDMOON ADD START - family_changes - оповещение о правилах семей
 				if("rumors")
+					if(usr?.client?.prefs?.be_russian)
+						to_chat(user, span_warning("<hr>Слухи не имеют механического влияния на персонажа."))
+					else
+						to_chat(user, span_warning("<hr>Rumors have no mechanical power over the character."))	
 					use_rumors = !use_rumors
 				// REDMOON ADD END
 	ShowChoices(user)
