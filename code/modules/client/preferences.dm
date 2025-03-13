@@ -1465,12 +1465,10 @@ Slots: [job.spawn_positions]</span>
 			if("genitals")
 				if(usr?.client?.prefs?.be_russian)
 					to_chat(usr, span_warning("<hr>\
-					<b>Обязательные условия для пары:</b>\
-					<br>Эора не благословит помолвку, если семья не способна породить жизнь."))
+					Эора не благословит помолвку, если семья не способна породить жизнь."))
 				else
 					to_chat(usr, span_warning("<hr>\
-					<b>Mandatory rules for mates:</b>\
-					<br>The marriage shall not supported by Eora if the mates cannot produce a new life."))
+					The marriage shall not supported by Eora if the mates cannot produce a new life."))
 				var/choice
 				while(choice != "(DONE)")
 					var/list/choices = list()
@@ -1485,13 +1483,14 @@ Slots: [job.spawn_positions]</span>
 							family_genitals -= choices[choice]
 						else
 							family_genitals += choices[choice]
+			// family_changes - возможнось формирования семьи после начала раунда
 			if("latejoin")
 				if(usr?.client?.prefs?.be_russian)
 					to_chat(usr, span_warning("<hr>\
 					Если выставлено \"Разрешено\", то заходя не с начала раунда, вы всё ещё можете в момент появления быть приписаны к тому, кто ищет семью. Иначе, только с начала недели."))
 				else
 					to_chat(usr, span_warning("<hr>\
-					If set as \"Allowed\", then in case of join after the start of week you will try to form up a family with anyone who seeks for it. Otherwise, you will seek only at the start of week."))	
+					If set as \"Allowed\", then in case of joining after start of the week you will try to form up a family with anyone who seeks for it. Otherwise, you will seek only at the start of week."))	
 				allow_latejoin_family = !allow_latejoin_family
 	// rumors_addition - выставление слухов
 	else if(href_list["preference"] == "rumors_prefs")
@@ -2270,7 +2269,6 @@ Slots: [job.spawn_positions]</span>
 						<br>● Дворяне не могут иметь пару из нижнего сословья и наоборот. \
 						<br><b>Если не выставлена душа второй половинки, то:</b> \
 						<br>● Бандиты, проститутки, заключенные, рабы, гоблины, бездомные и лунатики не могут сформировать семью. \
-						<br>● Для случайной семьи, нужно зайти с начала раунда. Если выставлена душа второй половинки И фамилия, то одинаковые фамилии автоматически формируют семью после начала раунда. \
 						<br>● Молодой и старый персонажи не могут быть парой."))
 					else
 						to_chat(usr, span_warning("<hr>\
@@ -2279,7 +2277,6 @@ Slots: [job.spawn_positions]</span>
 						<br>● You cannot be noble and have your spouse in lower class. \
 						<br><b>If you will not setup Spouse Soul, then:</b> \
 						<br>● Bandits, whores, prisoners, slaves, goblins, beggers and lunatics cannot form up families. \
-						<br>● You can only form up a family at round-start (you have to setup Spouse Soul and Family Surname to form up a family after latejoin).\
 						<br>● You cannot have too much of age difference (adult with old)."))
 					// REDMOON ADD END
 					if(family == FAMILY_NONE)
