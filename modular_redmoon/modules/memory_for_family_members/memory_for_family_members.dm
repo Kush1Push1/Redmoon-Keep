@@ -12,6 +12,7 @@
 	var/family_surname = null
 	var/list/family_genitals = list("Male", "Female")
 	var/allow_latejoin_family = TRUE
+	var/detailed_family_loging = TRUE // Детальный отчёт о причинах провала подбора семьи
 
 /datum/controller/subsystem/family/proc/SetupFamilies_Short(mob/living/carbon/human/newcomer)
 	var/add_to_potentials_poll = TRUE
@@ -73,3 +74,22 @@
 			user.mob_timers["cumfamily"] = world.time
 			to_chat(user, "I have had sex with my spouse!")
 			user.adjust_triumphs(3)
+
+// Детальный отчёт о причинах провала подбора семьи
+/datum/family/proc/detailed_log(var/mob/living/carbon/human/target, var/message)
+	if(!target.client?.prefs?.detailed_family_loging)
+		return
+	to_chat(target, span_small("[message] (Options > Detailed Family Log)"))
+
+// Детальный отчёт о причинах провала подбора семьи
+/client/verb/show_detailed_family_log()
+	set category = "Options"
+	set name = "Detailed Family Log"
+
+	if(prefs)
+		prefs.detailed_family_loging = !prefs.detailed_family_loging
+		prefs.save_preferences()
+		if(prefs.detailed_family_loging)
+			to_chat(src, "Detailed Family Log включен. Вы будете получать подробные сообщения при попытке формирования семьи. Эта функция нужна для демонстрации работы подбора партнёра.")
+		else
+			to_chat(src, "Detailed Family Log отключён.")
