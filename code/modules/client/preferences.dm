@@ -433,18 +433,15 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				dat += "<BR>"
 				// REDMOON ADD START - family_changes 
 				if(usr?.client?.prefs?.be_russian)
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Душа второй половинки: [spouse_ckey ? spouse_ckey : "(Случайная)"]</b></a></small>"
-					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Фамилия семьи: [family_surname ? family_surname : "(Нет)"]</b></a></small>"
-					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>Начало партнёра</b></a></small>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Душа второй половинки: [spouse_ckey ? spouse_ckey : "(Случайная)"]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Фамилия семьи: [family_surname ? family_surname : "(Нет)"]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>Начало партнёра</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=latejoin'><b>После начала: [allow_latejoin_family ? "Разрешено" : "Нет"]</b></a></small><BR>"
 				else
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Spouse soul: [spouse_ckey ? spouse_ckey : "(Random)"]</b></a></small>"
-					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Family surname: [family_surname ? family_surname : "(None)"]</b></a></small>"
-					dat += "<BR>"
-					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>Partner's beginning</b></a></small>"
-				dat += "<BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=ckey'><b>Spouse soul: [spouse_ckey ? spouse_ckey : "(Random)"]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=surname'><b>Family surname: [family_surname ? family_surname : "(None)"]</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=genitals'><b>Partner's beginning</b></a></small><BR>"
+					dat += " <small><a href='?_src_=prefs;preference=familypref;res=latejoin'><b>Latejoin: [allow_latejoin_family ? "Allowed" : "No"]</b></a></small><BR>"
 			// rumors_addition
 			if(usr?.client?.prefs?.be_russian)
 				dat += "<b>Слухи: </b> <a href='?_src_=prefs;preference=rumors'>[use_rumors ? "Ходят" : "Не ходят"]</a><BR>"
@@ -1488,6 +1485,14 @@ Slots: [job.spawn_positions]</span>
 							family_genitals -= choices[choice]
 						else
 							family_genitals += choices[choice]
+			if("latejoin")
+				if(usr?.client?.prefs?.be_russian)
+					to_chat(usr, span_warning("<hr>\
+					Если выставлено \"Разрешено\", то заходя не с начала раунда, вы всё ещё можете в момент появления быть приписаны к тому, кто ищет семью. Иначе, только с начала недели."))
+				else
+					to_chat(usr, span_warning("<hr>\
+					If set as \"Allowed\", then in case of join after the start of week you will try to form up a family with anyone who seeks for it. Otherwise, you will seek only at the start of week."))	
+				allow_latejoin_family = !allow_latejoin_family
 	// rumors_addition - выставление слухов
 	else if(href_list["preference"] == "rumors_prefs")
 		switch(href_list["res"])

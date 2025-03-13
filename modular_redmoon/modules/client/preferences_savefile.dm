@@ -38,6 +38,7 @@
 	S["rumors_overal"]									>> rumors_overal
 	S["rumors_overal_good"]								>> rumors_overal_good
 	S["rumors_dangerous"]								>> rumors_dangerous
+	S["allow_latejoin_family"] 							>> allow_latejoin_family
 
 	if(!islist(rumors_secret))
 		rumors_secret = list()
@@ -77,6 +78,7 @@
 	WRITE_FILE(S["spouse_ckey"] 						, spouse_ckey) // family_changes - ckey второй половинки
 	WRITE_FILE(S["family_surname"] 						, family_surname) // family_changes - фамилия семьи
 	WRITE_FILE(S["family_genitals"] 					, family_genitals) // family_changes - проверка на половые органы партнёра
+	WRITE_FILE(S["allow_latejoin_family"] 				, allow_latejoin_family) // family_changes - разрешение на семью после раундстарта
 
 	WRITE_FILE(S["use_rumors"]							, use_rumors) // rumors_addition
 
@@ -102,6 +104,7 @@
 	character.spouse_ckey = spouse_ckey
 	character.family_surname = family_surname
 	character.family_genitals = family_genitals 
+	character.allow_latejoin_family = allow_latejoin_family 
 
  	// rumors_addition
 	character.use_rumors = use_rumors
