@@ -556,8 +556,9 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		try_apply_character_post_equipment(humanc)
 	log_manifest(character.mind.key,character.mind,character,latejoin = TRUE)
 	// REDMOON ADD START - family_changes - попытка создать семью с персонажем в раунде
-	if(humanc.allow_latejoin_family)
-		SSfamily.SetupFamilies_Short(humanc)
+	if(humanc.client?.prefs.family)
+		if(humanc.allow_latejoin_family)
+			SSfamily.SetupFamilies_Short(humanc)
 	// REDMOON ADD END
 
 /mob/dead/new_player/proc/LateChoices()
