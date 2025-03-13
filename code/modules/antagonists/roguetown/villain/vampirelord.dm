@@ -94,7 +94,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		equip_spawn()
 		greet()
 		if(!sired)
-			addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, spawn_pick_class), "VAMPIRE SPAWN"), 5 SECONDS)
+			spawn(0) // REDMOON ADD - фикс для bad client при выборе подкласса вампира
+				addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, spawn_pick_class), "VAMPIRE SPAWN"), 5 SECONDS)
 	else
 		forge_vampirelord_objectives()
 		finalize_vampire()
