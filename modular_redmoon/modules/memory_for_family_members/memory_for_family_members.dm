@@ -58,3 +58,16 @@
 	// Если не удалось найти пару, добавляем в пулл ждунов
 	if(add_to_potentials_poll)
 		family_candidates += newcomer
+
+// Начисление триумфов супругам за соитие
+/datum/sex_controller/after_intimate_climax()
+	. = ..()
+	if(user.isFamily(target))
+		if(!target.mob_timers["cumfamily"])
+			target.mob_timers["cumfamily"] = world.time
+			to_chat(target, "I have had sex with my spouse!")
+			target.adjust_triumphs(3)
+		if(!user.mob_timers["cumfamily"])
+			user.mob_timers["cumfamily"] = world.time
+			to_chat(user, "I have had sex with my spouse!")
+			user.adjust_triumphs(3)
