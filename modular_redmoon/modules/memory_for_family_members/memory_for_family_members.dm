@@ -29,6 +29,8 @@
 			else
 				continue
 		// Чтобы бандит или заключенный не имели семью кроме случаев, когда это предусмотрено наличием spouse_ckey
+		if(!candidate.allow_latejoin_family)
+			continue
 		if(SSjob.GetJob(newcomer.job).family_blacklisted && !newcomer.client.prefs.spouse_ckey)
 			break
 		// Такая же проверка, как при создании семьи. На всякий случай, чтобы избежать знать в браке с простолюдинами и другие проблемы
