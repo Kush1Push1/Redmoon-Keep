@@ -214,7 +214,7 @@
 	mob_biotypes &= ~MOB_UNDEAD
 	faction = list()
 	to_chat(src, span_notice("My true form is hidden."))
-	if(MUTCOLORS in dna.species.species_traits) 
+	if(!(MUTCOLORS in dna.species.species_traits))
 		var/obj/item/organ/breasts/breasts = getorganslot(ORGAN_SLOT_BREASTS)
 		if(breasts)
 			breasts.accessory_colors = VD.cache_skin
@@ -250,7 +250,7 @@
 	mob_biotypes |= MOB_UNDEAD
 	faction = list("undead")
 	to_chat(src, span_notice("My true form is revealed."))
-	if(MUTCOLORS in dna.species.species_traits) 
+	if(!(MUTCOLORS in dna.species.species_traits))
 		var/obj/item/organ/breasts/breasts = getorganslot(ORGAN_SLOT_BREASTS)
 		if(breasts)
 			breasts.accessory_colors = "#c9d3de"
