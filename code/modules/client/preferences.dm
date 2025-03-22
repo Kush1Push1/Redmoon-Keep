@@ -904,13 +904,13 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	dat += "</td>"
 	dat += "<td width='33%' align='right'>"
 	if(usr?.client?.prefs?.be_russian)
-		dat += "<b>Детальная Семья:</b> <a href='?_src_=prefs;preference=detailed_family'>[(detailed_family_loging) ? "Yes":"No"]</a><br>"
+		dat += "<b>Детальная Семья:</b> <a href='?_src_=prefs;preference=detailed_family'>[(detailed_family_loging) ? "Yes":"No"]</a><br>" // REDMOON ADD - family_changes
 		dat += "<b>Русскоязычность:</b> <a href='?_src_=prefs;preference=be_russian'>[(be_russian) ? "Yes":"No"]</a><br>"
 		dat += "<b>Давать отпор:</b> <a href='?_src_=prefs;preference=be_defiant'>[(defiant) ? "Yes":"No"]</a><br>"
 		dat += "<b>Девственность:</b> <a href='?_src_=prefs;preference=be_virgin'>[(virginity) ? "Yes":"No"]</a><br>"
 		dat += "<b>Быть Голосом:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a>"
 	else
-		dat += "<b>Detailed Family:</b> <a href='?_src_=prefs;preference=detailed_family'>[(detailed_family_loging) ? "Yes":"No"]</a><br>"
+		dat += "<b>Detailed Family:</b> <a href='?_src_=prefs;preference=detailed_family'>[(detailed_family_loging) ? "Yes":"No"]</a><br>" // REDMOON ADD - family_changes
 		dat += "<b>Be Russian:</b> <a href='?_src_=prefs;preference=be_russian'>[(be_russian) ? "Yes":"No"]</a><br>"
 		dat += "<b>Be defiant:</b> <a href='?_src_=prefs;preference=be_defiant'>[(defiant) ? "Yes":"No"]</a><br>"
 		dat += "<b>Be a virgin:</b> <a href='?_src_=prefs;preference=be_virgin'>[(virginity) ? "Yes":"No"]</a><br>"
