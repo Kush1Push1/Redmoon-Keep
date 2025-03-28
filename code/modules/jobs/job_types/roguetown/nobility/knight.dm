@@ -3,8 +3,8 @@
 	flag = KNIGHT
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	allowed_races = RACES_TOLERATED_UP
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
@@ -16,11 +16,9 @@
 	display_order = JDO_KNIGHT
 	whitelist_req = TRUE
 	outfit = /datum/outfit/job/roguetown/knight
-	give_bank_account = 63
+	give_bank_account = 22
 	min_pq = 10
 	max_pq = null
-
-	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 
 /datum/job/roguetown/knight/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -213,4 +211,3 @@
 		if("Buckler and Steel Mace")
 			l_hand = /obj/item/rogueweapon/shield/buckler
 			beltr = /obj/item/rogueweapon/mace/steel
-			

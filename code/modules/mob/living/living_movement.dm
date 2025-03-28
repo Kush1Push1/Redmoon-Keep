@@ -54,8 +54,10 @@
 			mod = 6
 
 	var/spdchange = -(STASPD * 0.1 - 1)
+	var/mob/living/carbon/user = src
+	if(iscarbon(user) && user.mind)
+		spdchange -= user.mind.get_skill_level(/datum/skill/misc/athletics) / 10
 	mod = mod + spdchange
-	//maximum speed is achieved at 15spd, everything else results in insanity
 	add_movespeed_modifier(MOVESPEED_ID_MOB_WALK_RUN_CONFIG_SPEED, TRUE, 100, override = TRUE, multiplicative_slowdown = mod)
 
 /mob/living/proc/update_turf_movespeed(turf/open/T)

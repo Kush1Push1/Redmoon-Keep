@@ -32,6 +32,10 @@
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.checkcritarmor(zone_precise, bclass))
+			return FALSE
 
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	if(affecting && dismember_wound)
@@ -287,23 +291,9 @@
 		)
 		for(var/obj/item/worn_item in worn_items)
 			owner.dropItemToGround(worn_item, force = TRUE)
-
-//	owner.ghostize(0)
-//	if(brainmob)
-//		brainmob.ghostize(0)
-
 	qdel(owner.GetComponent(/datum/component/creamed)) //clean creampie overlay
-
 	name = "[owner.real_name]'s head"
 	. = ..()
-	/* REDMOON REMOVAL START - decap_cannot_reenter_body_fix - очень опасный фикс (т.к. весь код связанный с органами это спагетти) невозможности вернуться в тело
-	if(brainmob)
-		QDEL_NULL(brainmob)
-	var/obj/item/organ/brain/BR = locate(/obj/item/organ/brain) in contents
-	if(BR)
-		if(BR.brainmob)
-			QDEL_NULL(BR.brainmob)
-	REDMOON REMOVAL END */
 
 //Attach a limb to a human and drop any existing limb of that type.
 /obj/item/bodypart/proc/replace_limb(mob/living/carbon/C, special)

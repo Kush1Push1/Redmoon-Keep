@@ -4,6 +4,7 @@
 			горожане теперь обращаются к вам за решением проблем в Рокхилле по вопросам малой важности. \
 			Хоть Герцог и может носить свой титул, но, с вашим Шерифом, будете ли вы следовать традициям или переосмыслите нынешнюю идею власти?"
 	spells = list(/obj/effect/proc_holder/spell/self/convertrole/watchman_lesser, /obj/effect/proc_holder/spell/self/convertrole/vanguard_lesser, /obj/effect/proc_holder/spell/self/convertrole/citizenship)
+	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 
 /datum/job/roguetown/mayor/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

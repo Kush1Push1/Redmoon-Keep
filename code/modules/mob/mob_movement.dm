@@ -235,6 +235,10 @@
 			move_delay = world.time + 10
 			to_chat(src, span_warning("[L] still has footing! I need a stronger grip!"))
 			return TRUE
+		if(M.buckled)
+			move_delay = world.time + 10
+			to_chat(src, span_warning("I can't be on a mount!"))
+			return TRUE
 	if(istype(mob.pulling, /mob/living/simple_animal) && isliving(mob.pulling))
 		var/mob/living/simple_animal/bound = mob.pulling
 		if(bound.binded)
@@ -689,6 +693,24 @@
 					return FALSE
 	if(istype(src.head, /obj/item/clothing))
 		var/obj/item/clothing/CL = src.head
+		if(CL.armor_class == ARMOR_CLASS_HEAVY)
+			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+				return FALSE
+		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+				if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
+					return FALSE
+	if(istype(src.shoes, /obj/item/clothing))
+		var/obj/item/clothing/CL = src.shoes
+		if(CL.armor_class == ARMOR_CLASS_HEAVY)
+			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+				return FALSE
+		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
+				if(!HAS_TRAIT(src, TRAIT_MEDIUMARMOR))
+					return FALSE
+	if(istype(src.gloves, /obj/item/clothing))
+		var/obj/item/clothing/CL = src.gloves
 		if(CL.armor_class == ARMOR_CLASS_HEAVY)
 			if(!HAS_TRAIT(src, TRAIT_HEAVYARMOR))
 				return FALSE

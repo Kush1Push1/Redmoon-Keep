@@ -1,9 +1,11 @@
-///////////////////////////
+/*
+ * HUNGER 1
+ */
 
 /datum/status_effect/debuff/hungryt1
 	id = "hungryt1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt1
-	effectedstats = list(STATKEY_SPD = -1, STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -1)
+	effectedstats = list(STATKEY_END = -2)
 	duration = 100
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt1
@@ -29,10 +31,14 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/peckish)
 
+/*
+ * HUNGER 2
+ */
+
 /datum/status_effect/debuff/hungryt2
 	id = "hungryt2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
-	effectedstats = list(STATKEY_SPD = -4, STATKEY_STR = -2, STATKEY_CON = -2, STATKEY_END = -1)
+	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2, STATKEY_SPD = -1, STATKEY_INT = -1, STATKEY_PER = -1, STATKEY_INT = -4)
 	duration = 100
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt2
@@ -58,10 +64,14 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/hungry)
 
+/*
+ * HUNGER 3
+ */
+
 /datum/status_effect/debuff/hungryt3
 	id = "hungryt3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt3
-	effectedstats = list(STATKEY_SPD = -6, STATKEY_STR = -6, STATKEY_CON = -6, STATKEY_END = -6)
+	effectedstats = list(STATKEY_STR = -3, STATKEY_CON = -3, STATKEY_END = -5, STATKEY_SPD = -4, STATKEY_INT = -6, STATKEY_PER = -3)
 	duration = 100
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt3
@@ -87,7 +97,9 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/starving)
 
-///////////////////////////
+/*
+ * THIRST 1
+ */
 
 /datum/status_effect/debuff/thirstyt1
 	id = "thirsty1"
@@ -99,7 +111,6 @@
 	name = "Getting thirsty"
 	desc = "<span class='warning'>I could use a drink.</span>\n"
 	icon_state = "thirst1"
-
 
 /datum/status_effect/debuff/thirstyt1/on_apply()
 	. = ..()
@@ -113,10 +124,14 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/drym)
 
+/*
+ * THIRST 2
+ */
+
 /datum/status_effect/debuff/thirstyt2
 	id = "thirsty2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt2
-	effectedstats = list(STATKEY_SPD = -4, STATKEY_END = -4)
+	effectedstats = list(STATKEY_STR = -1, STATKEY_CON = -1, STATKEY_END = -2, STATKEY_SPD = -1, STATKEY_INT = -4)
 	duration = 100
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt2
@@ -142,10 +157,14 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/thirst)
 
+/*
+ * THIRST 3
+ */
+
 /datum/status_effect/debuff/thirstyt3
 	id = "thirsty3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt3
-	effectedstats = list(STATKEY_STR = -6, STATKEY_SPD = -6, STATKEY_END = -6)
+	effectedstats = list(STATKEY_STR = -3, STATKEY_CON = -3, STATKEY_END = -5, STATKEY_SPD = -4, STATKEY_INT = -6, STATKEY_PER = -3)
 	duration = 100
 
 /atom/movable/screen/alert/status_effect/debuff/thirstyt3
@@ -171,7 +190,9 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stressevent/parched)
 
-/////////
+/*
+ * UNCOOKED FOOD
+ */
 
 /datum/status_effect/debuff/uncookedfood
 	id = "uncookedfood"
@@ -185,7 +206,7 @@
 	icon_state = "uncookedfood"
 
 /datum/status_effect/debuff/uncookedfood/on_apply()
-	if(HAS_TRAIT(owner, TRAIT_NASTY_EATER) || HAS_TRAIT(owner, TRAIT_ORGAN_EATER))
+	if(HAS_TRAIT(owner, TRAIT_NASTY_EATER) || HAS_TRAIT(owner, TRAIT_ORGAN_EATER) || HAS_TRAIT(owner, TRAIT_WILD_EATER))
 		return FALSE
 	. = ..()
 	if(iscarbon(owner))
@@ -193,7 +214,9 @@
 		C.add_nausea(100)
 		C.add_stress(/datum/stressevent/uncookedfood)
 
-/////////
+/*
+ * BAD FOOD
+ */
 
 /datum/status_effect/debuff/badmeal
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/badmeal
@@ -212,7 +235,9 @@
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stressevent/badmeal)
 
-/////////
+/*
+ * BURNED FOOD
+ */
 
 /datum/status_effect/debuff/burnedfood
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/burntmeal
@@ -222,6 +247,8 @@
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	. = ..()
+	if(HAS_TRAIT(owner, TRAIT_NASTY_EATER))
+		return ..()
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
 		C.add_stress(/datum/stressevent/burntmeal)
@@ -232,7 +259,9 @@
 	desc = "<span class='warning'>That tasted like charcoal and cinder!</span>\n"
 	icon_state = "burntmeal"
 
-/////////
+/*
+ * ROTTEN FOOD
+ */
 
 /datum/status_effect/debuff/rotfood
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/rotfood
@@ -246,7 +275,7 @@
 	icon_state = "burntmeal"
 
 /datum/status_effect/debuff/rotfood/on_apply()
-	if(HAS_TRAIT(owner, TRAIT_ROT_EATER))
+	if(HAS_TRAIT(owner, TRAIT_NASTY_EATER) || HAS_TRAIT(owner, TRAIT_ROT_EATER))
 		return FALSE
 	. = ..()
 	if(iscarbon(owner))
@@ -254,7 +283,9 @@
 		C.add_nausea(200)
 		C.add_stress(/datum/stressevent/rotfood)
 
-/////////
+/*
+ * TIRED
+ */
 
 /atom/movable/screen/alert/status_effect/debuff/sleepytime
 	name = "Tired"
@@ -264,7 +295,7 @@
 /datum/status_effect/debuff/sleepytime
 	id = "sleepytime"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/sleepytime
-	effectedstats = list(STATKEY_SPD = -2, STATKEY_END = -2)
+	effectedstats = list(STATKEY_END = -2)
 
 /datum/status_effect/debuff/sleepytime/on_apply()
 	. = ..()

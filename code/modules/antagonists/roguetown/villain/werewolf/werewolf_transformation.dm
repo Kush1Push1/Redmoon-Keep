@@ -151,6 +151,7 @@
 	ADD_TRAIT(W, TRAIT_HARDDISMEMBER, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_PIERCEIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(W, TRAIT_DEATHBYSNUSNU, TRAIT_GENERIC)
+	ADD_TRAIT(W, TRAIT_BOG_TREKKING, TRAIT_GENERIC)
 
 	invisibility = oldinv
 
@@ -184,14 +185,13 @@
 	W.copy_known_languages_from(WA.stored_language)
 	W.mind.known_skills = WA.stored_skills.Copy()
 	W.mind.skill_experience = WA.stored_experience.Copy()
-	W.dodgetime = 12
 
 	if(isseelie(W.stored_mob))
 		W.change_stat("speed", 3)
-	W.RemoveSpell(/obj/effect/proc_holder/spell/self/howl)
-	W.RemoveSpell(/obj/effect/proc_holder/spell/self/claws)
-	W.RemoveSpell(/obj/effect/proc_holder/spell/targeted/woundlick)
-	W.RemoveSpell(/obj/effect/proc_holder/spell/targeted/werewolf_rejuv)
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/claws)
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/woundlick)
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/targeted/werewolf_rejuv)
 	W.regenerate_icons()
 
 	to_chat(W, span_userdanger("I return to my facade."))
