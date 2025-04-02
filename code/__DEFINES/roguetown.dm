@@ -22,7 +22,7 @@
 	/datum/species/kobold,\
 	/datum/species/goblinp,\
 	/datum/species/seelie,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 )
 
 // REDMOON ADD - avian_addition
@@ -35,7 +35,7 @@
 	/datum/species/lupian,\
 	/datum/species/vulpkanin,\
 	/datum/species/moth,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 	/datum/species/dracon,
 
 #define RACES_TOLERATED \
@@ -103,7 +103,7 @@
 	/datum/species/kobold,\
 	/datum/species/goblinp,\
 	/datum/species/seelie,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 )
 
 // REDMOON ADD - avian_addition
@@ -129,7 +129,7 @@
 	/datum/species/kobold,\
 	/datum/species/goblinp,\
 	/datum/species/seelie,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 )
 // Non-dwarf non-kobold non-goblin mostly
 // REDMOON ADD - avian_addition
@@ -151,7 +151,7 @@
 	/datum/species/demihuman,\
 	/datum/species/halforc,\
 	/datum/species/seelie,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 )
 // Non-elf non-dwarf non-kobold non-goblin mostly
 // REDMOON ADD - avian_addition
@@ -168,7 +168,7 @@
 	/datum/species/dracon,\
 	/datum/species/anthromorph,\
 	/datum/species/demihuman,\
-	/datum/species/avian,\
+	/datum/species/kraukalee,\
 )
 // For their armour sets. Shouldn't need to define the sub species, but oh well.
 #define GOBLIN_RACE_TYPES list(\

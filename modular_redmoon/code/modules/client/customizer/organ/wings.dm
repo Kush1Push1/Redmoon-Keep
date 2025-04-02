@@ -1,11 +1,11 @@
-/datum/customizer/organ/wings/avian
-	customizer_choices = list(/datum/customizer_choice/organ/wings/avian)
+/datum/customizer/organ/wings/kraukalee
+	customizer_choices = list(/datum/customizer_choice/organ/wings/kraukalee)
 	allows_disabling = TRUE
 	default_disabled = TRUE
 
-/datum/customizer_choice/organ/wings/avian
+/datum/customizer_choice/organ/wings/kraukalee
 	name = "Avian Wings"
-	organ_type = /obj/item/organ/wings/avian
+	organ_type = /obj/item/organ/wings/kraukalee
 	sprite_accessories = list(
 		/datum/sprite_accessory/wings/feathery,
 		/datum/sprite_accessory/wings/wide/harpywings,

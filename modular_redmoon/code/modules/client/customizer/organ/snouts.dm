@@ -1,9 +1,9 @@
-/datum/customizer/organ/snout/avian
-	customizer_choices = list(/datum/customizer_choice/organ/snout/avian)
+/datum/customizer/organ/snout/kraukalee
+	customizer_choices = list(/datum/customizer_choice/organ/snout/kraukalee)
 
-/datum/customizer_choice/organ/snout/avian
+/datum/customizer_choice/organ/snout/kraukalee
 	name = "Avian Beak"
-	organ_type = /obj/item/organ/snout/avian
+	organ_type = /obj/item/organ/snout/kraukalee
 	sprite_accessories = list(
 		/datum/sprite_accessory/snout/bird,
 		/datum/sprite_accessory/snout/bigbeak,

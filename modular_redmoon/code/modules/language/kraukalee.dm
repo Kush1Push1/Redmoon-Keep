@@ -1,5 +1,5 @@
-/datum/language/avian
-	name = "Avian Language"
+/datum/language/kraukalee
+	name = "Kraukalee Language"
 	desc = "A somewhat simple language consisting of heavily articulate barks, growls, yaps, and combined movements of the tail and ears. It's natively spoken by the Lupian and Vulpkian. Its parlance has been loosely compared to the Grenzel language group."
 	speech_verb = "chirps"
 	ask_verb = "chirps"

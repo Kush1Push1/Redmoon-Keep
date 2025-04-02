@@ -1,9 +1,9 @@
 /datum/customizer/organ/tail/anthro
-	customizer_choices = list(/datum/customizer_choice/organ/tail/avian)
+	customizer_choices = list(/datum/customizer_choice/organ/tail/kraukalee)
 
-/datum/customizer_choice/organ/tail/avian
+/datum/customizer_choice/organ/tail/kraukalee
 	name = "Avian Tail"
-	organ_type = /obj/item/organ/tail/avian
+	organ_type = /obj/item/organ/tail/kraukalee
 	sprite_accessories = list(
 		/datum/sprite_accessory/tail/corvid,
 		/datum/sprite_accessory/tail/hawk,
