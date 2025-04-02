@@ -7,7 +7,7 @@
 	id = "kraukalee"
 
 	desc = "<b>Kraukalee</b><br>\
-	The sons and daughters of Scree'Auk, which some other peoples and Gods were able to adopt. \
+	The sons and daughters of Scree-Auk, which some other peoples and Gods were able to adopt. \
 	They are bird-like creatures with feathers, beak and often wings, as additional limbs or embedded in theirs arms. \
 	They are attentive, dexterous, cunning and very intelligent, at the same time more fragile, than other animals \
 	around them. The history of Kraukalee nests is rooted very deeply through the birth of this world, although their \
@@ -16,7 +16,7 @@
 	other than to other races, but even so, many try to maintain community, migrating in large and small groups, trying \
 	to find a new home where they can build a new nest for all their kind."
 
-	expanded_desc = "An ancient race whose roots date back to the dawn of the world, when the Scree'Auk breathed life into \
+	expanded_desc = "An ancient race whose roots date back to the dawn of the world, when the Scree-Auk breathed life into \
 	their feathers and beaks. They live in flocks or families, migrating in camps through forests, mountains and steppes or \
 	settling near each other in nests. Divided into subspecies, Kraukalee carry echoes of their former greatness: Grakkory \
 	are brilliant and fierce in their efforts, Uhulany are wise and silent hunters in the shadows, Chirkity are tireless \
@@ -26,7 +26,7 @@
 	In small flocks and families, elders - those who have survived the harsh years, even if only a day longer than others \
 	- lead their relatives. In heirs of the great nests, governance is more complicated: leaders are chosen based on \
 	strength, wisdom or experience and sometimes councils are assembled, large and small, where the voice of each \
-	elder is intertwined with the general will. But Kraukalee's fame is in the past. Centuries after their heyday \
+	elder is intertwined with the general will. But Kraukalee-s fame is in the past. Centuries after their heyday \
 	have erased the memory of the past, leaving only fragments of legends, that whisper in the shadows of their feathers.\
 	<br><br>\
 	A long-forgotten thing is awakening in nests and flocks - Cult of a Dead Goddess, whose whisper carries old tales \
@@ -35,17 +35,17 @@
 	united in their goal: to resurrect the Dead Goddess by following her dim light. One bring her riches, some bring \
 	cold revenge, others bring hope for the revival of her former greatness and every flap of their wings, every ritual \
 	and song leads to her awakening. But this desire is not shared by all of Kraukalee: some see the return of the \
-	Scree'Auk as salvation, others, as a shadow, that will engulf their fragile world."
+	Scree-Auk as salvation, others, as a shadow, that will engulf their fragile world."
 
 	ru_desc = "<b>Краукали</b><br>\
-	Сыны и дочери Скри'Ок, принятые другими народами и Богами. Эти птицеподобные существа с перьями, \
+	Сыны и дочери СкриОк, принятые другими народами и Богами. Эти птицеподобные существа с перьями, \
 	клювами и нередко крыльями - будь то дополнительные конечности или часть их рук - внимательны, ловки, хитры и умны, \
 	но хрупки в сравнении с иными зверями. Их гнёзда уходят корнями в глубокую древность мира, хотя подлинная история \
 	сохранилась лишь у немногих, живущих вне стай. Зачастую их считают дикарями, не ведающими своего происхождения. \
 	Культуры краукали разнятся, порой до радикальной вражды между собой, но многие стремятся к единству, \
 	мигрируя малыми и большими группами в поисках нового дома, где смогут возвести гнездо для всех своих сородичей."
 
-	ru_expanded_desc = "Древняя раса, чьи корни уходят в эпоху зарождения мира, когда Скри'Ок вдохнула жизнь в их перья и \
+	ru_expanded_desc = "Древняя раса, чьи корни уходят в эпоху зарождения мира, когда Скри-Ок вдохнула жизнь в их перья и \
 	клювы. Они живут стаями или семьями, кочуя таборами через леса, горы и степи, либо оседая вблизи друг друга в гнёздах — \
 	великих столицах, что стали их оплотами. Разделённые на подвиды, краукали несут в себе отголоски былого величия: \
 	граккоры - гениальные и яростные в своих замыслах, ухуланы - мудрые и бесшумные охотники теней, чиркиты - \
@@ -62,7 +62,7 @@
 	над садами, крийары с клятвами на вершинах скал или курлуги с древними молитвами - все они становятся едины в своей \
 	цели: воскресить Мёртвую Богиню, следуя за её тусклым светом. Одни приносят ей богатства, другие - холодную месть, \
 	третьи - надежду на возрождение былого величия и каждый взмах крыльев, каждый обряд и пение ведёт к её пробуждению. \
-	Но это стремление разделяют не все из краукали: одни видят в возвращении Скри'Ок спасение, другие - тень, что поглотит \
+	Но это стремление разделяют не все из краукали: одни видят в возвращении Скри-Ок спасение, другие - тень, что поглотит \
 	их хрупкий мир."
 
 	skin_tone_wording = "Nest"
@@ -240,24 +240,26 @@
 
 /datum/species/kraukalee/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
+	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.verbs += list(
-		/mob/living/carbon/human/verb/emote_chirp,
-		/mob/living/carbon/human/verb/emote_caw,
-		/mob/living/carbon/human/verb/emote_hoot,
-		/mob/living/carbon/human/verb/emote_bawk,
-		/mob/living/carbon/human/verb/emote_bird_trill,
-		/mob/living/carbon/human/verb/emote_chirp_squeaky,
-		/mob/living/carbon/human/verb/emote_pip,
+		/mob/living/carbon/human/proc/emote_chirp,
+		/mob/living/carbon/human/proc/emote_caw,
+		/mob/living/carbon/human/proc/emote_hoot,
+		/mob/living/carbon/human/proc/emote_bawk,
+		/mob/living/carbon/human/proc/emote_bird_trill,
+		/mob/living/carbon/human/proc/emote_chirp_squeaky,
+		/mob/living/carbon/human/proc/emote_pip,
 	)
 
 /datum/species/kraukalee/on_species_loss(mob/living/carbon/C)
 	. = ..()
+	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.verbs -= list(
-		/mob/living/carbon/human/verb/emote_chirp,
-		/mob/living/carbon/human/verb/emote_caw,
-		/mob/living/carbon/human/verb/emote_hoot,
-		/mob/living/carbon/human/verb/emote_bawk,
-		/mob/living/carbon/human/verb/emote_bird_trill,
-		/mob/living/carbon/human/verb/emote_chirp_squeaky,
-		/mob/living/carbon/human/verb/emote_pip
+		/mob/living/carbon/human/proc/emote_chirp,
+		/mob/living/carbon/human/proc/emote_caw,
+		/mob/living/carbon/human/proc/emote_hoot,
+		/mob/living/carbon/human/proc/emote_bawk,
+		/mob/living/carbon/human/proc/emote_bird_trill,
+		/mob/living/carbon/human/proc/emote_chirp_squeaky,
+		/mob/living/carbon/human/proc/emote_pip
 	)

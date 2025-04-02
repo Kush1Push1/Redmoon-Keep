@@ -116,7 +116,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_chirp()
+/mob/living/carbon/human/proc/emote_chirp()
 	set name = "Chirp"
 	set category = "Noises"
 
@@ -130,7 +130,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_caw()
+/mob/living/carbon/human/proc/emote_caw()
 	set name = "Caw"
 	set category = "Noises"
 
@@ -144,7 +144,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_hoot()
+/mob/living/carbon/human/proc/emote_hoot()
 	set name = "Hoot"
 	set category = "Noises"
 
@@ -158,7 +158,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_bawk()
+/mob/living/carbon/human/proc/emote_bawk()
 	set name = "Bawk"
 	set category = "Noises"
 
@@ -172,7 +172,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_bird_trill()
+/mob/living/carbon/human/proc/emote_bird_trill()
 	set name = "Trill"
 	set category = "Noises"
 
@@ -186,7 +186,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_chirp_squeaky()
+/mob/living/carbon/human/proc/emote_chirp_squeaky()
 	set name = "Chirp Squeaky"
 	set category = "Noises"
 
@@ -200,7 +200,7 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
-/mob/living/carbon/human/verb/emote_pip()
+/mob/living/carbon/human/proc/emote_pip()
 	set name = "Pip"
 	set category = "Noises"
 
