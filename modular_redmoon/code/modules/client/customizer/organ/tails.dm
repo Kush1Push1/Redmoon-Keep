@@ -1,4 +1,4 @@
-/datum/customizer/organ/tail/anthro
+/datum/customizer/organ/tail/kraukalee
 	customizer_choices = list(/datum/customizer_choice/organ/tail/kraukalee)
 
 /datum/customizer_choice/organ/tail/kraukalee

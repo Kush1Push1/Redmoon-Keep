@@ -131,7 +131,7 @@
 		/datum/customizer/organ/ears/anthro,
 		/datum/customizer/organ/horns/humanoid,
 		/datum/customizer/organ/neck_feature/kraukalee,
-		/datum/customizer/organ/tail/anthro,
+		/datum/customizer/organ/tail/kraukalee,
 		/datum/customizer/organ/wings/kraukalee,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/testicles/anthro,
