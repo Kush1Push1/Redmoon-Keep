@@ -66,6 +66,7 @@
 	их хрупкий мир."
 
 	skin_tone_wording = "Nest"
+	use_skintones = TRUE
 	species_traits = list(
 		MUTCOLORS,
 		EYECOLOR,
