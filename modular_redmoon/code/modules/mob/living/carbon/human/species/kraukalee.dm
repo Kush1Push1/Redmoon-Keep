@@ -21,14 +21,14 @@
 	settling near each other in nests. Divided into subspecies, Kraukalee carry echoes of their former greatness: Grakkory \
 	are brilliant and fierce in their efforts, Uhulany are wise and silent hunters in the shadows, Chirkity are tireless \
 	workers, whose songs enliven the forests, Kiryary are unsurpassed warriors, guardians of heaven and rocks and the \
-	Kurlugi are the first among the saints, whose voices once resounded in harmony with the will of the Goddess.<br><br>\
-	\
+	Kurlugi are the first among the saints, whose voices once resounded in harmony with the will of the Goddess.\
+	<br><br>\
 	In small flocks and families, elders - those who have survived the harsh years, even if only a day longer than others \
 	- lead their relatives. In heirs of the great nests, governance is more complicated: leaders are chosen based on \
 	strength, wisdom or experience and sometimes councils are assembled, large and small, where the voice of each \
 	elder is intertwined with the general will. But Kraukalee's fame is in the past. Centuries after their heyday \
-	have erased the memory of the past, leaving only fragments of legends, that whisper in the shadows of their feathers.<br><br>\
-	\
+	have erased the memory of the past, leaving only fragments of legends, that whisper in the shadows of their feathers.\
+	<br><br>\
 	A long-forgotten thing is awakening in nests and flocks - Cult of a Dead Goddess, whose whisper carries old tales \
 	and truths. Her followers, whether they are Grakkory with their bloody rituals, Uhulany with silent night vows, \
 	Chirkity with chants over gardens, Kiryary with oaths on top of rocks or Kurlugi with ancient prayers, all become \
@@ -50,13 +50,13 @@
 	великих столицах, что стали их оплотами. Разделённые на подвиды, краукали несут в себе отголоски былого величия: \
 	граккоры - гениальные и яростные в своих замыслах, ухуланы - мудрые и бесшумные охотники теней, чиркиты - \
 	неутомимые труженики, чьи песни оживляют леса, крийары - непревзойдённые воины, стражи небес и скал и курлуги - \
-	первые среди святых, чьи голоса некогда звучали в гармонии с волей Богини.<br><br>\
-	\
+	первые среди святых, чьи голоса некогда звучали в гармонии с волей Богини.\
+	<br><br>\
 	В малых таборах и семьях старшие - те, кто пережил суровые годы, пусть даже на день дольше других, — ведут своих \
 	сородичей. В великих гнёздах правление сложнее: там избирают вождей по силе, мудрости или опыту, а порой собирают \
 	советы - большие и малые, где голос каждого старейшины вплетается в общую волю. Но слава краукали осталась в прошлом. \
-	Столетия после эпохи их расцвета стёрли память о былом, оставив лишь осколки легенд, что шепчутся в тенях перьев.<br><br>\
-	\
+	Столетия после эпохи их расцвета стёрли память о былом, оставив лишь осколки легенд, что шепчутся в тенях перьев.\
+	<br><br>\
 	В гнёздах и стаях пробуждается давно забытое - Культ Мёртвой Богини, чей шёпот несёт старые сказания и истины. \
 	Её последователи, будь то граккоры с их кровавыми ритуалами, ухуланы с тихими ночными обетами, чиркиты с песнопениями \
 	над садами, крийары с клятвами на вершинах скал или курлуги с древними молитвами - все они становятся едины в своей \
