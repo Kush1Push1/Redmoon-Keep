@@ -9,6 +9,7 @@
 	на грани ереси по мнению Верховного Жреца Святого Престола. Несмотря на вызывающие действия, люди терпимы, \
 	поскольку церковь часто вмешивается в несправедливости, вызванные бессердечными институтами, что терзают Рокхилл."
 	spells = list(/obj/effect/proc_holder/spell/self/convertrole/templar, /obj/effect/proc_holder/spell/self/convertrole/monk, /obj/effect/proc_holder/spell/invoked/solar_smite)
+	cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 
 /obj/effect/proc_holder/spell/invoked/solar_smite
 	name = "Solar Smite"
@@ -48,7 +49,8 @@
 			L.adjustFireLoss(50)
 			if(L.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
 				L.visible_message(span_danger("[L] is unmade by holy light!"), span_userdanger("I'm unmade by holy light!"))
-				L.gib()
+				L.adjust_fire_stacks(12)
+				L.adjustFireLoss(100)
 		return TRUE
 	else
 		return FALSE
