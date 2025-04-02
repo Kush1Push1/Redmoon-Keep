@@ -16,7 +16,26 @@
 	other than to other races, but even so, many try to maintain community, migrating in large and small groups, trying \
 	to find a new home where they can build a new nest for all their kind."
 
-	expanded_desc = "(SEE RUSSIAN VERSION)"
+	expanded_desc = "An ancient race whose roots date back to the dawn of the world, when the Scree'Auk breathed life into \
+	their feathers and beaks. They live in flocks or families, migrating in camps through forests, mountains and steppes or \
+	settling near each other in nests. Divided into subspecies, Kraukalee carry echoes of their former greatness: Grakkory \
+	are brilliant and fierce in their efforts, Uhulany are wise and silent hunters in the shadows, Chirkity are tireless \
+	workers, whose songs enliven the forests, Kiryary are unsurpassed warriors, guardians of heaven and rocks and the \
+	Kurlugi are the first among the saints, whose voices once resounded in harmony with the will of the Goddess.<br><br>\
+	\
+	In small flocks and families, elders - those who have survived the harsh years, even if only a day longer than others \
+	- lead their relatives. In heirs of the great nests, governance is more complicated: leaders are chosen based on \
+	strength, wisdom or experience and sometimes councils are assembled, large and small, where the voice of each \
+	elder is intertwined with the general will. But Kraukalee's fame is in the past. Centuries after their heyday \
+	have erased the memory of the past, leaving only fragments of legends, that whisper in the shadows of their feathers.<br><br>\
+	\
+	A long-forgotten thing is awakening in nests and flocks - Cult of a Dead Goddess, whose whisper carries old tales \
+	and truths. Her followers, whether they are Grakkory with their bloody rituals, Uhulany with silent night vows, \
+	Chirkity with chants over gardens, Kiryary with oaths on top of rocks or Kurlugi with ancient prayers, all become \
+	united in their goal: to resurrect the Dead Goddess by following her dim light. One bring her riches, some bring \
+	cold revenge, others bring hope for the revival of her former greatness and every flap of their wings, every ritual \
+	and song leads to her awakening. But this desire is not shared by all of Kraukalee: some see the return of the \
+	Scree'Auk as salvation, others, as a shadow, that will engulf their fragile world."
 
 	ru_desc = "<b>Краукали</b><br>\
 	Сыны и дочери Скри'Ок, принятые другими народами и Богами. Эти птицеподобные существа с перьями, \
@@ -184,18 +203,11 @@
 
 /datum/species/kraukalee/get_skin_list()
 	return list(
-		"Vakran" = "271f1b",
-		"Lanarain" = "271f1c",
-		"Frostfell" = "271f1d",
-		"Varghelm" = "271f1e",
-		"Dawnbreak" = "271f1f",
-		"Bloodmoon" = "271f2a",
-		"Felsaad" = "271f2b",
-		"Hizmut" = "271f2c",
-		"Langqan" = "271f2d",
-		"a tangled lineage" = "271f2e",
-		"disputed" = "271f2f",
-		"bastardized" = "271f3a"
+		"Grakkory" = "271f1b",
+		"Uhulany" = "271f1c",
+		"Chirkity" = "271f1d",
+		"Kriyary" = "271f1e",
+		"Kurlugi" = "271f1f",
 	) // This is a dirty hack that stops me using mob defines, the colors do not do anything, it just a var that relates to their pack name on examine
 
 /datum/species/kraukalee/get_random_features()
