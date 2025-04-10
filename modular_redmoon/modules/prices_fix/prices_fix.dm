@@ -21,13 +21,10 @@
  */
 
 /obj/item/rogueweapon/mace
-	sellprice = 10
+	sellprice = 20
 
 /obj/item/rogueweapon/mace/church
 	sellprice = 50 // Уникальное
-
-/obj/item/rogueweapon/mace/cudgel
-	sellprice = 10
 
 /obj/item/rogueweapon/mace/wsword // Деревянный меч
 	sellprice = 2
@@ -138,9 +135,6 @@
 /obj/item/rogueweapon/sword
 	sellprice = 10 
 
-/obj/item/rogueweapon/sword/decorated
-	sellprice = 50 
-
 /obj/item/rogueweapon/sword/short
 	sellprice = 20 // Сталь 
 
@@ -171,14 +165,8 @@
 /obj/item/rogueweapon/sword/sabre
 	sellprice = 20
 
-/obj/item/rogueweapon/sword/sabre/dec
-	sellprice = 100
-
 /obj/item/rogueweapon/sword/rapier
 	sellprice = 20
-
-/obj/item/rogueweapon/sword/rapier/dec
-	sellprice = 60 
 
 /obj/item/rogueweapon/sword/cutlass
 	sellprice = 20 
