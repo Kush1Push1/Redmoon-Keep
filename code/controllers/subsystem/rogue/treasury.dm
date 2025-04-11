@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(treasury)
 
 /datum/controller/subsystem/treasury/Initialize()
 	treasury_value = rand(800,1500)
-	queens_tax = rand(0.06, 0.13) // REDMOON EDIT - prices_fix - снижен налог гильдии - WAS pick(0.09, 0.15, 0.21, 0.30)
+	queens_tax = rand(5, 11)/100 // REDMOON EDIT - prices_fix - снижен налог гильдии - WAS pick(0.09, 0.15, 0.21, 0.30)
 	
 	for(var/path in subtypesof(/datum/roguestock/bounty))
 		var/datum/D = new path
