@@ -217,16 +217,16 @@
 	if(!(MUTCOLORS in dna.species.species_traits))
 		var/obj/item/organ/breasts/breasts = getorganslot(ORGAN_SLOT_BREASTS)
 		if(breasts)
-			breasts.accessory_colors = VD.cache_skin
+			breasts.accessory_colors = "#[VD.cache_skin]" // REDMOON EDIT - нужно писать в "#[VD.cache_skin]", потому что в отличии от тела, органам нужно # в начале цвета
 		var/obj/item/organ/penis/penis = getorganslot(ORGAN_SLOT_PENIS)
 		if(penis)
-			penis.accessory_colors = VD.cache_skin
+			penis.accessory_colors = "#[VD.cache_skin]" // REDMOON EDIT
 		var/obj/item/organ/testicles/testicles = getorganslot(ORGAN_SLOT_TESTICLES)
 		if(testicles)
-			testicles.accessory_colors = VD.cache_skin
+			testicles.accessory_colors = "#[VD.cache_skin]" // REDMOON EDIT
 		var/obj/item/organ/butt/butt = getorganslot(ORGAN_SLOT_BUTT)
 		if(butt)
-			butt.accessory_colors = VD.cache_skin
+			butt.accessory_colors = "#[VD.cache_skin]" // REDMOON EDIT
 		regenerate_icons()
 
 /mob/living/carbon/human/proc/vampire_undisguise(datum/antagonist/vampirelord/VD)
