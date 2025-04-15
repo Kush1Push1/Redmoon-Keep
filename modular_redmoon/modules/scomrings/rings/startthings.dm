@@ -19,7 +19,7 @@
 	. = ..()
 
 /datum/outfit/job/roguetown/marshal/pre_equip(mob/living/carbon/human/H)
-	id = /obj/item/scomstone_rk/bad/garrison
+	id = /obj/item/scomstone_rk/garrison
 	. = ..()
 
 /datum/outfit/job/roguetown/steward/pre_equip(mob/living/carbon/human/H)
