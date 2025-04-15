@@ -30,5 +30,8 @@
 			testicles.accessory_colors = "#[accessories_color_changing]"
 		var/obj/item/organ/butt/butt = H.getorganslot(ORGAN_SLOT_BUTT)
 		if(butt)
-			butt.accessory_colors = "#[accessories_color_changing]"
+			butt.accessory_colors ="#[accessories_color_changing]"
+		var/obj/item/organ/ears/ears = H.getorganslot(ORGAN_SLOT_EARS)
+		if(ears)
+			ears.accessory_colors = "#[accessories_color_changing]"
 		H.update_body()
