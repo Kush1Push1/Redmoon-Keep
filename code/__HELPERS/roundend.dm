@@ -326,6 +326,7 @@
 			round_occupations += "<font color='#b18254'><span class='italics'>[target_job.title]</span></font> - [target_job.current_positions]<br>"
 	shit += round_occupations
 	// REDMOON ADD END
+	shit += "<br><span class='bold'>∇--------------------∇</span>"
 	to_chat(world, "[shit.Join()]")
 	return
 
