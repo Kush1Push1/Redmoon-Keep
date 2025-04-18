@@ -74,7 +74,7 @@
 			H.change_stat("fortune", 2)
 			ADD_TRAIT(H, TRAIT_WILD_EATER, TRAIT_GENERIC)
 
-		if("Caveling Tinkerer")	
+		if("Caveling Tinkerer")
 			H.mind.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)

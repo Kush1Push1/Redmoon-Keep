@@ -10,7 +10,7 @@
 		gib_animation()
 
 	spill_embedded_objects()
-	
+
 	spill_organs(no_brain, no_organs, no_bodyparts)
 
 	if(!no_bodyparts)
@@ -42,7 +42,7 @@
 
 	if(drop_items)
 		unequip_everything()
-	
+
 	if(buckled)
 		buckled.unbuckle_mob(src, force = TRUE)
 

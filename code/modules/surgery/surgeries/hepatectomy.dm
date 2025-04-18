@@ -1,16 +1,3 @@
-/datum/surgery/hepa
-	name = "Hepatectomy"
-	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	possible_locs = list(BODY_ZONE_PRECISE_STOMACH)
-	steps = list(
-		/datum/surgery_step/incise,
-		/datum/surgery_step/clamp,
-		/datum/surgery_step/retract,
-		/datum/surgery_step/incise,
-		/datum/surgery_step/resection,
-		/datum/surgery_step/cauterize,
-	)
-
 /datum/surgery_step/resection
 	name = "Perform Liver Rejuvination"
 	time = 20 SECONDS

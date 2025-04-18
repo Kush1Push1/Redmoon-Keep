@@ -1,6 +1,6 @@
 /obj/effect/temp_visual/heal_rogue //color is white by default, set to whatever is needed
 	name = "healing glow"
-	icon = 'modular_redmoon/icons/effects/miracle-healing.dmi'
+	icon = 'icons/effects/miracle-healing.dmi'
 	icon_state = "heal_pantheon"
 	duration = 15
 	plane = GAME_PLANE_UPPER
