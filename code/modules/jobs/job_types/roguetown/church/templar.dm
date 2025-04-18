@@ -32,8 +32,8 @@
 			title = "Sister"
 		H.real_name = "[title] [prev_real_name]"
 		H.name = "[title] [prev_name]"
-   	addtimer(CALLBACK(src, PROC_REF(templar_helmet_choice), H), 50)
-  ..() // REDMOON ADD - fixes_for_characters_memory - исправление, что персонажи запоминают имена без титулов
+		addtimer(CALLBACK(src, PROC_REF(templar_helmet_choice), H), 50)
+	..() // REDMOON ADD - fixes_for_characters_memory - исправление, что персонажи запоминают имена без титулов
 
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
