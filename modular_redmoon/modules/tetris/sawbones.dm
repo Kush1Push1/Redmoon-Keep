@@ -23,7 +23,8 @@
 		/obj/item/reagent_containers/hypospray/medipen/sty/detox,
 		/obj/item/reagent_containers/pill/pnkpill,
 		/obj/item/candle/yellow,
-		/obj/item/needle
+		/obj/item/needle,
+		/obj/item/reagent_containers/glass/bottle/rogue/embalm
 	)
 
 /obj/item/storage/fancy/pilltin

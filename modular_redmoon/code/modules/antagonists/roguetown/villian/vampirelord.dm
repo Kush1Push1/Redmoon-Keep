@@ -37,6 +37,7 @@
 // 	if(creator_op)
 // 		M.mind.add_antag_datum(new_op,creator_op.nuke_team)
 // 		M.mind.special_role = "Nuclear Operative"
+
 // vampire_skin_color_fix
 /datum/antagonist/vampirelord
 	var/cache_breasts // Нужно для запоминания цветов
@@ -105,3 +106,6 @@
 		cache_snout = snout.accessory_colors
 
 	..()
+
+/obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire
+	icon = 'modular_redmoon/icons/armor.dmi'
