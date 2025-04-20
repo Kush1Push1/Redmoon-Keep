@@ -1,5 +1,9 @@
 GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 
+/*
+ * ДАТУМ АНТАГОНИСТА
+ */
+
 /datum/antagonist/vurdalak
 	name = ROLE_VURDALAK
 	roundend_category = "Vurdalaks"
@@ -174,6 +178,10 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 			owner.current.change_stat(STAT_INTELLIGENCE, -4)
 			bog_bounded = FALSE
 
+/*
+ * ЗАДАЧИ
+ */
+
 /datum/objective/vurdalak
 	name = "drink_blood"
 	explanation_text = "With each and every dae, my lifeforce betrays me. I have to drink blood or feast on 10 victims, to sustain myself for a bit more."
@@ -184,3 +192,29 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	if(vurdalak_datum)
 		if(vurdalak_datum.unique_victims.len >= 10)
 			return TRUE
+
+/*
+ * СОСТОЯНИЯ
+ */
+
+/datum/status_effect/debuff/vurdalak_sunlight_exposed
+	id = "hungryt2"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
+	effectedstats = list("strength" = -5, "constitution" = -5, "speed" = -5)
+	duration = 10 SECONDS
+
+/datum/status_effect/debuff/vurdalak_church_exposed
+	id = "hungryt3"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
+	effectedstats = list("strength" = -8, "constitution" = -8, "speed" = -8) // Братан НЕ ДОЛЖЕН суваться в деревню
+	duration = 10 SECONDS
+
+/atom/movable/screen/alert/status_effect/debuff/vurdalak_sunlight_exposed
+	name = "SUNLIGHT!"
+	desc = "<span class='warning'>I feel myself sick of it!</span>\n"
+	icon_state = "stressb"
+
+/atom/movable/screen/alert/status_effect/debuff/vurdalak_church_exposed
+	name = "Church!"
+	desc = "<span class='warning'>Their church weakens me... I need to get back to the bog.</span>\n"
+	icon_state = "stressvb"

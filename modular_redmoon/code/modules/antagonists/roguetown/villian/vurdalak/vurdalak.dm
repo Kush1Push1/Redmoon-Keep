@@ -152,25 +152,3 @@
 
 /obj/item/rogueweapon/vurdalak_claw/left
 	icon_state = "claw_l"
-
-/datum/status_effect/debuff/vurdalak_sunlight_exposed
-	id = "hungryt2"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
-	effectedstats = list("strength" = -5, "constitution" = -5, "speed" = -5)
-	duration = 10 SECONDS
-
-/datum/status_effect/debuff/vurdalak_church_exposed
-	id = "hungryt3"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
-	effectedstats = list("strength" = -8, "constitution" = -8, "speed" = -8) // Братан НЕ ДОЛЖЕН суваться в деревню
-	duration = 10 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/vurdalak_sunlight_exposed
-	name = "SUNLIGHT!"
-	desc = "<span class='warning'>I feel myself sick of it!</span>\n"
-	icon_state = "stressb"
-
-/atom/movable/screen/alert/status_effect/debuff/vurdalak_church_exposed
-	name = "Church!"
-	desc = "<span class='warning'>Their church weakens me... I need to get back to the bog.</span>\n"
-	icon_state = "stressvb"

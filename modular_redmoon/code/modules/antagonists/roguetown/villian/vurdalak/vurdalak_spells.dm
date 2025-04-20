@@ -47,12 +47,12 @@
 /obj/effect/proc_holder/spell/self/vurdalak_targets_search/cast(mob/user = usr)
 	..()
 	if(GLOB.tod != "night")
-		to_chat(user, span_warning("The night has not come... I shall wait to look into the reflections in sky."))
+		to_chat(user, user.client.prefs.be_russian ? span_warning("Ночь ещё не пришла... Мне нужно ждать, чтобы почувствовать добычу.") : span_warning("The night has not come... I need wait to look for the prey."))
 		revert_cast()
 		return
 	var/area/user_area = get_area(user)
 	if(!user_area.outdoors)
-		to_chat(user, span_warning("I cannot watch the sky while not beneath the smiling moon."))
+		to_chat(user, user.client.prefs.be_russian ? span_warning("Для этого, мне сначала нужно видеть луну.") : span_warning("I need to be under the sky to see the moon for it."))
 		revert_cast()
 		return
 	var/mob/target = null
@@ -70,7 +70,7 @@
 			target = potential_victim
 
 	if(!target)
-		to_chat(user, span_warning("There are no living beings in the wilderness... Some may hide in the underground, in huts or sneak around."))
+		to_chat(user, user.client.prefs.be_russian ? span_warning("Нет живых на болоте... Кто-то может прятаться в подземелье, зданиях или красться.") : span_warning("There are no living beings in the wilderness... Some may hide in the underground, in huts or sneak around."))
 		revert_cast()
 		return
 
@@ -93,7 +93,8 @@
 		if(SOUTHEAST)
 			arrowpart = " ⇘"
 
-	to_chat(user, span_cult("I see [target.gender == MALE ? "him" : "her"]... [target.gender == MALE ? "His" : "Her"] blood is [FLOOR(last_best_distance*1.5, 1)] meters away. ([arrowpart])"))
+	to_chat(user, user.client.prefs.be_russian ? span_cult("Я вижу [target.gender == MALE ? "его" : "её"]... [target.gender == MALE ? "Его" : "её"] кровь в [FLOOR(last_best_distance*1.5, 1)] метрах от меня. ([arrowpart])") : span_cult("I see [target.gender == MALE ? "him" : "her"]... [target.gender == MALE ? "His" : "Her"] blood is [FLOOR(last_best_distance*1.5, 1)] meters away. ([arrowpart])"))
+	playsound(user.loc, 'sound/vo/mobs/wwolf/sniff.ogg', 60, 1)
 
 // Spells
 /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv
@@ -118,7 +119,7 @@
 
 /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv/cast(list/targets, mob/user = usr)
 	if(GLOB.tod != "night")
-		to_chat(user, span_warning("I don't feel the power... I must wait until the night"))
+		to_chat(user, user.client.prefs.be_russian ? span_warning("Ночь ещё не пришла... Мне нужно ждать, чтобы регенерировать.") : span_warning("The night has not come... I need wait to regenerate myself."))
 		revert_cast()
 		return FALSE
 
@@ -131,12 +132,12 @@
 			silver_curse_status = TRUE
 			break
 		if(silver_curse_status)
-			to_chat(vurdalak, span_danger("My BANE is not letting me rejuvenate!"))
+			to_chat(vurdalak, user.client.prefs.be_russian ? span_danger("Моё ПРОКЛЯТИЕ не даёт мне восстановиться!") : span_danger("My BANE is not letting me rejuvenate!"))
 			revert_cast()
 			return FALSE
 
 		if(vurdalak_antag_datum)
-			to_chat(user, span_cult("I feel how my body regenerates quickly... As well as my hide. More I will feed myself, more I will restore."))
+			to_chat(user, user.client.prefs.be_russian ? span_cult("Я чувствую, как моё тело быстро восстанавливается... Ровно как и моя шкура. Чем больше я загублю, тем сильнее стану.")  : span_cult("I feel how my body regenerates quickly... As well as my hide. More I will feed myself, more I will restore."))
 			vurdalak.reagents.add_reagent(/datum/reagent/medicine/greaterhealthpot, length(vurdalak_antag_datum.unique_victims))
 			vurdalak.heal_wounds(vurdalak_antag_datum.unique_victims.len * 20)
 			vurdalak.blood_volume += BLOOD_VOLUME_SURVIVE
@@ -179,11 +180,11 @@
 			var/mob/living/carbon/human/vurdalak = user
 			var/datum/antagonist/vurdalak/vurdalak_antag_datum = user.mind.has_antag_datum(/datum/antagonist/vurdalak)
 			if(target.vitae_bank <= 500)
-				to_chat(vurdalak, span_warning("This body has already lost its lifeforce..."))
+				to_chat(vurdalak, user.client.prefs.be_russian ? span_warning("Это тело уже лишилось своей жизненной силы...") : span_warning("This body has already lost its lifeforce..."))
 				revert_cast()
 				return
-			if(!target.mind <= 500)
-				to_chat(vurdalak, span_warning("I don't feel enought lifeforce in this body... It will be useless."))
+			if(!target.mind)
+				to_chat(vurdalak, user.client.prefs.be_russian ? span_warning("Я не чувствую достаточно жизненной силы в этом теле... Это бесполезно.") : span_warning("I don't feel enought lifeforce in this body... It will be useless."))
 				revert_cast()
 				return
 
