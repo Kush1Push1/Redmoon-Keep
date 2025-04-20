@@ -58,11 +58,17 @@
 	var/mob/target = null
 	var/last_best_distance = 1000
 	for(var/mob/living/carbon/human/potential_victim in GLOB.human_list - user)
-		if(potential_victim.stat)
-			continue
 		if(!is_valid_hunting_area(get_area(potential_victim)))
 			continue
+		if(potential_victim.stat)
+			continue
 		if(potential_victim.m_intent == MOVE_INTENT_SNEAK)
+			continue
+		if(!potential_victim.mind)
+			continue
+		if("undead" in potential_victim.faction)
+			continue
+		if(HAS_TRAIT(potential_victim, HUGBOX_TRAIT))
 			continue
 		var/distance_to_potential_victim = get_dist_euclidian(user, potential_victim)
 		if(distance_to_potential_victim < last_best_distance)

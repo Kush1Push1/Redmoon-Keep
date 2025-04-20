@@ -43,8 +43,8 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	var/mob/living/carbon/human/H = owner.current
 	H.vurdalak_transform()
 
-	greet()
 	forge_vurdalak_objectives()
+	greet()
 	return ..()
 
 /datum/antagonist/vurdalak/proc/move_to_spawn_location()
@@ -198,14 +198,14 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
  */
 
 /datum/status_effect/debuff/vurdalak_sunlight_exposed
-	id = "hungryt2"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
+	id = "vurdalak_sunglight"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/vurdalak_sunlight_exposed
 	effectedstats = list("strength" = -5, "constitution" = -5, "speed" = -5)
 	duration = 10 SECONDS
 
 /datum/status_effect/debuff/vurdalak_church_exposed
-	id = "hungryt3"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
+	id = "vurdalak_church"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/vurdalak_church_exposed
 	effectedstats = list("strength" = -8, "constitution" = -8, "speed" = -8) // Братан НЕ ДОЛЖЕН суваться в деревню
 	duration = 10 SECONDS
 
