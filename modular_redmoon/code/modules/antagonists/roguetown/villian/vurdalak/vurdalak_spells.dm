@@ -191,7 +191,7 @@
 			while(target.vitae_bank > 500)
 				var/obj/item = vurdalak.get_active_held_item()
 				if(!item || !(item.type in typesof(/obj/item/rogueweapon/vurdalak_claw)))
-					to_chat(vurdalak, span_warning("I need to extend my claws to feast on them."))
+					to_chat(vurdalak, user.client.prefs.be_russian ? span_warning("Мне нужно выпустить когти, чтобы приступить к трапезе.") : span_warning("I need to extend my claws to feast on them."))
 					revert_cast()
 					break
 				if(!do_after(user, 1.4 SECONDS, target = target))
@@ -207,7 +207,7 @@
 					O.forceMove(target_turf)
 				target.vitae_bank -= 500
 			if(target.vitae_bank <= 500)
-				vurdalak.visible_message(span_dead("[vurdalak] finishes with [target]..."), span_dead("I have consumed their flesh... The lifeforce is enough."))
+				vurdalak.visible_message(span_dead("[vurdalak] finishes with [target]..."), vurdalak.client.prefs.be_russian ? span_dead("Я закончил поглощать плоть... Жизненной силы достаточно.") : span_dead("I have consumed their flesh... The lifeforce is enough."))
 				if(!(target.real_name in vurdalak_antag_datum.unique_victims))
 					vurdalak_antag_datum.unique_victims += target.real_name
 					vurdalak_antag_datum.handle_power_up()
