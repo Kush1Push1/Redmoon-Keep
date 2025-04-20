@@ -40,7 +40,7 @@
 /obj/effect/proc_holder/spell/self/vurdalak_targets_search
 	name = "See Into Night"
 	desc = "!"
-	overlay_state = "claws"
+	overlay_state = "transfix"
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
 
@@ -100,7 +100,7 @@
 /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv
 	name = "Undead Regeneration"
 	desc = "Regenerates my targeted limb and replenishes half my stamina. Recharges every 60 seconds. I must stand still."
-	overlay_state = "doc"
+	overlay_state = "unrot"
 	action_icon = 'icons/mob/actions/roguespells.dmi'
 	releasedrain = 0
 	chargedrain = 0
@@ -154,9 +154,9 @@
 
 // Spells
 /obj/effect/proc_holder/spell/targeted/vurdalak_feast
-	name = "Consume Lux"
+	name = "Consume"
 	desc = ""
-	overlay_state = "doc"
+	overlay_state = "tamebeast"
 	action_icon = 'icons/mob/actions/roguespells.dmi'
 	releasedrain = 0
 	chargedrain = 0

@@ -131,7 +131,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 		return TRUE
 	if(SSticker.manualmodes)
 		forcedmodes |= SSticker.manualmodes
-
+	if(num_players() < 20)
+		return TRUE // Убираем рол антагонистов, если низкий онлайн
 	if(forcedmodes.len)
 		message_admins("Manual gamemodes selected.")
 		for(var/G in forcedmodes)
@@ -208,7 +209,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "N
 		pick_bandits()
 		log_game("Minor Antagonist: Bandit")
 
-	pick_vurdalaks()
+	if(prob(100))
+		pick_vurdalaks()
+		log_game("Minor Antagonist: Vurdalak")
 
 	if(prob(45))
 		pick_aspirants()

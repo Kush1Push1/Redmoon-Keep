@@ -44,7 +44,7 @@
 	soundpack_f = /datum/voicepack/werewolf
 	specstats = list(
 		"strength" = 5, 
-		"perception" = 5, 
+		"perception" = -2, 
 		"intelligence" = -2, 
 		"constitution" = 6, 
 		"endurance" = 6, 
