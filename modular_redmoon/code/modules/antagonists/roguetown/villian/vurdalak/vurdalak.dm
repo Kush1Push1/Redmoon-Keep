@@ -58,6 +58,7 @@
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/self/vurdalak_targets_search)
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv)
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/vurdalak_feast)
+	W.remove_status_effect(STATUS_EFFECT_STASIS)
 	
 	qdel(src)
 
