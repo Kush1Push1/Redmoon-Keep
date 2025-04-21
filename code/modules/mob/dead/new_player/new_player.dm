@@ -514,6 +514,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	testing("basedtest 3")
 	character.islatejoin = TRUE
 	var/equip = SSjob.EquipRank(character, rank, TRUE)
+	SSjob.initialise_memories(character, rank, TRUE)
 	testing("basedtest 4")
 
 	if(isliving(equip))	//Borgs get borged in the equip, so we need to make sure we handle the new mob.
@@ -721,6 +722,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 /mob/living/carbon/human/after_creation()
 	if(dna?.species)
 		dna.species.after_creation(src)
+	apply_status_effect(STATUS_EFFECT_STASIS, null, TRUE) // REDMOON ADD - after_death_stats_fix - исправляет, что при спавне у персонажа имеются дебафы, которые записываются в раундстартовые
 	roll_stats()
 
 /mob/dead/new_player/proc/transfer_character()
