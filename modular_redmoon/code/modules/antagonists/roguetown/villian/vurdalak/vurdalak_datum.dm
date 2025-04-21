@@ -20,6 +20,7 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	var/list/unique_victims = list()
 	var/last_sound = 0
 	var/hide_strenght = 200
+	var/claws_armor_penetration = 30
 
 ///datum/antagonist/vurdalak/lesser/roundend_report()
 //	return
@@ -68,26 +69,26 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 							vurdalak.apply_status_effect(/datum/status_effect/debuff/vurdalak_sunlight_exposed)
 
 		if(vurdalak.m_intent != MOVE_INTENT_SNEAK)
-			if(last_sound + 15 SECONDS <= world.time)
+			if(last_sound + 10 SECONDS <= world.time)
 				for(var/mob/living/carbon/human/target in range(4, user) - vurdalak)
 					if(target.stat)
 						continue
 					if(target.m_intent == MOVE_INTENT_SNEAK)
 						continue
 
-					var/sound_to_pick = pick('sound/vo/mobs/wwolf/pain (1).ogg', 'sound/vo/mobs/wwolf/pain (2).ogg', 'sound/vo/mobs/wwolf/pain (3).ogg')
+					var/sound_to_pick = pick('sound/vo/mobs/wwolf/pain (1).ogg', 'sound/vo/mobs/wwolf/pain (2).ogg', 'sound/vo/mobs/wwolf/pain (3).ogg', 'sound/vo/mobs/wwolf/roar.ogg')
 					playsound(vurdalak.loc, sound_to_pick, 80, 1)
 					last_sound = world.time
 					break
 
-			if(last_sound + 15 SECONDS <= world.time)
+			if(last_sound + 10 SECONDS <= world.time)
 				for(var/mob/living/carbon/human/target in range(7, user) - vurdalak)
 					if(target.stat)
 						continue
 					if(target.m_intent == MOVE_INTENT_SNEAK)
 						continue
 
-					playsound(vurdalak.loc, 'sound/vo/mobs/wwolf/sniff.ogg', 80, 1)
+					playsound(vurdalak.loc, 'sound/vo/mobs/wwolf/sniff.ogg', 60, 1)
 					last_sound = world.time
 					break
 	
@@ -95,12 +96,8 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 		if(vurdalak.y >= 194) // Супер-проклято. Нужны нормальные зоны для помещений в болоте, потому что они одни и те же, что и в деревне.
 			vurdalak.apply_status_effect(/datum/status_effect/debuff/vurdalak_church_exposed)
 
-	vurdalak.reagents.add_reagent(/datum/reagent/medicine/healthpot, 1)
-
 	if(vurdalak.on_fire)
 		vurdalak.freak_out()
-
-	vurdalak.blood_volume = min(vurdalak.blood_volume + 1, BLOOD_VOLUME_NORMAL)
 
 /datum/antagonist/vurdalak/on_removal()
 	if(!silent && owner.current)
@@ -153,6 +150,8 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я чувствую себя сильнее.") : span_cult("I feel myself more powerful."))
 			owner.current.change_stat(STAT_STRENGTH, 1)
 			owner.current.adjust_triumphs(1)
+			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я ощущаю, что куда лучше орудую своими когтями.") : span_cult("I feel myself much more confident in claws combat."))
+			owner.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		if(5)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я чувствую себя крепче.") : span_cult("I feel myself more resilent."))
 			owner.current.change_stat(STAT_CONSTITUTION, 1)
@@ -164,11 +163,19 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Моя кровь... Моя кровь кипит! Жажда убивать становится сильнее... Я ощущаю, как думать становится сложнее.") : span_cult("My blood... My blood boils! The urge to kill is more than before... Do I lose myself?"))
 			owner.current.change_stat(STAT_ENDURANCE, 1)
 			owner.current.change_stat(STAT_INTELLIGENCE, -1)
+			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Из моей хватки не вырваться!") : span_cult("My grasp is much stronger now!"))
+			owner.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		if(8)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я ЧУВСТВУЮ СЕБЯ ВЫНОСЛИВЕЕ, ЧЕМ КОГДА ЛИБО! Я МОГУ УБИВАТЬ БОЛЬШЕ! ЦЕРКОВЬ УМОЕТСЯ В КРОВИ!") : span_cult("I FEEL MYSELF LESS FATIGUE THAN EVER BEFORE! I CAN KILL MORE! THE CHURCH WILL BATH IN BLOOD!"))
 			owner.current.change_stat(STAT_ENDURANCE, 1)
 			owner.current.change_stat(STAT_INTELLIGENCE, -1)
 			owner.current.adjust_triumphs(1)
+			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("В БОЮ КОГТЯМИ МНЕ НЕТ РАВНЫХ!") : span_cult("IN COMBAT WITH CLAWS NO ONE CAN MATCH ME!"))
+			owner.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("МОИ КОГТИ СОЗДАНЫ, ЧТОБЫ РАЗРЫВАТЬ ЖЕЛЕЗО!") : span_cult("MY CLAWS ARE FORMED TO BREAK THROUGH IRON!"))
+			claws_armor_penetration = 50
+			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("И я стал весить больше... Какое счастье, что мне теперь не так и сильно нужно прыгать по деревьям. Корм мне не угроза.") : span_cult("And I have become heavier... Lucky me I don't need to jump on trees anymore. A prey is not a threat to me."))
+			REMOVE_TRAIT(owner.current, TRAIT_ZJUMP, SPECIES_TRAIT)
 		if(9)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я ЧУВСТВУЮ... СОЛНЦЕ... ОНА НЕ ИМЕЕТ БОЛЕЕ ВЛАСТИ НАДО МНОЙ...") : span_cult("I FEEL... THE SUN... SHE HAS NO POWER OVER ME ANYMORE..."))
 			owner.current.change_stat(STAT_INTELLIGENCE, -2)

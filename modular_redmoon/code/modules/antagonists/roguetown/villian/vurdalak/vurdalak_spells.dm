@@ -30,10 +30,14 @@
 				if(1)
 					obj = user.get_inactive_held_item()
 			user.dropItemToGround(obj, TRUE)
+		var/datum/antagonist/vurdalak/vurdalak_antag_datum = user.mind.has_antag_datum(/datum/antagonist/vurdalak)
+
 		l = new(user, 1)
 		r = new(user, 2)
 		user.put_in_hands(l, TRUE, FALSE, TRUE)
 		user.put_in_hands(r, TRUE, FALSE, TRUE)
+		l.armor_penetration = vurdalak_antag_datum.claws_armor_penetration
+		r.armor_penetration = vurdalak_antag_datum.claws_armor_penetration
 		// user.visible_message("Your claws extend.", "You feel your claws extending.", "You hear a sound of claws extending.")
 		extended = TRUE
 

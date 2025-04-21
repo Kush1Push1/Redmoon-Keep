@@ -22,16 +22,16 @@
 		TRAIT_ORGAN_EATER,
 		TRAIT_NASTY_EATER,
 		TRAIT_NOSTINK,
-//		TRAIT_HARDDISMEMBER, //Decapping Volfs causes them to bug out, badly, and need admin intervention to fix. Bandaid fix.
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_HARDDISMEMBER, //Decapping Volfs causes them to bug out, badly, and need admin intervention to fix. Bandaid fix.
 //		TRAIT_PIERCEIMMUNE, //Prevents weapon dusting and caltrop effects due to them transforming when killed/stepping on shards.
 		TRAIT_BOG_TREKKING,
 		TRAIT_IGNORESLOWDOWN,
-		TRAIT_NOSTAMINA, 
-		TRAIT_NOBREATH, 
 		TRAIT_NOPAINSTUN, 
 		TRAIT_LIMPDICK,
 		TRAIT_NOMOOD,
 		TRAIT_ZOMBIE_IMMUNE,
+		TRAIT_DODGEEXPERT,
 		TRAIT_NORUN
 	)
 	inherent_biotypes = MOB_HUMANOID
@@ -58,7 +58,6 @@
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/zombie,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears,
-		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
@@ -71,11 +70,21 @@
 	playsound(get_turf(H), pick('sound/vo/mobs/wwolf/wolftalk1.ogg','sound/vo/mobs/wwolf/wolftalk2.ogg'), 100, TRUE, -1)
 
 /datum/species/vurdalak/regenerate_icons(mob/living/carbon/human/H)
-	H.icon = 'modular_redmoon/icons/mobs/ghoul.dmi'
+	H.icon = 'modular_redmoon/icons/mobs/vurdalak.dmi'
 	H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
-	H.icon_state = "ghoul"
+	H.icon_state = "vurdalack"
 	H.update_damage_overlays()
 	return TRUE
+
+/datum/species/vurdalak/spec_life(mob/living/carbon/human/H)
+	..()
+	H.blood_volume = min(H.blood_volume + 1, BLOOD_VOLUME_NORMAL)
+	H.heal_wounds(1)
+	H.adjustBruteLoss(-1, 0)
+	H.adjustFireLoss(-1, 0)
+	H.adjustOxyLoss(-0.5, 0)
+	H.adjustCloneLoss(-0.5, 0) //heals as half as health
+	H.update_damage_overlays()
 
 /datum/species/vurdalak/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
@@ -115,4 +124,4 @@
 	return TRUE
 
 /datum/species/vurdalak/random_name(gender,unique,lastname)
-	return "Vurdalak"
+	return pick("Vurdalak", "Nightcurse", "Night Creature", "Abomination", "Creature", "Monster", "Beast", "Terrorbog Beast", "Rockhill Beast", "Nighthunter", "Nightshade", "Dreadclaw", "Nightstalker")

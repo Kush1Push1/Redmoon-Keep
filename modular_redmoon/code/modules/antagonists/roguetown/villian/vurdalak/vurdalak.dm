@@ -27,28 +27,25 @@
 	W.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/vurdalak_skin(W)
 
 	W.after_creation()
-	remove_all_languages()
 	mind.transfer_to(W)
 	W.mind.known_skills = list()
 	W.mind.skill_experience = list()
-	W.grant_language(/datum/language/hellspeak)
-	W.real_name = "Vurdalak"
-	W.name = "Vurdalak"
+	W.real_name = W.dna.species.random_name()
+	W.name =  W.real_name
 	W.mob_biotypes |= MOB_UNDEAD
 	W.faction = list("undead")
 
 	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 	W.update_a_intents()
 	W.can_do_sex = FALSE
+	W.grant_all_languages(omnitongue = TRUE)
 
 	W.possible_rmb_intents = list(/datum/rmb_intent/feint,\
-	/datum/rmb_intent/aimed,\
-	/datum/rmb_intent/strong,\
 	/datum/rmb_intent/riposte,\
 	/datum/rmb_intent/weak)
 
-	W.mind.adjust_skillrank(/datum/skill/combat/wrestling, 6, TRUE)
-	W.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
+	W.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+	W.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/misc/climbing, 6, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/misc/swimming, 5, TRUE)
@@ -111,7 +108,6 @@
 	attack_verb = list("claws", "mauls", "eviscerates")
 	animname = "chop"
 	hitsound = "genslash"
-	penfactor = 50
 	candodge = TRUE
 	canparry = TRUE
 	miss_text = "slashes the air!"
@@ -130,7 +126,7 @@
 	force = 20 // Penetration + strenght
 	block_chance = 0
 	wdefense = 4
-	armor_penetration = 20
+	armor_penetration = 30
 	associated_skill = /datum/skill/combat/unarmed
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_BULKY
