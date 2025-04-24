@@ -9,6 +9,7 @@
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
 #include "_maps\conflict_marker.dm"
+#include "_maps\roguetest.dm"
 #include "_maps\templates\arcyne_fortress.dm"
 #include "_maps\templates\bog_shack_small.dm"
 #include "_maps\templates\sewers.dm"
@@ -201,6 +202,7 @@
 #include "code\__REDFINES\colors.dm"
 #include "code\__REDFINES\DNA.dm"
 #include "code\__REDFINES\mobs.dm"
+#include "code\__REDFINES\prefereces.dm"
 #include "code\__REDFINES\stats.dm"
 #include "code\__REDFINES\stress.dm"
 #include "code\__REDFINES\traits.dm"
