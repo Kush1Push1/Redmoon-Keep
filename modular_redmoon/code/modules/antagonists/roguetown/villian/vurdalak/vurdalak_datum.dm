@@ -19,7 +19,7 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	var/bog_bounded = TRUE
 	var/list/unique_victims = list()
 	var/last_sound = 0
-	var/hide_strenght = 200
+	var/hide_strength = 200
 	var/claws_armor_penetration = 30
 
 ///datum/antagonist/vurdalak/lesser/roundend_report()
@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 /datum/antagonist/vurdalak/proc/handle_power_up()
 	if(unique_victims.len <= 10)
 		to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Моя шкура станет плотнее, когда я регенерирую.") : span_cult("My hide will be more resilent after I regenerate myself."))
-		hide_strenght += 20
+		hide_strength += 20
 	switch(unique_victims.len)
 		if(1)
 			to_chat(owner.current, owner.current.client.prefs.be_russian ? span_cult("Я чувствую себя сильнее.") : span_cult("I feel myself more powerful."))

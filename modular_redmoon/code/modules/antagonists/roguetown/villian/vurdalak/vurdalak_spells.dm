@@ -1,5 +1,5 @@
 /obj/effect/proc_holder/spell/self/claws_vurdalak
-	name = "Claws of Night"
+	name = "Extend Claws"
 	desc = "!"
 	overlay_state = "claws"
 	antimagic_allowed = TRUE
@@ -42,7 +42,7 @@
 		extended = TRUE
 
 /obj/effect/proc_holder/spell/self/vurdalak_targets_search
-	name = "See Into Night"
+	name = "Seek for Prey"
 	desc = "!"
 	overlay_state = "transfix"
 	antimagic_allowed = TRUE
@@ -103,7 +103,7 @@
 		if(SOUTHEAST)
 			arrowpart = " ⇘"
 
-	to_chat(user, user.client.prefs.be_russian ? span_cult("Я вижу [target.gender == MALE ? "его" : "её"]... [target.gender == MALE ? "Его" : "её"] кровь в [FLOOR(last_best_distance*1.5, 1)] метрах от меня. ([arrowpart])") : span_cult("I see [target.gender == MALE ? "him" : "her"]... [target.gender == MALE ? "His" : "Her"] blood is [FLOOR(last_best_distance*1.5, 1)] meters away. ([arrowpart])"))
+	to_chat(user, user.client.prefs.be_russian ? span_cult("Чувствую... Бьется сердце в [FLOOR(last_best_distance*1.5, 1)] шагах от меня. ([arrowpart])") : span_cult("I feel it... A heart is beating [FLOOR(last_best_distance*1.5, 1)] steps away. ([arrowpart])"))
 	playsound(user.loc, 'sound/vo/mobs/wwolf/sniff.ogg', 60, 1)
 
 // Spells
@@ -155,16 +155,16 @@
 			vurdalak.playsound_local(get_turf(vurdalak), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 
 			if(vurdalak.skin_armor)
-				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strenght
-				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strenght
+				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strength
+				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strength
 			else
 				vurdalak.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/vurdalak_skin(vurdalak.skin_armor)
-				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strenght
-				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strenght
+				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strength
+				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strength
 
 // Spells
 /obj/effect/proc_holder/spell/targeted/vurdalak_feast
-	name = "Consume"
+	name = "Feast"
 	desc = ""
 	overlay_state = "tamebeast"
 	action_icon = 'icons/mob/actions/roguespells.dmi'

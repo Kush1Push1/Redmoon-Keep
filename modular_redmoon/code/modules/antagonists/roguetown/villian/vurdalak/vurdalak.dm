@@ -55,31 +55,10 @@
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/self/vurdalak_targets_search)
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv)
 	W.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/vurdalak_feast)
-	W.remove_status_effect(STATUS_EFFECT_STASIS)
 	
 	qdel(src)
 
-/mob/living/carbon/human/proc/can_vurdalak()
-	if(!mind)
-		return FALSE
-	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
-		return FALSE
-	if(mind.has_antag_datum(/datum/antagonist/werewolf))
-		return FALSE
-	if(mind.has_antag_datum(/datum/antagonist/skeleton))
-		return FALSE
-	return TRUE
-
-/mob/living/carbon/human/proc/vurdalak_check(werewolf_type = /datum/antagonist/werewolf/lesser)
-	if(!mind)
-		return
-	var/already_wolfy = mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(already_wolfy)
-		return already_wolfy
-	if(!can_werewolf())
-		return
-	return mind.add_antag_datum(werewolf_type)
-
+// WIP
 /mob/living/carbon/human/proc/vurdalak_feed(mob/living/carbon/human/target)
 	if(!istype(target))
 		return
@@ -115,7 +94,7 @@
 	item_d_type = "slash"
 
 /obj/item/rogueweapon/vurdalak_claw
-	name = "Vurdalak Claw"
+	name = "claws"
 	desc = ""
 	item_state = null
 	lefthand_file = null
@@ -123,7 +102,7 @@
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 999999
 	max_integrity = 999999
-	force = 20 // Penetration + strenght
+	force = 20 // Penetration + strength
 	block_chance = 0
 	wdefense = 4
 	armor_penetration = 30
