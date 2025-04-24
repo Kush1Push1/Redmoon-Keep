@@ -2192,6 +2192,7 @@
 #include "modular_redmoon\code\modules\cargo\packsrogue\bandit\clothing.dm"
 #include "modular_redmoon\code\modules\cargo\packsrogue\bandit\foresworn.dm"
 #include "modular_redmoon\code\modules\client\client_procs.dm"
+#include "modular_redmoon\code\modules\client\preferences.dm"
 #include "modular_redmoon\code\modules\client\preferences_toggles.dm"
 #include "modular_redmoon\code\modules\client\customizer\organ\fluff.dm"
 #include "modular_redmoon\code\modules\client\customizer\organ\genitals.dm"
