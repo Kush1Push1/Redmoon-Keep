@@ -1135,8 +1135,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	return TRUE
 
 /client/proc/commendsomeone(var/forced = FALSE)
-	if(!can_commend(forced))
-		return
+/*	if(!can_commend(forced)) - REDMOON REMOVAL - uncommend_removal
+		return */
 	if(usr?.client?.prefs?.be_russian)
 		if(alert(src,"Был ли в этом раунде персонаж, действия которого вы хотели бы оценить?", "Оценка", "ДА", "НЕТ") != "ДА")
 			return
@@ -1180,8 +1180,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		else
 			to_chat(src,"You can't commend yourself.")
 		return
+/*		if(!can_commend(forced)) - REDMOON REMOVAL - перенесено вниз - WAS: prefs.commendedsomeone = TRUE 
+			return */
 	if(theykey)
-		// REDMOON REMOVAL - перенесено вниз - WAS: prefs.commendedsomeone = TRUE 
+//		prefs.commendedsomeone = TRUE - REDMOON REMOVAL - перенесено вниз - WAS: prefs.commendedsomeone = TRUE 
 		if(action == "Похвалить" || action == "Commend")
 			if(!can_commend(forced))
 				return
