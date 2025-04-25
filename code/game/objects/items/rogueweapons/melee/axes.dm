@@ -3,7 +3,7 @@
 	force = 18
 	force_wielded = 20
 	possible_item_intents = list(/datum/intent/axe/chop/stone)
-	name = "stone axe"
+	name = "каменный топор"
 	desc = "A rough stone axe. Badly balanced."
 	icon_state = "stoneaxe"
 	icon = 'icons/roguetown/weapons/32.dmi'
