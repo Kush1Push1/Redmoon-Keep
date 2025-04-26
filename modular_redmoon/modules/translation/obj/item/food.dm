@@ -1,9 +1,10 @@
 /obj/item/reagent_containers/food/snacks/egg
-	name_gen = "куриного яйца" // Родительный падеж
-	name_accu = "куриное яйцо" // Винительный падеж
-	name_dat = "куриному яйцу" // Дательный падеж
-	name_inst = "куриным яйцом" // Творительный падеж
-	name_prep = "курином яйце" // Предложный падеж
+	name = "куриное яйцо" // Именительный
+	name_gen = "куриного яйца" // Родительный
+	name_accu = "куриное яйцо" // Винительный
+	name_dat = "куриному яйцу" // Дательный
+	name_inst = "куриным яйцом" // Творительный
+	name_prep = "курином яйце" // Предложный
 
 /obj/item/reagent_containers/food/snacks/grown
 /obj/item/reagent_containers/food/snacks/grown/wheat
