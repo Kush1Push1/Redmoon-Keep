@@ -44,8 +44,10 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 		SPELL_ARCYNE_STORM,			// 2 cost	combat, light damaging AOE, stall/area denial spell
 		SPELL_DARKVISION,			// 2 cost	utility, dark sight
 		SPELL_HASTE,				// 2 cost	utility/combatbuff, faster mve speed.
+		SPELL_ENLARGE,				// 2 cost 	utility/combatbuff, less spd more str and con
 		SPELL_SUMMON_WEAPON,		// 2 cost	utility/combat, summons a marked weapon to caster.
 		SPELL_MENDING,				// 2 cost	utility, repairs items
+		SPELL_GLOBAL_MESSAGE,		// 6 cost	utility, messages anyone you know the name of.
 		SPELL_MESSAGE,				// 2 cost	utility, messages anyone you know the name of.
 		SPELL_BLADE_BURST,			// 2 cost	combat, single target damage localized on rndm leg. possible bone break.
 		SPELL_FETCH,				// 2 cost	utility/combat, pulls single target closer
@@ -1222,6 +1224,49 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 
 	return TRUE
 
+
+/obj/effect/proc_holder/spell/invoked/enlarge
+	name = "Enlarge"
+	desc = "Cause a target to be magically enlarged."
+	cost = 2
+	xp_gain = TRUE
+	releasedrain = 50
+	chargedrain = 1
+	chargetime = 2 SECONDS
+	charge_max = 2.5 MINUTES
+	warnie = "spellwarning"
+	school = "transmutation"
+	no_early_release = TRUE
+	movement_interrupt = FALSE
+	charging_slowdown = 2
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/arcane
+	invocation = "Su Magnus!"
+	invocation_type = "shout"
+
+/obj/effect/proc_holder/spell/invoked/enlarge/cast(list/targets, mob/user)
+	var/atom/A = targets[1]
+	if(!isliving(A))
+		revert_cast()
+		return
+
+	var/mob/living/spelltarget = A
+	spelltarget.apply_status_effect(/datum/status_effect/buff/enlarge)
+
+	if(spelltarget != user)
+		if(!(isseelie(spelltarget)))
+			user.visible_message("[user] mutters an incantation and [spelltarget] starts to rapidly grow in size.")
+		else
+			user.visible_message("[user] mutters an incantation and [spelltarget]'s muscles bulge and grow on their tiny frame.")
+	else
+		if(!(isseelie(spelltarget)))
+			user.visible_message("[user] mutters an incantation and they rapidly start to grow in size.")
+		else
+			user.visible_message("[user] mutters an incantation and their muscles bulge and grow on their tiny frame.")
+
+	return TRUE
+
+
 /obj/effect/proc_holder/spell/invoked/findfamiliar
 	name = "Find Familiar"
 	desc = "Summons a temporary spectral volf to aid you. Hostile to all but yourself. Summon with care."
@@ -1782,7 +1827,7 @@ Unless of course, they went heavy into the gameplay loop, and got a better book.
 	charge_max = 30 SECONDS
 	xp_gain = TRUE
 	cost = 2 //Weaker than Eyebite and thus 2 not 3
-
+	devotion_cost = 30 // REDMOON ADD - noc_blindness_spell_fix - исправление 0 цены за спелл; выставил 30, т.к. в бою эти секунды критически сильны
 
 /obj/effect/proc_holder/spell/invoked/mageblindness/cast(list/targets, mob/user = usr)
 	if(isliving(targets[1]))

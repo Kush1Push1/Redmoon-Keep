@@ -24,6 +24,7 @@
 #define SPELL_FORCEWALL_WEAK						/obj/effect/proc_holder/spell/invoked/forcewall_weak
 #define SPELL_HAMMERFALL							/obj/effect/proc_holder/spell/invoked/hammerfall
 #define SPELL_HASTE									/obj/effect/proc_holder/spell/invoked/haste
+#define SPELL_ENLARGE								/obj/effect/proc_holder/spell/invoked/enlarge
 #define SPELL_HEAL									/obj/effect/proc_holder/spell/invoked/heal
 #define SPELL_HEATMETAL								/obj/effect/proc_holder/spell/invoked/heatmetal
 #define SPELL_INVISIBILITY							/obj/effect/proc_holder/spell/invoked/invisibility
@@ -33,6 +34,7 @@
 #define SPELL_MAGEBLINDNESS							/obj/effect/proc_holder/spell/invoked/mageblindness
 #define SPELL_MAGEINVISIBILITY						/obj/effect/proc_holder/spell/invoked/mageinvisibility
 #define SPELL_MALUM_FLAME_ROGUE						/obj/effect/proc_holder/spell/invoked/malum_flame_rogue
+#define SPELL_GLOBAL_MESSAGE						/obj/effect/proc_holder/spell/invoked/global_message
 #define SPELL_MESSAGE								/obj/effect/proc_holder/spell/invoked/message
 #define SPELL_PREPARE_FEAST							/obj/effect/proc_holder/spell/invoked/prepare_feast
 #define SPELL_ANIMATE_OBJECT						/obj/effect/proc_holder/spell/invoked/projectile/animate_object
