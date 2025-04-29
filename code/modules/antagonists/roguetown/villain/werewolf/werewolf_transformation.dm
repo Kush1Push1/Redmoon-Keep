@@ -43,9 +43,9 @@
 		H.name = wolfname
 
 		if(GLOB.tod != "night")
-			if(isturf(H.loc)) // REDMOON ADD - оборотень теперь обращается обратно только если видит солнце
+			if(isturf(H.loc)) // REDMOON ADD - оборотень теперь обращается обратно только если не в пещерах болот
 				var/turf/loc = H.loc // REDMOON ADD
-				if(loc.can_see_sky()) // REDMOON ADD
+				if(!isarea(loc, /area/rogue/under/cavewet/bogcaves) || loc.can_see_sky()) // REDMOON ADD
 					if(!untransforming)
 						untransforming = world.time // Start untransformation phase
 
