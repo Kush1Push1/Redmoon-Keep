@@ -1,6 +1,5 @@
 /mob/living/carbon/human/species/vurdalak
 	race = /datum/species/vurdalak
-	footstep_type = FOOTSTEP_MOB_CLAW
 
 /mob/living/carbon/human/species/vurdalak/male
 	gender = MALE
