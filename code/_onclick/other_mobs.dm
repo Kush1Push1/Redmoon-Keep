@@ -259,6 +259,11 @@
 				caused_wound?.werewolf_infect_attempt()
 				if(prob(60))
 					user.werewolf_feed(src)
+			if(user.mind.has_antag_datum(/datum/antagonist/vurdalak))
+				if(prob(60))
+					visible_message(span_danger("[user] откусывает кусок от [src]![next_attack_msg.Join()]"), \
+									span_userdanger("[user] ЕСТ МЕНЯ ЖИВЬЁМ!![next_attack_msg.Join()]"))
+					user.vurdalak_feed(src)
 			// both player and npc deadites can infect
 			if(user.mind.has_antag_datum(/datum/antagonist/zombie) || istype(user, /mob/living/carbon/human/species/deadite))
 				var/datum/antagonist/zombie/existing_zomble = mind?.has_antag_datum(/datum/antagonist/zombie)

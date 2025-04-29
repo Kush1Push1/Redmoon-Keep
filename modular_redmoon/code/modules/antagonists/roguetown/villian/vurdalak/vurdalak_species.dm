@@ -17,7 +17,6 @@
 		TRAIT_ZJUMP,
 		TRAIT_NOFALLDAMAGE1,
 		TRAIT_STEELHEARTED,
-		TRAIT_BREADY,
 		TRAIT_TOXIMMUNE,
 		TRAIT_ORGAN_EATER,
 		TRAIT_NASTY_EATER,
@@ -30,8 +29,10 @@
 		TRAIT_NOPAINSTUN, 
 		TRAIT_LIMPDICK,
 		TRAIT_NOMOOD,
+		TRAIT_NOSLEEP,
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_DODGEEXPERT,
+		TRAIT_GROUNDSLEEPER,
 		TRAIT_NORUN
 	)
 	inherent_biotypes = MOB_HUMANOID
@@ -78,10 +79,10 @@
 
 /datum/species/vurdalak/spec_life(mob/living/carbon/human/H)
 	..()
-	H.blood_volume = min(H.blood_volume + 1, BLOOD_VOLUME_NORMAL)
-	H.heal_wounds(1)
-	H.adjustBruteLoss(-1, 0)
-	H.adjustFireLoss(-1, 0)
+	H.blood_volume = min(H.blood_volume + 5, BLOOD_VOLUME_NORMAL)
+	H.heal_wounds(2)
+	H.adjustBruteLoss(-2, 0)
+	H.adjustFireLoss(-2, 0)
 	H.adjustOxyLoss(-0.5, 0)
 	H.adjustCloneLoss(-0.5, 0) //heals as half as health
 	H.update_damage_overlays()

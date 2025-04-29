@@ -58,13 +58,14 @@
 	
 	qdel(src)
 
-// WIP
 /mob/living/carbon/human/proc/vurdalak_feed(mob/living/carbon/human/target)
 	if(!istype(target))
 		return
 
 	to_chat(src, span_warning("I feed on succulent flesh. I feel reinvigorated."))
-	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 3)
+	adjust_hydration(50)
+	adjust_nutrition(50)
+	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 2)
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/vurdalak_skin
 	slot_flags = null
@@ -72,7 +73,7 @@
 	desc = ""
 	icon_state = null
 	body_parts_covered = FULL_BODY
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 100, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 150, "laser" = 0,"energy" = 0, "bomb" = 100, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP

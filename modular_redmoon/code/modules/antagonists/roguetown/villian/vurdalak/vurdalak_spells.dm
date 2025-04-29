@@ -122,16 +122,16 @@
 	invocation_type = "whisper"
 	associated_skill = /datum/skill/magic/druidic
 	antimagic_allowed = FALSE
-	charge_max = 4 MINUTES
-	cooldown_min = 4 MINUTES
+	charge_max = 3.5 MINUTES
+	cooldown_min = 3.5 MINUTES
 	include_user = TRUE
 	max_targets = 1
 
 /obj/effect/proc_holder/spell/targeted/vurdalak_rejuv/cast(list/targets, mob/user = usr)
-	if(GLOB.tod != "night")
-		to_chat(user, user.client.prefs.be_russian ? span_warning("Ночь ещё не пришла... Мне нужно ждать, чтобы регенерировать.") : span_warning("The night has not come... I need wait to regenerate myself."))
-		revert_cast()
-		return FALSE
+//	if(GLOB.tod != "night")
+//		to_chat(user, user.client.prefs.be_russian ? span_warning("Ночь ещё не пришла... Мне нужно ждать, чтобы регенерировать.") : span_warning("The night has not come... I need wait to regenerate myself."))
+//		revert_cast()
+//		return FALSE
 
 	if(user && ishuman(user))
 		var/mob/living/carbon/human/vurdalak = user
@@ -155,12 +155,10 @@
 			vurdalak.playsound_local(get_turf(vurdalak), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 
 			if(vurdalak.skin_armor)
-				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strength
-				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strength
-			else
-				vurdalak.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/vurdalak_skin(vurdalak.skin_armor)
-				vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strength
-				vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strength
+				qdel(vurdalak.skin_armor)
+			vurdalak.skin_armor = new /obj/item/clothing/suit/roguetown/armor/skin_armor/vurdalak_skin(vurdalak)
+			vurdalak.skin_armor.max_integrity = vurdalak_antag_datum.hide_strength
+			vurdalak.skin_armor.obj_integrity = vurdalak_antag_datum.hide_strength
 
 // Spells
 /obj/effect/proc_holder/spell/targeted/vurdalak_feast
