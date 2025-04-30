@@ -21,9 +21,39 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	var/last_sound = 0
 	var/hide_strength = 200
 	var/claws_armor_penetration = 30
+	var/last_tod = "day"
 
-///datum/antagonist/vurdalak/lesser/roundend_report()
-//	return
+/datum/antagonist/vurdalak/roundend_report()
+	var/traitorwin = TRUE
+
+	printplayer(owner)
+
+	var/count = 0
+	if(objectives.len)//If the traitor had no objectives, don't need to process this.
+		for(var/datum/objective/objective in objectives)
+			objective.update_explanation_text()
+			to_chat(world, "<B>Times they have feasted: [unique_victims.len]</B>")
+			if(objective.check_completion())
+				to_chat(world, "<B>Goal #[count]</B>: [objective.explanation_text] <span class='greentext'>TRIUMPH!</span>")
+			else
+				to_chat(world, "<B>Goal #[count]</B>: [objective.explanation_text] <span class='redtext'>Failure.</span>")
+				traitorwin = FALSE
+			count += objective.triumph_count
+
+	var/special_role_text = lowertext(name)
+	if(traitorwin)
+		if(count)
+			if(owner)
+				owner.adjust_triumphs(count)
+		to_chat(world, span_greentext("The [special_role_text] has TRIUMPHED!"))
+		if(owner?.current)
+			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/triumph.ogg', 100, FALSE, pressure_affected = FALSE)
+	else
+		to_chat(world, span_redtext("The [special_role_text] has FAILED!"))
+		if(owner?.current)
+			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/fail.ogg', 100, FALSE, pressure_affected = FALSE)
+
+
 
 /datum/antagonist/vurdalak/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/werewolf/lesser))
@@ -39,10 +69,12 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 
 /datum/antagonist/vurdalak/on_gain()
 	owner.special_role = name
+	owner.assigned_role = name
 	move_to_spawn_location()
 
 	var/mob/living/carbon/human/H = owner.current
 	H.vurdalak_transform()
+	owner.name = H.real_name
 
 	forge_vurdalak_objectives()
 	greet()
@@ -60,13 +92,31 @@ GLOBAL_LIST_EMPTY(vurdalak_spawn_locations)
 	if(vurdalak.advsetup)
 		return
 	if(world.time % 5)
-		if(day_debuff)
-			if(GLOB.tod != "night")
+		if(GLOB.tod != "night")
+			if(day_debuff)
 				if(isturf(vurdalak.loc))
 					var/turf/T = vurdalak.loc
 					if(T.can_see_sky())
 						if(T.get_lumcount() > 0.05)
 							vurdalak.apply_status_effect(/datum/status_effect/debuff/vurdalak_sunlight_exposed)
+			last_tod = ""
+		if(GLOB.tod == "night")
+			if(last_tod != "night")
+				last_tod = "night"
+				for(var/client/client in GLOB.clients - vurdalak.client)
+					if(!client.mob)
+						continue
+					if(!is_station_level(client.mob.z))
+						continue
+					if(client.mob.y > 298) // Довольно проклято
+						continue
+					var/distance = 20
+					if(client.mob.z == vurdalak.z)
+						distance = CLAMP(100 - get_dist(vurdalak, client.mob), 5, 80)
+					client.mob.playsound_local(client.mob, 'modular_redmoon/sounds/misc/vurdalak_far.ogg', distance, FALSE)
+					to_chat(client.mob, span_warning("Я слышу завывания болотного чудища[distance >= 50 ? " в далеке..." : "..."]"))
+				vurdalak.playsound_local(vurdalak, 'modular_redmoon/sounds/misc/vurdalak_far.ogg', 80, FALSE)
+				to_chat(vurdalak, span_notice("Я вою в ночь, чтобы показать, кому принадлежит это болото... Или же от бессилия сделать что-то с тем, кем я стал?"))
 
 		if(vurdalak.m_intent != MOVE_INTENT_SNEAK)
 			if(last_sound + 10 SECONDS <= world.time)
