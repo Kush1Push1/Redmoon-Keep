@@ -33,14 +33,15 @@
 /datum/emote/living/growl
 	key = "growl"
 	key_third_person = "growls"
-	message = "growls."
-	message_muffled = "makes a muffled noise."
+	message = "рычит!"
+	message_muffled = "сдавленно рычит..."
+	runechat_msg = "рычит"
 	only_forced_audio = TRUE
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/proc/growl()
-	set name = "Growl"
+	set name = "Рычать"
 	set category = "Noises"
 	if(stat != CONSCIOUS)
 		return
@@ -52,14 +53,15 @@
 /datum/emote/living/bark
 	key = "bark"
 	key_third_person = "barks"
-	message = "barks."
-	message_muffled = "makes a muffled noise."
+	message = "лает!"
+	message_muffled = "издаёт сдавленный звук."
+	runechat_msg = "лает"
 	only_forced_audio = TRUE
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/proc/barks()
-	set name = "Bark"
+	set name = "Лаять"
 	set category = "Noises"
 	if(stat != CONSCIOUS)
 		return
@@ -71,14 +73,15 @@
 /datum/emote/living/whine
 	key = "whine"
 	key_third_person = "whines"
-	message = "whines."
-	message_muffled = "makes a muffled noise."
+	message = "скулит..."
+	message_muffled = "издаёт сдавленный скулёж..."
+	runechat_msg = "скулит"
 	only_forced_audio = TRUE
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/proc/whine()
-	set name = "Whine"
+	set name = "Скулить"
 	set category = "Noises"
 	if(stat != CONSCIOUS)
 		return
@@ -90,20 +93,22 @@
 /datum/emote/living/lower	// the emote that signals an animal is tamed. Previously smile was used. The chicken smiles. The pig smiles. Wut.
 	key = "lower_head"
 	key_third_person = "lowers_head"
-	message = "lowers its head."
-	message_param = "lowers its head."
+	message = "склоняет голову."
+	message_param = "склоняет голову перед %t."
+	runechat_msg = "склоняет голову"
 	emote_type = EMOTE_VISIBLE
 
 /datum/emote/living/lewdmoan
 	key = "lewdmoan"
 	key_third_person = "moans lewdly"
-	message = "moans lewdly"
-	message_muffled = "makes a muffled noise."
+	message = "пошло стонет!"
+	message_muffled = "издаёт сдавленный стон."
+	runechat_msg = "пошло стонет"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_lewdmoan()
-	set name = "Moan Lewdly"
+	set name = "Пошлый Стон"
 	set category = "Noises"
 
 	emote("lewdmoan", intentional = TRUE)
@@ -111,13 +116,14 @@
 /datum/emote/living/chirp
 	key = "chirp"
 	key_third_person = "chirps"
-	message = "chirps!"
-	message_muffled = "makes a muffled noise."
+	message = "чирикает!"
+	message_muffled = "издаёт сдавленное чириканье."
+	runechat_msg = "чирикает"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_chirp()
-	set name = "Chirp"
+	set name = "Чирикать"
 	set category = "Noises"
 
 	emote("chirp", intentional = TRUE)
@@ -125,13 +131,14 @@
 /datum/emote/living/caw
 	key = "caw"
 	key_third_person = "caws"
-	message = "caws!"
-	message_muffled = "makes a muffled noise."
+	message = "каркает!"
+	message_muffled = "издаёт сдавленное карканье."
+	runechat_msg = "каркает"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_caw()
-	set name = "Caw"
+	set name = "Каркать"
 	set category = "Noises"
 
 	emote("caw", intentional = TRUE)
@@ -139,13 +146,15 @@
 /datum/emote/living/hoot
 	key = "hoot"
 	key_third_person = "hoots"
-	message = "hoots!"
-	message_muffled = "makes a muffled noise."
+	message = "ухукает!"
+	message_muffled = "издаёт сдавленное ухуканье."
+	runechat_msg = "ухукает"
+
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_hoot()
-	set name = "Hoot"
+	set name = "Уху"
 	set category = "Noises"
 
 	emote("hoot", intentional = TRUE)
@@ -153,13 +162,14 @@
 /datum/emote/living/bawk
 	key = "bawk"
 	key_third_person = "BAWKS!"
-	message = "BAWKS!"
-	message_muffled = "makes a muffled noise."
+	message = "кудахчет!"
+	message_muffled = "издаёт сдавленное кудахтанье."
+	runechat_msg = "кудахчет"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_bawk()
-	set name = "Bawk"
+	set name = "Кудахтать"
 	set category = "Noises"
 
 	emote("bawk", intentional = TRUE)
@@ -167,13 +177,14 @@
 /datum/emote/living/trill_bird
 	key = "trill_bird"
 	key_third_person = "trills!"
-	message = "trills!"
-	message_muffled = "makes a muffled noise."
+	message = "издаёт трелль!"
+	message_muffled = "издаёт сдавленную трелль."
+	runechat_msg = "издаёт трелль"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_bird_trill()
-	set name = "Trill"
+	set name = "Трелль"
 	set category = "Noises"
 
 	emote("trill_bird", intentional = TRUE)
@@ -181,13 +192,14 @@
 /datum/emote/living/chirp_squeaky
 	key = "chirp_squaky"
 	key_third_person = "chirps squeaky!"
-	message = "chirps squeaky!"
-	message_muffled = "makes a muffled noise."
+	message = "щебечет!"
+	message_muffled = "издаёт сдавленное щебетание."
+	runechat_msg = "щебечет"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_chirp_squeaky()
-	set name = "Chirp Squeaky"
+	set name = "Щебетать"
 	set category = "Noises"
 
 	emote("chirp_squaky", intentional = TRUE)
@@ -195,13 +207,14 @@
 /datum/emote/living/pip
 	key = "pip"
 	key_third_person = "pip!"
-	message = "pips!"
-	message_muffled = "makes a muffled noise."
+	message = "пищит!"
+	message_muffled = "издаёт сдавленное пищание."
+	runechat_msg = "пищит"
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
 /mob/living/carbon/human/proc/emote_pip()
-	set name = "Pip"
+	set name = "Пищать"
 	set category = "Noises"
 
 	emote("pip", intentional = TRUE)
