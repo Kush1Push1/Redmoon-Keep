@@ -160,7 +160,6 @@
 	runechat_msg = "плюёт на землю"
 
 /datum/emote/living/hug
-	message = ""
 	message_param = "обнимает %t!"
 	runechat_msg = "обнимается"
 
@@ -172,7 +171,6 @@
 	message_param = "даёт пощечину %t!"
 
 /datum/emote/living/pinch
-	message = "ущипывает себя"
 	message_param = "щипает %t."
 	runechat_msg = "щипается"
 
