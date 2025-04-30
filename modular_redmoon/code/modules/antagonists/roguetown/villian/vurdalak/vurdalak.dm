@@ -38,7 +38,7 @@
 	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 	W.update_a_intents()
 	W.can_do_sex = FALSE
-	W.grant_all_languages(omnitongue = TRUE)
+	W.grant_all_languages(omnitongue = FALSE)
 
 	W.possible_rmb_intents = list(/datum/rmb_intent/feint,\
 	/datum/rmb_intent/riposte,\
