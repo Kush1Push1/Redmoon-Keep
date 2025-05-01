@@ -1,94 +1,20 @@
 /datum/species/vulpkanin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	C.verbs += list(
+		/mob/proc/howl,
 		/mob/proc/growl,
-		/mob/proc/barks,
 		/mob/proc/whine,
+		/mob/proc/barks,
 	)
 
 /datum/species/vulpkanin/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	C.verbs -= list(
+		/mob/proc/howl,
 		/mob/proc/growl,
-		/mob/proc/barks,
 		/mob/proc/whine,
-	)
-
-/datum/species/lupian/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	..()
-	C.verbs += list(
-		/mob/proc/growl,
 		/mob/proc/barks,
-		/mob/proc/whine,
 	)
-
-/datum/species/lupian/on_species_loss(mob/living/carbon/C)
-	. = ..()
-	C.verbs -= list(
-		/mob/proc/growl,
-		/mob/proc/barks,
-		/mob/proc/whine,
-	)
-
-/datum/emote/living/growl
-	key = "growl"
-	key_third_person = "growls"
-	message = "рычит!"
-	message_muffled = "сдавленно рычит..."
-	runechat_msg = "рычит"
-	only_forced_audio = TRUE
-	emote_type = EMOTE_AUDIBLE
-	show_runechat = FALSE
-
-/mob/proc/growl()
-	set name = "Рычать"
-	set category = "Noises"
-	if(stat != CONSCIOUS)
-		return
-	if(next_move > world.time)
-		return
-	emote("growl")
-	next_move = world.time + 3
-
-/datum/emote/living/bark
-	key = "bark"
-	key_third_person = "barks"
-	message = "лает!"
-	message_muffled = "издаёт сдавленный звук."
-	runechat_msg = "лает"
-	only_forced_audio = TRUE
-	emote_type = EMOTE_AUDIBLE
-	show_runechat = FALSE
-
-/mob/proc/barks()
-	set name = "Лаять"
-	set category = "Noises"
-	if(stat != CONSCIOUS)
-		return
-	if(next_move > world.time)
-		return
-	emote("bark")
-	next_move = world.time + 3
-
-/datum/emote/living/whine
-	key = "whine"
-	key_third_person = "whines"
-	message = "скулит..."
-	message_muffled = "издаёт сдавленный скулёж..."
-	runechat_msg = "скулит"
-	only_forced_audio = TRUE
-	emote_type = EMOTE_AUDIBLE
-	show_runechat = FALSE
-
-/mob/proc/whine()
-	set name = "Скулить"
-	set category = "Noises"
-	if(stat != CONSCIOUS)
-		return
-	if(next_move > world.time)
-		return
-	emote("whine")
-	next_move = world.time + 3
 
 /datum/emote/living/lower	// the emote that signals an animal is tamed. Previously smile was used. The chicken smiles. The pig smiles. Wut.
 	key = "lower_head"
