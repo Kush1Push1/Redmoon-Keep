@@ -44,6 +44,26 @@
 	message_muffled = "издаёт сдавленный звук."
 	runechat_msg = "мурчит"
 
+/datum/emote/living/howl
+	message = "воет!"
+	message_muffled = "издаёт сдавленный звук."
+	runechat_msg = "воет"
+
+/datum/emote/living/growl
+	message = "рычит!"
+	message_muffled = "издаёт сдавленное рычание!"
+	runechat_msg = "рычит"
+
+/datum/emote/living/whine
+	message = "скулит..."
+	message_muffled = "издаёт сдавленный скулёж."
+	runechat_msg = "скулит"
+
+/datum/emote/living/bark
+	message = "лает!"
+	message_muffled = "издаёт сдавленный звук."
+	runechat_msg = "лает"
+
 /datum/emote/living/cross
 	message = "скрещивает руки."
 	runechat_msg = "скрещивает руки"
