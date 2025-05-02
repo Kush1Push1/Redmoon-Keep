@@ -124,7 +124,7 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 		N = R.result[1]
 	else
 		N = R.result
-	result_name = N.name
+	result_name = N.name_accu // REDMOON EDIT - translation
 
 	if(isopenturf(T) && R.wallcraft)
 		to_chat(user, span_warning("Нужно встать перед стеной, для начала."))
@@ -230,7 +230,7 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 			return "."
 		to_chat(usr, span_warning("Не хватает инструмента."))
 		return
-	return ", missing component."
+	return ", не хватает компонента."
 
 
 // Used for multi-stage structures.
@@ -254,10 +254,10 @@ proc/check_constructability(mob/user, datum/crafting_recipe/R)
 				if(do_after(user, time2use, target = user))
 					contents = get_surroundings(user)
 					if(!check_contents(R, contents))
-						to_chat(usr, span_warning("I'm missing a component."))
+						to_chat(usr, span_warning("Не хватает компонента."))
 						return FALSE
 					if(!check_tools(user, R, contents))
-						to_chat(usr, span_warning("I'm missing a tool."))
+						to_chat(usr, span_warning("Не хватает инструмента."))
 						return FALSE
 
 					var/prob2craft = 25
@@ -275,9 +275,9 @@ proc/check_constructability(mob/user, datum/crafting_recipe/R)
 					prob2craft = CLAMP(prob2craft, 0, 99)
 					if(!prob(prob2craft))
 						if(user.client?.prefs.showrolls)
-							to_chat(user, span_danger("I've failed to craft \the [result_name]... [prob2craft]%"))
+							to_chat(user, span_danger("У меня не получилось смастерить \the [result_name]... [prob2craft]%"))
 							continue
-						to_chat(user, span_danger("I've failed to craft \the [result_name]."))
+						to_chat(user, span_danger("У меня не получилось смастерить \the [result_name]."))
 						continue
 					del_reqs(R, user)
 
@@ -292,9 +292,9 @@ proc/check_constructability(mob/user, datum/crafting_recipe/R)
 					return TRUE
 				return FALSE
 			return FALSE
-		to_chat(usr, span_warning("I'm missing a tool."))
+		to_chat(usr, span_warning("Мне не хватает инструмента."))
 		return FALSE
-	to_chat(usr, span_warning("I'm missing a component."))
+	to_chat(usr, span_warning("Мне не хватает компонента."))
 	return FALSE
 
 /*Del reqs works like this:
@@ -453,7 +453,7 @@ proc/roguecraft(location, control, params, mob/user)
 		return
 	var/area/A = get_area(user)
 	if(!A.can_craft_here())
-		to_chat(user, span_warning("I can't craft here."))
+		to_chat(user, span_warning("Я не могу мастерить здесь."))
 		return
 	var/list/data = list()
 	var/list/catty = list()
@@ -472,7 +472,7 @@ proc/roguecraft(location, control, params, mob/user)
 				else
 					catty |= "Other"
 	if(!data.len)
-		to_chat(user, span_warning("There is nothing I can craft."))
+		to_chat(user, span_warning("Не из чего мастерить."))
 		return
 	if(!catty.len)
 		return
@@ -492,7 +492,7 @@ proc/roguecraft(location, control, params, mob/user)
 				if(t == "Other")
 					realdata += X
 		if(realdata.len)
-			var/r = input(user, "What should I craft?") as null|anything in realdata
+			var/r = input(user, "Что мне смастерить?") as null|anything in realdata
 			if(r)
 				construct_item(user, r)
 				user.mind.lastrecipe = r
