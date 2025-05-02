@@ -127,44 +127,44 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 	result_name = N.name
 
 	if(isopenturf(T) && R.wallcraft)
-		to_chat(user, span_warning("Need to craft this on a wall."))
+		to_chat(user, span_warning("Нужно встать перед стеной, для начала."))
 		return
 	if(!isopenturf(T) || R.ontile)
 		T = get_turf(user.loc)
 	if(!R.TurfCheck(user, T))
-		to_chat(user, span_warning("I can't craft here."))
+		to_chat(user, span_warning("Не могу начать мастерить здесь."))
 		return
 	if(isturf(R.result))
 		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
-			to_chat(user, span_warning("I can't craft here."))
+			to_chat(user, span_warning("Не могу начать мастерить здесь."))
 			return
 	if(ispath(R.result, /obj/structure) || ispath(R.result, /obj/machinery))
 		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
-			to_chat(user, span_warning("I can't craft here."))
+			to_chat(user, span_warning("Не могу начать мастерить здесь."))
 			return
 		for(var/obj/structure/S in T)
 			if(R.buildsame && istype(S, R.result))
 				if(user.dir == S.dir)
-					to_chat(user, span_warning("Something is in the way."))
+					to_chat(user, span_warning("Что-то мешает."))
 					return
 				continue
 			if(R.structurecraft && istype(S, R.structurecraft))
 				testing("isstructurecraft")
 				continue
 			if(S.density)
-				to_chat(user, span_warning("Something is in the way."))
+				to_chat(user, span_warning("Что-то мешает."))
 				return
 		for(var/obj/machinery/M in T)
 			if(M.density)
-				to_chat(user, span_warning("Something is in the way."))
+				to_chat(user, span_warning("Что-то мешает."))
 				return
 	if(R.req_table)
 		if(!(locate(/obj/structure/table) in T))
-			to_chat(user, span_warning("I need to make this on a table."))
+			to_chat(user, span_warning("Нужен стол, чтобы начать."))
 			return
 	if(R.structurecraft)
 		if(!(locate(R.structurecraft) in T))
-			to_chat(user, span_warning("I'm missing a structure I need."))
+			to_chat(user, span_warning("Не хватает структуры для этого..."))
 			return
 	if(check_contents(R, contents))
 		if(check_tools(user, R, contents))
@@ -175,9 +175,9 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 				if(do_after(user, time2use, target = user))
 					contents = get_surroundings(user)
 					if(!check_contents(R, contents))
-						return ", missing component."
+						return ", не хватает компонента."
 					if(!check_tools(user, R, contents))
-						return ", missing tool."
+						return ", не хватает инструмента."
 
 					var/prob2craft = 25
 					if(R.skill_level)
