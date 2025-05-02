@@ -194,9 +194,9 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 					prob2craft = CLAMP(prob2craft, 0, 99)
 					if(!prob(prob2craft))
 						if(user.client?.prefs.showrolls)
-							to_chat(user, span_danger("I've failed to craft \the [result_name]... [prob2craft]%"))
+							to_chat(user, span_danger("У меня не получилось смастерить [result_name]... [prob2craft]%"))
 							continue
-						to_chat(user, span_danger("I've failed to craft \the [result_name]."))
+						to_chat(user, span_danger("У меня не получилось смастерить [result_name]."))
 						continue
 					var/list/parts = del_reqs(R, user)
 
@@ -228,7 +228,7 @@ proc/construct_item(mob/user, datum/crafting_recipe/R)
 					return TRUE
 				return 0
 			return "."
-		to_chat(usr, span_warning("I'm missing a tool."))
+		to_chat(usr, span_warning("Не хватает инструмента."))
 		return
 	return ", missing component."
 
