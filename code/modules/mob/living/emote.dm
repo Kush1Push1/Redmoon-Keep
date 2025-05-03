@@ -18,7 +18,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_pray()
-	set name = "Pray"
+	set name = "Молиться"
 	set category = "Emotes"
 
 	emote("pray", intentional = TRUE)
@@ -109,7 +109,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_meditate()
-	set name = "Meditate"
+	set name = "Медитировать"
 	set category = "Emotes"
 
 	emote("meditate", intentional = TRUE)
@@ -132,7 +132,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_bow()
-	set name = "Bow"
+	set name = "Поклониться"
 	set category = "Emotes"
 
 	emote("bow", intentional = TRUE)
@@ -146,7 +146,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_burp()
-	set name = "Burp"
+	set name = "Рыгнуть"
 	set category = "Noises"
 
 	emote("burp", intentional = TRUE)
@@ -160,7 +160,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_choke()
-	set name = "Choke"
+	set name = "Подавиться"
 	set category = "Noises"
 
 	emote("choke", intentional = TRUE)
@@ -201,6 +201,42 @@
 	emote_type = EMOTE_AUDIBLE
 	show_runechat = FALSE
 
+/datum/emote/living/howl
+	key = "howl"
+	key_third_person = "howls"
+	message = "howls."
+	message_muffled = "makes a muffled noise."
+	only_forced_audio = TRUE
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+
+/datum/emote/living/growl
+	key = "growl"
+	key_third_person = "growls"
+	message = "growls."
+	message_muffled = "makes a muffled noise."
+	only_forced_audio = TRUE
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+
+/datum/emote/living/whine
+	key = "whine"
+	key_third_person = "whines"
+	message = "whines."
+	message_muffled = "makes a muffled noise."
+	only_forced_audio = TRUE
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+
+/datum/emote/living/bark
+	key = "bark"
+	key_third_person = "barks"
+	message = "barks."
+	message_muffled = "makes a muffled noise."
+	only_forced_audio = TRUE
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
+	
 /datum/emote/living/cross
 	key = "crossarms"
 	key_third_person = "crossesarms"
@@ -209,7 +245,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_crossarms()
-	set name = "Cross Arms"
+	set name = "Скрестить Руки"
 	set category = "Emotes"
 
 	emote("crossarms", intentional = TRUE)
@@ -252,7 +288,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_cough()
-	set name = "Cough"
+	set name = "Кашлять"
 	set category = "Noises"
 
 	emote("cough", intentional = TRUE)
@@ -266,7 +302,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_clearthroat()
-	set name = "Clear Throat"
+	set name = "Прочистить Горло"
 	set category = "Noises"
 
 	emote("clearthroat", intentional = TRUE)
@@ -279,7 +315,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_dance()
-	set name = "Dance"
+	set name = "Танцевать"
 	set category = "Emotes"
 
 	emote("dance", intentional = TRUE)
@@ -312,7 +348,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_drool()
-	set name = "Drool"
+	set name = "Слюни"
 	set category = "Emotes"
 
 	emote("drool", intentional = TRUE)
@@ -324,7 +360,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_faint()
-	set name = "Faint"
+	set name = "Обморок"
 	set category = "Emotes"
 
 	emote("faint", intentional = TRUE)
@@ -365,7 +401,7 @@
 	message = "frowns."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_frown()
-	set name = "Frown"
+	set name = "Хмуриться"
 	set category = "Emotes"
 
 	emote("frown", intentional = TRUE)
@@ -376,14 +412,14 @@
 	message = "gags."
 	emote_type = EMOTE_AUDIBLE
 	ignore_silent = TRUE
-	show_runechat = FALSE
-
+//	show_runechat = FALSE - REDMOON REMOVAL
+/* - REDMOON REMOVAL - дубликает Choke
 /mob/living/carbon/human/verb/emote_gag()
-	set name = "Gag"
+	set name = "Подавиться"
 	set category = "Noises"
 
 	emote("gag", intentional = TRUE)
-
+*/
 /datum/emote/living/gasp
 	key = "gasp"
 	key_third_person = "gasps"
@@ -394,7 +430,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_gasp()
-	set name = "Gasp"
+	set name = "Задыхаться"
 	set category = "Noises"
 
 	emote("gasp", intentional = TRUE)
@@ -416,7 +452,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_giggle()
-	set name = "Giggle"
+	set name = "Хихикает"
 	set category = "Noises"
 
 	emote("giggle", intentional = TRUE)
@@ -430,7 +466,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_chuckle()
-	set name = "Chuckle"
+	set name = "Посмеиваться"
 	set category = "Noises"
 
 	emote("chuckle", intentional = TRUE)
@@ -443,7 +479,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_glare()
-	set name = "Glare"
+	set name = "Зыркнуть"
 	set category = "Emotes"
 
 	emote("glare", intentional = TRUE)
@@ -454,7 +490,7 @@
 	message = "grins."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_grin()
-	set name = "Grin"
+	set name = "Ухмыльнуться"
 	set category = "Emotes"
 
 	emote("grin", intentional = TRUE)
@@ -468,7 +504,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_groan()
-	set name = "Groan"
+	set name = "Недовольство"
 	set category = "Noises"
 
 	emote("groan", intentional = TRUE)
@@ -479,7 +515,7 @@
 	message = "grimaces."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_grimace()
-	set name = "Grimace"
+	set name = "Гримаса"
 	set category = "Emotes"
 
 	emote("grimace", intentional = TRUE)
@@ -505,7 +541,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_kiss()
-	set name = "Kiss"
+	set name = "Поцеловать"
 	set category = "Emotes"
 
 	emote("kiss", intentional = TRUE, targetted = TRUE)
@@ -562,7 +598,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_spit()
-	set name = "Spit"
+	set name = "Плюнуть"
 	set category = "Emotes"
 
 	emote("spit", intentional = TRUE, targetted = TRUE)
@@ -598,7 +634,7 @@
 	restraint_check = TRUE
 
 /mob/living/carbon/human/verb/emote_hug()
-	set name = "Hug"
+	set name = "Обнять"
 	set category = "Emotes"
 
 	emote("hug", intentional = TRUE, targetted = TRUE)
@@ -631,7 +667,7 @@
 	stat_allowed = SOFT_CRIT
 
 /mob/living/carbon/human/verb/emote_hold()
-	set name = "Hold Breath"
+	set name = "Задержать Дыхание"
 	set category = "Emotes"
 
 	emote("hold", intentional = TRUE)
@@ -675,7 +711,7 @@
 	..()
 
 /mob/living/carbon/human/verb/emote_slap()
-	set name = "Slap"
+	set name = "Пощечина"
 	set category = "Emotes"
 
 	emote("slap", intentional = TRUE, targetted = TRUE)
@@ -707,7 +743,7 @@
 		H.flash_fullscreen("redflash1")
 
 /mob/living/carbon/human/verb/emote_pinch()
-	set name = "Pinch"
+	set name = "Ущипнуть"
 	set category = "Emotes"
 
 	emote("pinch", intentional = TRUE, targetted = TRUE)
@@ -730,7 +766,7 @@
 		return !C.silent
 
 /mob/living/carbon/human/verb/emote_laugh()
-	set name = "Laugh"
+	set name = "Смеяться"
 	set category = "Noises"
 
 	emote("laugh", intentional = TRUE)
@@ -748,7 +784,7 @@
 	message_param = "nods at %t."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_nod()
-	set name = "Nod"
+	set name = "Кивнуть"
 	set category = "Emotes"
 
 	emote("nod", intentional = TRUE)
@@ -790,7 +826,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_scream()
-	set name = "Scream"
+	set name = "Кричать"
 	set category = "Noises"
 
 	emote("scream", intentional = TRUE)
@@ -912,7 +948,7 @@
 	show_runechat = TRUE
 
 /mob/living/carbon/human/verb/emote_haltyell()
-	set name = "HALT!"
+	set name = "СТОЙ!"
 	set category = "Noises"
 
 	emote("haltyell", intentional = TRUE)
@@ -924,7 +960,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_rage()
-	set name = "Rage"
+	set name = "Ярость"
 	set category = "Noises"
 
 	emote("rage", intentional = TRUE)
@@ -937,7 +973,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_attnwhistle()
-	set name = "Attnwhistle"
+	set name = "Привлечь Внимание"
 	set category = "Noises"
 
 	emote("attnwhistle", intentional = TRUE)
@@ -963,7 +999,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_shakehead()
-	set name = "Shake Head"
+	set name = "Качать Головой"
 	set category = "Emotes"
 
 	emote("shakehead", intentional = TRUE)
@@ -976,7 +1012,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_shiver()
-	set name = "Shiver"
+	set name = "Дрожать"
 	set category = "Emotes"
 
 	emote("shiver", intentional = TRUE)
@@ -991,7 +1027,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_sigh()
-	set name = "Sigh"
+	set name = "Вздохнуть"
 	set category = "Noises"
 
 	emote("sigh", intentional = TRUE)
@@ -1005,7 +1041,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_whistle()
-	set name = "Whistle"
+	set name = "Свистеть"
 	set category = "Noises"
 
 	emote("whistle", intentional = TRUE)
@@ -1019,7 +1055,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_hmm()
-	set name = "Hmm"
+	set name = "Хмыкнуть"
 	set category = "Noises"
 
 	emote("hmm", intentional = TRUE)
@@ -1033,7 +1069,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_huh()
-	set name = "Huh"
+	set name = "Удивиться"
 	set category = "Noises"
 
 	emote("huh", intentional = TRUE)
@@ -1047,7 +1083,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_hum()
-	set name = "Hum"
+	set name = "Напевать"
 	set category = "Noises"
 
 	emote("hum", intentional = TRUE)
@@ -1058,7 +1094,7 @@
 	message = "smiles."
 	emote_type = EMOTE_VISIBLE
 /mob/living/carbon/human/verb/emote_smile()
-	set name = "Smile"
+	set name = "Улыбнуться"
 	set category = "Emotes"
 
 	emote("smile", intentional = TRUE)
@@ -1080,7 +1116,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_shh()
-	set name = "Shh"
+	set name = "Шикнуть"
 	set category = "Noises"
 
 	emote("shh", intentional = TRUE)
@@ -1159,7 +1195,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_whimper()
-	set name = "Whimper"
+	set name = "Скулить"
 	set category = "Noises"
 
 	emote("whimper", intentional = TRUE)
@@ -1178,7 +1214,7 @@
 	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_yawn()
-	set name = "Yawn"
+	set name = "Зевать"
 	set category = "Noises"
 
 	emote("yawn", intentional = TRUE)
@@ -1250,7 +1286,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_shake()
-	set name = "Shake Head"
+	set name = "Качать Головой"
 	set category = "Emotes"
 
 	emote("shake", intentional = TRUE)
@@ -1262,7 +1298,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_squint()
-	set name = "Squint"
+	set name = "Прищуриться"
 	set category = "Emotes"
 
 	emote("squint", intentional = TRUE)
