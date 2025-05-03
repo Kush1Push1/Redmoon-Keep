@@ -601,7 +601,7 @@
 						VDrinker.handle_vitae(500)
 				else
 					to_chat(user, span_warning("No more vitae from this blood..."))
-		if(vurdalak_drinker)
+		else if(vurdalak_drinker)
 			if(C.vitae_bank > 500)
 				C.blood_volume = max(C.blood_volume-45, 0)
 				C.vitae_bank -= 1500
