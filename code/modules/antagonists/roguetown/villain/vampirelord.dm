@@ -874,7 +874,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		new_knight.key = C.key
 		new_knight.equipOutfit(/datum/job/roguetown/deathknight)
 		new_knight.regenerate_icons()
-		else // REDMOON REMOVAL - фиксим удаление челиков в лобби при отказе становиться лордом
+//	else // REDMOON REMOVAL - фиксим удаление челиков в лобби при отказе становиться лордом
 		qdel(src)
 
 // DEATH KNIGHT ANTAG
