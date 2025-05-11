@@ -46,6 +46,10 @@
 	if(!mob)
 		return
 
+	if(prefs.muted & MUTE_LOOC)
+		to_chat(src, "<span class='danger'>I cannot use LOOC (muted).</span>")
+		return
+
 	msg = copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
