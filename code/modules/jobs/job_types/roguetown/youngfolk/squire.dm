@@ -24,13 +24,14 @@
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(istype(H.cloak, /obj/item/clothing/cloak/stabard/surcoat/guard))
-			var/obj/item/clothing/S = H.cloak
+			var/obj/item/clothing/cloak/S = H.cloak
 			var/index = findtext(H.real_name, " ")
 			if(index)
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
 			S.name = "squire jupon ([index])"
+			S.visual_name = index // REDMOON ADD - tabard_fix
 		H.advsetup = 1
 		H.invisibility = INVISIBILITY_MAXIMUM
 		H.become_blind("advsetup")
@@ -54,6 +55,7 @@
 	tutorial = "Born into nobility, you are yet to become a real knight. Yet, the Gods smile upon you, so eventually you will be the one in need of a squire. \
 	A riddle, little one, who is superior: a noble squire or an unremarkable man-at-arms?"
 	outfit = /datum/outfit/job/roguetown/squire/page
+	allowed_races = RACES_TOLERATED_UP
 	category_tags = list(CTAG_SQUIRE)
 	maximum_possible_slots = 2
 

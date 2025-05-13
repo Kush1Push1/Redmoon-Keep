@@ -28,13 +28,14 @@
 		H.invisibility = INVISIBILITY_MAXIMUM
 		H.become_blind("advsetup")
 		if(istype(H.cloak, /obj/item/clothing/cloak/tabard/knight/guard))
-			var/obj/item/clothing/S = H.cloak
+			var/obj/item/clothing/cloak/S = H.cloak
 			var/index = findtext(H.real_name, " ")
 			if(index)
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
 			S.name = "knight tabard ([index])"
+			S.visual_name = index // REDMOON ADD - tabard_fix
 		for(var/datum/mind/MF in get_minds()) // REDMOON ADD - fixes_for_characters_memory - удаление из памяти всех, кто успел запомнить имя без титула
 			H.mind.become_unknown_to(MF)
 		var/prev_real_name = H.real_name
@@ -56,6 +57,7 @@
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backl = /obj/item/gwstrap
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) // REDMOON ADD - для корректной работы семьи
 /datum/subclass/knight/sentinel
 	name = "Sentinel"
 	tutorial = "Proud defender of your ducal house. You are a master of the spear, and prefer to don yourself in the heaviest of armors."
@@ -95,7 +97,7 @@
 
 	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+//	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) - REDMOON REMOVAL - добавляется при спавне, а не выборе класса
 	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
@@ -149,7 +151,7 @@
 
 	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+//	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) - REDMOON REMOVAL - добавляется при спавне, а не выборе класса
 	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
@@ -199,7 +201,7 @@
 
 	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+//	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) - REDMOON REMOVAL - добавляется при спавне, а не выборе класса
 	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 

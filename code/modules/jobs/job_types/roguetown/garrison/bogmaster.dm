@@ -29,13 +29,14 @@
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(istype(H.cloak, /obj/item/clothing/cloak/shadow))
-			var/obj/item/clothing/S = H.cloak
+			var/obj/item/clothing/cloak/S = H.cloak
 			var/index = findtext(H.real_name, " ")
 			if(index)
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
 			S.name = "warden cloak ([index])"
+			S.visual_name = index // REDMOON ADD - tabard_fix
 
 /datum/outfit/job/roguetown/bogmaster/pre_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -78,7 +79,7 @@
 		H.change_stat("endurance", 2)
 	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_WANTED_POSTER_READ, TRAIT_GENERIC)
 
 /obj/effect/proc_holder/spell/self/convertrole/bog
 	name = "Recruit Vanguard"

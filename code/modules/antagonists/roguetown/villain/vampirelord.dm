@@ -15,8 +15,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "Vlord"
 	confess_lines = list(
-		"I AM ANCIENT", 
-		"I AM THE LAND", 
+		"I AM ANCIENT",
+		"I AM THE LAND",
 		"CHILD OF KAIN!",
 	)
 	rogue_enabled = TRUE
@@ -62,7 +62,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	C.vampires |= owner
 	. = ..()
 	owner.special_role = name
-	ADD_TRAIT(owner.current, TRAIT_CRITICAL_WEAKNESS, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_STRONGBITE, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOSTAMINA, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, "[type]")
@@ -71,7 +70,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_HEAVYARMOR, "[type]")
 	for(var/obj/structure/fluff/traveltile/vampire/tile in GLOB.traveltiles)
@@ -179,7 +177,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				log_message("ERROR: Unable to pick [A.name] as a subclass for [src].", LOG_GAME)
 				spawn_pick_class()
 				return
-	
+
 			if(equipOutfit(A.outfit))
 				return
 	set_patron(/datum/patron/zizo) // REDMOON ADD - выдача патрона зизо, т.к. он даётся при заражении лордом в процессе раунда
@@ -188,11 +186,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE) // REDMOON EDIT - повышен навык воадения до 5
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE) // REDMOON EDIT - повышен навык воадения до 6
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 6, TRUE) // REDMOON EDIT - повышен навык воадения до 6
+	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 6, TRUE)  // REDMOON EDIT - повышен навык воадения до 6
+	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 6, TRUE) // REDMOON EDIT - повышен навык воадения до 6
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -344,13 +342,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /datum/antagonist/vampirelord/proc/finalize_vampire()
 	owner.current.forceMove(pick(GLOB.vlord_starts))
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/finalize_vampire_lesser()
 	if(!sired)
 		owner.current.forceMove(pick(GLOB.vspawn_starts))
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/vamp_look()
 	var/mob/living/carbon/human/V = owner.current
@@ -401,7 +399,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 							if(N.can_see_sky())
 								if(N.get_lumcount() > 0.15)
 									H.fire_act(3)
-									handle_vitae(-500)
+								handle_vitae(-500)
 							to_chat(H, span_warning("That was too close. I must avoid the sun."))
 						else if (isspawn && !disguised)
 							H.fire_act(1,5)
@@ -504,8 +502,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "Vampire Spawn"
 	antag_hud_name = "Vspawn"
 	confess_lines = list(
-		"THE CRIMSON CALLS!", 
-		"MY MASTER COMMANDS", 
+		"THE CRIMSON CALLS!",
+		"MY MASTER COMMANDS",
 		"THE SUN IS ENEMY!",
 	)
 	isspawn = TRUE
@@ -596,13 +594,23 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/structure/vampire/portal/Crossed(atom/movable/AM)
 	. = ..()
 	if(istype(AM, /mob/living))
-		playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
-		AM.forceMove(pick(GLOB.vteleportsenddest))
+		// REDMOON EDIT START - исправление перемещения вампира в портале
+		for(var/obj/effect/landmark/vteleport/dest in GLOB.landmarks_list)
+			playsound(dest.loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			AM.forceMove(dest.loc)
+			break
+		// REDMOON EDIT END
 
 /obj/structure/vampire/portal/sending/Crossed(atom/movable/AM)
 	if(istype(AM, /mob/living))
-		playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
-		AM.forceMove(pick(GLOB.vteleportsenddest))
+		// REDMOON EDIT START - исправление перемещения вампира в портале
+		for(var/obj/effect/landmark/vteleportsenddest/V in GLOB.vteleportsenddest)
+			playsound(V.loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			playsound(loc, 'sound/misc/portalenter.ogg', 100, FALSE, pressure_affected = FALSE)
+			AM.forceMove(V.loc)
+			break
+		// REDMOON EDIT END
 
 /obj/structure/vampire/portal/sending/Destroy()
 	for(var/obj/effect/landmark/vteleportsenddest/V in GLOB.landmarks_list)
@@ -685,11 +693,21 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				if(do_after(user, 100))
 					lord.handle_vitae(-5000)
 					new /obj/item/clothing/under/roguetown/platelegs/vampire(user.loc)
-					new /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire(user.loc)
+					new /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk/vampire(user.loc)
 					new /obj/item/clothing/suit/roguetown/armor/plate/vampire(user.loc)
 					new /obj/item/clothing/shoes/roguetown/armor/steel/vampire(user.loc)
-					new /obj/item/clothing/head/roguetown/helmet/heavy/vampire(user.loc)
-					new /obj/item/clothing/gloves/roguetown/chain/vampire(user.loc)
+					new /obj/item/clothing/head/roguetown/helmet/heavy/captain/vampire(user.loc)
+					new /obj/item/clothing/gloves/roguetown/plate/blk/vampire(user.loc)
+					new /obj/item/clothing/neck/roguetown/gorget(user.loc)
+				user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
+		if("Shape Sword")
+			if(alert(user, "Craft a new Zizo blade? Cost:2500","","Yes","No") == "Yes")
+				if(!check_withdraw(-2500))
+					to_chat(user, "I don't have enough vitae!")
+					return
+				if(do_after(user, 100))
+					lord.handle_vitae(-2500)
+					new /obj/item/rogueweapon/greatsword/zizo(user.loc)
 				user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
 
 /obj/structure/vampire/bloodpool/proc/update_pool(change)
@@ -740,7 +758,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				if(istype(choice, /obj/item/clothing/neck/roguetown/portalamulet))
 					var/obj/item/clothing/neck/roguetown/portalamulet/A = choice
 					A.uses -= 1
-					var/obj/effect/landmark/vteleportdestination/VR = new(A.loc)
+					var/turf/G = get_turf(A) // REDMOON ADD - фикс появления портала внутри персонажа
+					var/obj/effect/landmark/vteleportdestination/VR = new(G)
 					VR.amuletname = A.name
 					create_portal_return(A.name, 3000)
 					user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
@@ -763,7 +782,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 					var/obj/item/clothing/neck/roguetown/portalamulet/A = choice
 					A.uses -= 1
 					var/turf/G = get_turf(A)
-					new /obj/effect/landmark/vteleportsenddest(G.loc)
+					new /obj/effect/landmark/vteleportsenddest(G)
 					if(A.uses <= 0)
 						A.visible_message("[A] shatters!")
 						qdel(A)
@@ -776,14 +795,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	if(alert(user, "Create a portal?", "PORTAL GEM", "Yes", "No") == "Yes")
 		uses -= 1
-		var/obj/effect/landmark/vteleportdestination/Vamp = new(loc)
-		Vamp.amuletname = name
-		for(var/obj/structure/vampire/portalmaker/P in GLOB.vampire_objects)
-			P.create_portal_return(name, 3000)
-		user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
-		if(uses <= 0)
-			visible_message("[src] shatters!")
-			qdel(src)
+		var/turf/T = get_step(user, user.dir) // REDMOON ADD - фикс спавна портала внутри персонажа
+		if(T)
+			var/obj/effect/landmark/vteleportdestination/Vamp = new(T)
+			Vamp.amuletname = name
+			for(var/obj/structure/vampire/portalmaker/P in GLOB.vampire_objects)
+				P.create_portal_return(name, 3000)
+			user.playsound_local(get_turf(src), 'sound/misc/portalactivate.ogg', 100, FALSE, pressure_affected = FALSE)
+			if(uses <= 0)
+				visible_message("[src] shatters!")
+				qdel(src)
 
 /obj/structure/vampire/scryingorb/attack_hand(mob/living/carbon/human/user)
 	if(user.mind.special_role == "Vampire Lord")
@@ -803,16 +824,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
 			if("Create Death Knight")
-				if(alert(user, "Create a Death Knight? Cost:10000","","Yes","No") == "Yes")
+				if(alert(user, "Create a Death Knight? Cost:900000","","Yes","No") == "Yes")
 					if(C.deathknights.len >= 3)
 						to_chat(user, "You cannot summon any more death knights.")
 						return
-					if(!lord.mypool.check_withdraw(-10000))
+					if(!lord.mypool.check_withdraw(-900000))
 						to_chat(user, "I don't have enough vitae!")
 						return
 					if(do_after(user, 100))
 						to_chat(user, "I have summoned a knight from the underworld. I need only wait for them to materialize.")
-						lord.handle_vitae(-10000)
+						lord.handle_vitae(-900000)
 						C.deathknightspawn = TRUE
 						for(var/mob/dead/observer/D in GLOB.player_list)
 							D.death_knight_spawn()
@@ -863,7 +884,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		new_knight.key = C.key
 		new_knight.equipOutfit(/datum/job/roguetown/deathknight)
 		new_knight.regenerate_icons()
-	else
+//	else // REDMOON REMOVAL - фиксим удаление челиков в лобби при отказе становиться лордом
 		qdel(src)
 
 // DEATH KNIGHT ANTAG
@@ -1100,7 +1121,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/current = 8000
 	var/nextlevel = VAMP_LEVEL_ONE
 	var/debug = FALSE
-	var/list/useoptions = list("Grow Power", "Shape Amulet", "Shape Armor")
+	var/list/useoptions = list("Grow Power", "Shape Amulet", "Shape Armor", "Shape Sword")
 
 /obj/structure/vampire/scryingorb // Method of spying on the town
 	name = "Eye of Night"
@@ -1177,7 +1198,7 @@ GLOBAL_LIST_EMPTY(vteleportsenddest)
 
 /obj/effect/landmark/vteleportsenddest/Initialize()
 	. = ..()
-	GLOB.vteleportsenddest += loc
+	GLOB.vteleportsenddest += src // REDMOON EDIT - добавляем именно лэндмарк, а не локу
 
 // SCRYING Since it has so many unique procs
 /mob/dead/observer/rogue/arcaneeye

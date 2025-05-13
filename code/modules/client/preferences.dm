@@ -69,6 +69,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	var/real_name						//our character's name
 	var/gender = MALE					//gender of character (well duh)
 	var/age = AGE_ADULT						//age of character
+	var/voice_type = VOICE_TYPE_MASC // voice pack they use
 	var/origin = "Default"
 	var/underwear = "Nude"				//underwear type
 	var/underwear_color = null			//underwear color
@@ -306,6 +307,10 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				dat += "<a href='?_src_=prefs;preference=antag;task=menu'>Антагонисты</a>"
 			else
 				dat += "<a href='?_src_=prefs;preference=antag;task=menu'>Villain Selection</a>"
+			if(usr?.client?.prefs?.be_russian)
+				dat += "<a href='?_src_=prefs;preference=additional_settings;task=menu'>Дополнительные настройки</a>"
+			else
+				dat += "<a href='?_src_=prefs;preference=additional_settings;task=menu'>Additional Settings</a>"
 			dat += "</td>"
 
 			dat += "<td style='width:33%;text-align:right'>"
@@ -392,6 +397,9 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 				if(randomise[RANDOM_BODY] || randomise[RANDOM_BODY_ANTAG]) //doesn't work unless random body
 					dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_GENDER]'>Always Random Gender: [(randomise[RANDOM_GENDER]) ? "Yes" : "No"]</A>"
 					dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_GENDER_ANTAG]'>When Antagonist: [(randomise[RANDOM_GENDER_ANTAG]) ? "Yes" : "No"]</A>"
+			
+			// Allows you to select vioce pack					
+			dat += "<b>Voice Type</b>: <a href='?_src_=prefs;preference=voicetype;task=input'>[voice_type]</a><BR>"
 
 			if(usr?.client?.prefs?.be_russian)
 				dat += "<b>Возраст:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><BR>"
@@ -1429,7 +1437,19 @@ Slots: [job.spawn_positions]</span>
 				SetAntag(user)
 			else
 				SetAntag(user)
-
+	else if(href_list["preference"] == "additional_settings")
+		switch(href_list["task"])
+			if("close")
+				user << browse(null, "window=additional_settings")
+				ShowChoices(user)
+			if("set_hand")
+				var/potential_hand_ckey = input(usr, "Введите Byond Login (CKEY) игрока, которого вы хотели бы видеть в качестве десницы (эту настройку можно изменять посреди раунда) Те, кто не выставлен в качестве десницы, не смогут зайти за неё ни в начале, ни в процессе раунда..", "Bloodbinding", hand_ckey) as text
+				if(!potential_hand_ckey)
+					hand_ckey = ""
+				hand_ckey = potential_hand_ckey
+				AdditionalSettings(user)
+			else
+				AdditionalSettings(user)
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
 
@@ -1890,6 +1910,14 @@ Slots: [job.spawn_positions]</span>
 						ResetJobs()
 						to_chat(user, "<font color='red'>Classes reset.</font>")
 
+
+				if ("voicetype")
+					var voicetype_input = input(user, "Choose your character's voice type", "Voice Type") as null|anything in GLOB.voice_types_list
+					if(voicetype_input)
+						voice_type = voicetype_input
+						to_chat(user, "<font color='red'>Your character will now vocalize with a [lowertext(voice_type)] affect.</font>")
+
+						
 				if("faith")
 					var/list/faiths_named = list()
 					for(var/path as anything in GLOB.preference_faiths)
@@ -2720,6 +2748,7 @@ Slots: [job.spawn_positions]</span>
 	character.set_patron(selected_patron)
 	character.backpack = backpack
 	character.defiant = defiant
+	character.voice_type = voice_type
 	character.virginity = virginity
 
 	character.jumpsuit_style = jumpsuit_style
@@ -2849,3 +2878,19 @@ Slots: [job.spawn_positions]</span>
 	if(is_misc_banned(parent.ckey, BAN_MISC_RESPAWN))
 		return FALSE
 	return TRUE
+
+/datum/preferences/proc/AdditionalSettings(mob/user)
+	var/list/dat = list()
+
+	dat += "<style>label { display: inline-block; width: 200px; }</style><body>"
+
+	dat += "<center><a href='?_src_=prefs;preference=additional_settings;task=close'>Done</a></center><br>"
+
+	dat += "<b>Set Hand: <a href='?_src_=prefs;preference=additional_settings;task=set_hand'>[hand_ckey ? hand_ckey : "(Anyone)"]</a></b>"
+
+	dat += "</body>"
+
+	var/datum/browser/noclose/popup = new(user, "additional_settings", "<div align='center'>Additional Settings</div>", 250, 300) //no reason not to reuse the occupation window, as it's cleaner that way
+	popup.set_window_options("can_close=0")
+	popup.set_content(dat.Join())
+	popup.open(FALSE)
